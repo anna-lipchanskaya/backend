@@ -8,7 +8,7 @@
     <img src = "./Снимок.PNG"></img>
       <img src = "./Снимок1.PNG"></img>
       <img src = "./Снимок2.PNG"></img>
-    <img src = "./снимок4.PNG"></img>
+    <img src = "./снимок4.png"></img>
     
 </body>
 </html>
