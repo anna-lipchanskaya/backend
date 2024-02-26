@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
     <meta charset="utf-8" />
-    <title>Задание №1</title>
+    <title>Задание №2</title>
 </head>
 <body>
     <img src = "./task2n1.PNG"></img>
