@@ -20,15 +20,15 @@
             <br />
             Дата рождения:<br />
             <input name="date"
-              value="2023-09-14"
+              value="2000-01-01"
               type="date" />
           </label><br />
           Пол:<br />
       <label><input type="radio" checked="checked"
-        name="pol" value="Значение1" />
+        name="pol" value="M" />
         Мужской</label>
       <label><input type="radio"
-        name="radio-group-1" value="Значение2" />
+        name="radio-group-1" value="W" />
         Женский</label><br />
         <label>
           Биография:<br />
