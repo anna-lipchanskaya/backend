@@ -1,0 +1,11 @@
+CREATE TABLE application (
+ id int(10) unsigned NOT NULL AUTO_INCREMENT,
+ name varchar(128) NOT NULL DEFAULT '',
+ phone varchar(128) NOT NULL DEFAULT '',
+ email varchar(128) NOT NULL DEFAULT '',
+ data DATE NOT NULL DEFAULT "200-01-01",
+ pol char(1),
+ bio varchar(1024) NOT NULL DEFAULT '',
+ ok char(1),
+ PRIMARY KEY (id)
+);
