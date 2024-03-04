@@ -19,7 +19,7 @@
           <label>
             <br />
             Дата рождения:<br />
-            <input name="date"
+            <input name="data"
               value="2000-01-01"
               type="date" />
           </label><br />
