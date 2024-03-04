@@ -20,15 +20,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
 // Проверяем ошибки.
 $errors = FALSE;
-if (empty($_POST['fio'])) {
+if (empty($_POST['name'])) {
   print('Заполните имя.<br/>');
   $errors = TRUE;
 }
-
-if (empty($_POST['year']) || !is_numeric($_POST['year']) || !preg_match('/^\d+$/', $_POST['year'])) {
-  print('Заполните год.<br/>');
+if (empty($_POST['phone'])) {
+  print('Запоните телефон.<br/>');
   $errors = TRUE;
 }
+if (empty($_POST['email'])) {
+  print('Запоните почту.<br/>');
+  $errors = TRUE;
+}
+if (empty($_POST['bio'])) {
+  print('Запоните биографию.<br/>');
+  $errors = TRUE;
+}
+
 
 
 // *************
@@ -49,8 +57,8 @@ $db = new PDO('mysql:host=localhost;dbname=u67440', $user, $pass,
 
 // Подготовленный запрос. Не именованные метки.
 try {
-  $stmt = $db->prepare("INSERT INTO application SET name = ?");
-  $stmt->execute([$_POST['fio']]);
+  $stmt = $db->prepare("INSERT INTO application (name, phone, email, date, pol, bio, ok) VALUES(?, ?, ?, ?, ?, ?, ?, ?)");
+  $stmt->execute([$_POST['name'], $_POST['phone'], $_POST['email'], $_POST['date'], $_POST['pol'], $_POST['bio'], $_POST['ok']]);
 }
 catch(PDOException $e){
   print('Error : ' . $e->getMessage());
