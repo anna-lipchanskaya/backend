@@ -21,22 +21,16 @@ print_r($_POST);
 exit();
 // Проверяем ошибки.
 $errors = FALSE;
-if (empty($_POST['name'])) {
+if (empty($_POST['fio'])) {
   print('Заполните имя.<br/>');
   $errors = TRUE;
 }
-if (empty($_POST['phone'])) {
-  print('Запоните телефон.<br/>');
+
+if (empty($_POST['year']) || !is_numeric($_POST['year']) || !preg_match('/^\d+$/', $_POST['year'])) {
+  print('Заполните год.<br/>');
   $errors = TRUE;
 }
-if (empty($_POST['email'])) {
-  print('Запоните почту.<br/>');
-  $errors = TRUE;
-}
-if (empty($_POST['bio'])) {
-  print('Запоните биографию.<br/>');
-  $errors = TRUE;
-}
+
 
 // *************
 // Тут необходимо проверить правильность заполнения всех остальных полей.
@@ -56,8 +50,8 @@ $db = new PDO('mysql:host=localhost;dbname=u67440', $user, $pass,
 
 // Подготовленный запрос. Не именованные метки.
 try {
-  $stmt = $db->prepare("INSERT INTO application (name, phone, email, date, pol, bio, ok) VALUES(?, ?, ?, ?, ?, ?, ?, ?)");
-  $stmt->execute([$_POST['name'], $_POST['phone'], $_POST['email'], $_POST['date'], $_POST['pol'], $_POST['bio'], $_POST['ok']]);
+  $stmt = $db->prepare("INSERT INTO application SET name = ?");
+  $stmt->execute([$_POST['fio']]);
 }
 catch(PDOException $e){
   print('Error : ' . $e->getMessage());
