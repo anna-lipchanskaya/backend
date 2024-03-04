@@ -2,7 +2,7 @@
         <form>
         <label>
           ФИО:<br />
-          <input required name="name"
+          <input name="name"
           placeholder="Введите ваше ФИО" />
         </label><br />
         <label>
