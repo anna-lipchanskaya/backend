@@ -28,7 +28,7 @@
         name="pol" value="M" />
         Мужской</label>
       <label><input type="radio"
-        name="radio-group-1" value="W" />
+        name="pol" value="W" />
         Женский</label><br />
         <label>
           Биография:<br />
