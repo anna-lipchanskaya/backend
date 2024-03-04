@@ -1,5 +1,5 @@
 <p style="font-size: 30px; color: rgb(50, 100, 255)">Форма</p>
-        <form>
+        <form action="" method="POST">
         <label>
           ФИО:<br />
           <input name="name"
