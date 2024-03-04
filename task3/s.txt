@@ -6,6 +6,6 @@ CREATE TABLE application (
  data DATE NOT NULL DEFAULT "2000-01-01",
  pol char(1),
  bio varchar(1024) NOT NULL DEFAULT '',
- ok char(1),
+ ok char(5),
  PRIMARY KEY (id)
 );
