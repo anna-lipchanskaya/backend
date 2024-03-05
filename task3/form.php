@@ -33,7 +33,7 @@
                  <label>
           Любимый язык программирования:
           <br />
-            <select name="love-language[]" multiple>
+        <select name="abilities[]" multiple="multiple">
                 <option disabled>Выберите любимый язык пр.</option>
                 <option value="Pascal">Pascal</option>
                 <option value="C">C</option>
