@@ -63,7 +63,8 @@ try {
   foreach ($_POST['abilities'] as $ability) {
       $stmt = $db->prepare("INSERT INTO ap_lan (id_application, id_language) VALUES(:abilities, :lastId)");
       $stmt->bindParam(':abilities', $abilities);
-      $stmt->bindParam(':lastId', $lastId);  
+      $stmt->bindParam(':lastId', $lastId);
+      $stmt->execute();
 }
 }
 catch(PDOException $e){
