@@ -30,6 +30,21 @@
       <label><input type="radio"
         name="pol" value="W" />
         Женский</label><br />
+                 <label>
+          Любимый язык программирования:
+          <br />
+            <select name="love-language[]" multiple>
+                <option disabled>Выберите любимый язык пр.</option>
+                <option value="Pascal">Pascal</option>
+                <option value="C">C</option>
+                <option value="C++">C++</option>
+                <option value="JavaScript">JavaScript</option>
+                <option value="PHP">PHP</option>
+                <option value="Python">Python</option>
+                <option value="Java">Java</option>
+                <option value="Haskel">Haskel</option>
+            </select>
+        </label><br />
         <label>
           Биография:<br />
           <textarea name="bio" placeholder="Ваша биография" ></textarea>
