@@ -72,7 +72,6 @@ foreach ($_POST['abilities'] as $ability) {
     $stmtApLang->execute();
 }
 }
-}
 catch(PDOException $e){
   print('Error : ' . $e->getMessage());
   exit();
