@@ -96,7 +96,7 @@ margin-left: 28%;
 <i class="fas fa-at"></i>
 <i class="fas fa-mail-bulk"></i>
 </div>
-<form action="/" method="POST">
+<form action="" method="POST">
 <h1 style="display: flex;
 justify-content: center;
 align-items: center;">Заявка</h1>
