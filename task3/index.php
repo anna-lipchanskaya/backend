@@ -63,7 +63,7 @@ try {
   foreach ($_POST['abilities'] as $ability) {
       $stmt = $db->prepare("INSERT INTO ap_lan (id_application, id_language) VALUES(:lastId, :ability)");
       $stmt->bindParam(':lastId', $lastId);
-      $stmt->bindParam(':abilities', $ability);
+      $stmt->bindParam(':ability', $ability);
       $stmt->execute();
 }
 }
