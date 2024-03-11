@@ -58,7 +58,7 @@ $db = new PDO('mysql:host=localhost;dbname=u67440', $user, $pass,
 // Подготовленный запрос. Не именованные метки.
 try {
 $stmt = $db->prepare("INSERT INTO application (name, phone, email, data, pol, bio, ok) VALUES (?, ?, ?, ?, ?, ?, ?)");
-$stmt->execute([$_POST['name'], $_POST['phone'], $_POST['email'], $_POST['data'], $_POST['pol'], $_POST['bio'], $_POST['ok']);
+$stmt->execute([$_POST['name'], $_POST['phone'], $_POST['email'], $_POST['data'], $_POST['pol'], $_POST['bio'], $_POST['ok']]);
 $lastId = $db->lastInsertId();
 
 foreach ($_POST['abilities'] as $ability) {
