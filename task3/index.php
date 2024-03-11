@@ -57,14 +57,20 @@ $db = new PDO('mysql:host=localhost;dbname=u67440', $user, $pass,
 
 // Подготовленный запрос. Не именованные метки.
 try {
-  $stmt = $db->prepare("INSERT INTO application (name, phone, email, data, pol, bio, ok) VALUES(?, ?, ?, ?, ?, ?, ?)");
-  $stmt->execute([$_POST['name'], $_POST['phone'], $_POST['email'], $_POST['data'], $_POST['pol'], $_POST['bio'], $_POST['ok']]);
-  $lastId = $db->lastInsertId();
-  foreach ($_POST['abilities'] as $ability) {
-      $stmt = $db->prepare("INSERT INTO ap_lan (id_application, id_language) VALUES(:lastId, :ability)");
-      $stmt->bindParam(':lastId', $lastId);
-      $stmt->bindParam(':ability', $ability);
-      $stmt->execute();
+$stmt = $db->prepare("INSERT INTO application (name, phone, email, data, pol, bio, ok) VALUES (?, ?, ?, ?, ?, ?, ?)");
+$stmt->execute([$_POST['name'], $_POST['phone'], $_POST['email'], $_POST['data'], $_POST['pol'], $_POST['bio'], $_POST['ok']);
+$lastId = $db->lastInsertId();
+
+foreach ($_POST['abilities'] as $ability) {
+    $stmtLang = $db->prepare("SELECT id FROM language WHERE name = ?");
+    $stmtLang->execute([$ability]);
+    $languageId = $stmtLang->fetchColumn();
+
+    $stmtApLang = $db->prepare("INSERT INTO ap_lan (id_application, id_language) VALUES (:lastId, :languageId)");
+    $stmtApLang->bindParam(':lastId', $lastId);
+    $stmtApLang->bindParam(':languageId', $languageId);
+    $stmtApLang->execute();
+}
 }
 }
 catch(PDOException $e){
