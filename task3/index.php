@@ -61,9 +61,9 @@ try {
   $stmt->execute([$_POST['name'], $_POST['phone'], $_POST['email'], $_POST['data'], $_POST['pol'], $_POST['bio'], $_POST['ok']]);
   $lastId = $db->lastInsertId();
   foreach ($_POST['abilities'] as $ability) {
-      $stmt = $db->prepare("INSERT INTO ap_lan (id_application, id_language) VALUES(:abilities, :lastId)");
-      $stmt->bindParam(':abilities', $abilities);
+      $stmt = $db->prepare("INSERT INTO ap_lan (id_application, id_language) VALUES(:lastId, :ability)");
       $stmt->bindParam(':lastId', $lastId);
+      $stmt->bindParam(':abilities', $ability);
       $stmt->execute();
 }
 }
