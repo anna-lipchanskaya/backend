@@ -67,9 +67,6 @@ if (empty($_POST['email'])) {
 } elseif (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
     print('Введите корректный адрес электронной почты.<br/>');
     $errors = TRUE;
-} elseif (preg_match('/\s/', $_POST['email'])) {
-    print('Адрес электронной почты не должен содержать пробелов.<br/>');
-    $errors = TRUE;
 }elseif (strlen($_POST['email']) > 150) {
             print('Адрес электронной почты '.$_POST['email'].' не должен превышать 150 символов.<br/>');
             $errors = TRUE;
