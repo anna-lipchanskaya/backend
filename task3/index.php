@@ -40,8 +40,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 // Проверяем ошибки.
 $errors = FALSE;
 if (empty($_POST['name'])) {
-  print('Заполните имя.<br/>');
-  $errors = TRUE;
+    print('Заполните имя.<br/>');
+    $errors = TRUE;
+} elseif (!preg_match('/^[a-zA-Z\s]+$/', $_POST['name'])) {
+    print('Имя может содержать только буквы и пробелы.<br/>');
+    $errors = TRUE;
 }
 if (empty($_POST['phone'])) {
   print('Запоните телефон.<br/>');
