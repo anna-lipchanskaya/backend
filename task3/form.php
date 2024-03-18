@@ -67,7 +67,7 @@ color: #fff;
 button:hover {
 background: #2371a0;
 } 
-    @media (min-width: @media (min-width: 1300px) {
+@media (min-width: 1300px) {
 .main-block {
 flex-direction: row;
 }
