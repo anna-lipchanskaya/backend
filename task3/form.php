@@ -107,13 +107,13 @@ align-items: center;">Заявка</h1>
     </label><br />
     <label>
     Телефон:<br />
-    <input class = "f" required name="phone"
+    <input class = "f" name="phone"
       type="tel"
       placeholder="Введите ваш телефон" />
   </label><br />
   <label>
     Email:<br />
-    <input class = "f" required name="email"
+    <input class = "f" name="email"
       type="email"
       placeholder="Введите вашу почту" /></label>
       <label>
@@ -150,7 +150,7 @@ align-items: center;">Заявка</h1>
       Биография:<br />
       <textarea class = "f" name="bio" placeholder="Ваша биография" ></textarea>
     </label><br />
-  <label><input required type="checkbox" checked="checked"
+  <label><input type="checkbox" checked="checked"
     name="ok" />    С контрактом ознакомлен(а)</label>
     <br />
 <button type="submit" href="/">Сохранить</button>
