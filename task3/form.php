@@ -67,6 +67,25 @@ color: #fff;
 button:hover {
 background: #2371a0;
 } 
+    @media (min-width: 568px) {
+.main-block {
+flex-direction: row;
+}
+.left-part, form {
+width: 50%;
+}
+.fa-envelope {
+margin-top: 0;
+margin-left: 20%;
+}
+.fa-at {
+margin-top: -10%;
+margin-left: 65%;
+}
+.fa-mail-bulk {
+margin-top: 2%;
+margin-left: 28%;
+}
 </style>
 </head>
 <body>
