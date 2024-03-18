@@ -114,7 +114,6 @@ align-items: center;">Заявка</h1>
   <label>
     Email:<br />
     <input class = "f" name="email"
-      type="email"
       placeholder="Введите вашу почту" /></label>
       <label>
         <br />
