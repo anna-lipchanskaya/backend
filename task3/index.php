@@ -11,15 +11,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                     document.addEventListener("DOMContentLoaded", function() {
                         var modal = document.createElement("div");
                         modal.innerHTML = "Спасибо, результаты сохранены.";
-                        modal.style.position = "fixed";
                         modal.style.color = "#1c87c9";
+                        modal.style.position = "fixed";
                         modal.style.zIndex = "1";
-                        modal.style.top = "50%";
-                        modal.style.left = "50%";
-                        modal.style.backgroundColor = "#fff";
-                        modal.style.padding = "20px";
-                        modal.style.transform = "translate(-50%, -50%)";
-                        modal.style.border = "1px solid #333";
+                        modal.style.top = "0";
+                        modal.style.left = "0";
+                        modal.style.width = "100%";
+                        modal.style.height = "100%";
+                        modal.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
+                        modal.style.display = "flex";
+                        modal.style.justifyContent = "center";
+                        modal.style.alignItems = "center";
+                        modal.style.color = "#fff";
+                        modal.style.fontSize = "24px";
                         modal.style.cursor = "pointer";
                         modal.addEventListener("click", function() {
                             modal.style.display = "none";
