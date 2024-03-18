@@ -12,6 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                         var modal = document.createElement("div");
                         modal.innerHTML = "Спасибо, результаты сохранены.";
                         modal.style.position = "fixed";
+                        modal.style.color = "#1c87c9";
                         modal.style.zIndex = "1";
                         modal.style.top = "50%";
                         modal.style.left = "50%";
