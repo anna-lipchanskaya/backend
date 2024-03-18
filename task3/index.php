@@ -11,7 +11,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                     document.addEventListener("DOMContentLoaded", function() {
                         var modal = document.createElement("div");
                         modal.innerHTML = "Спасибо, результаты сохранены.";
-                        modal.style.color = "#1c87c9";
                         modal.style.position = "fixed";
                         modal.style.zIndex = "1";
                         modal.style.top = "0";
