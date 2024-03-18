@@ -6,15 +6,30 @@ header('Content-Type: text/html; charset=UTF-8');
 // В суперглобальном массиве $_SERVER PHP сохраняет некторые заголовки запроса HTTP
 // и другие сведения о клиненте и сервере, например метод текущего запроса $_SERVER['REQUEST_METHOD'].
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-  // В суперглобальном массиве $_GET PHP хранит все параметры, переданные в текущем запросе через URL.
-  if (!empty($_GET['save'])) {
-    // Если есть параметр save, то выводим сообщение пользователю.
-    print('Спасибо, результаты сохранены.');
-  }
-  // Включаем содержимое файла form.php.
-  include('form.php');
-  // Завершаем работу скрипта.
-  exit();
+    if (!empty($_GET['save'])) {
+        echo '<script>
+                    document.addEventListener("DOMContentLoaded", function() {
+                        var modal = document.createElement("div");
+                        modal.innerHTML = "Спасибо, результаты сохранены.";
+                        modal.style.position = "fixed";
+                        modal.style.zIndex = "1";
+                        modal.style.top = "50%";
+                        modal.style.left = "50%";
+                        modal.style.backgroundColor = "#fff";
+                        modal.style.padding = "20px";
+                        modal.style.transform = "translate(-50%, -50%)";
+                        modal.style.border = "1px solid #333";
+                        modal.style.cursor = "pointer";
+                        modal.addEventListener("click", function() {
+                            modal.style.display = "none";
+                        });
+                        document.body.appendChild(modal);
+                    });
+              </script>';
+    }
+
+    include('form.php');
+    exit();
 }
 // Иначе, если запрос был методом POST, т.е. нужно проверить данные и сохранить их в XML-файл.
 
