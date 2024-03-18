@@ -45,18 +45,46 @@ if (empty($_POST['name'])) {
 } elseif (!preg_match('/^[a-zA-Z\s]+$/', $_POST['name'])) {
     print('Имя может содержать только буквы и пробелы.<br/>');
     $errors = TRUE;
-}
+}elseif (strlen($_POST['name']) > 150) {
+            print('Имя '.$_POST['name'].' не должно превышать 150 символов.<br/>');
+            $errors = TRUE;
+        }
+
 if (empty($_POST['phone'])) {
-  print('Запоните телефон.<br/>');
-  $errors = TRUE;
-}
+    print('Заполните телефон.<br/>');
+    $errors = TRUE;
+} elseif (!preg_match('/^\d+$/', $_POST['phone'])) {
+    print('Телефон должен состоять только из цифр.<br/>');
+    $errors = TRUE;
+}elseif (strlen($_POST['phone']) > 11) {
+            print('Телефон '.$_POST['phone'].' не должно превышать 11 символов.<br/>');
+            $errors = TRUE;
+        }
+
 if (empty($_POST['email'])) {
-  print('Запоните почту.<br/>');
-  $errors = TRUE;
-}
+    print('Заполните адрес электронной почты.<br/>');
+    $errors = TRUE;
+} elseif (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+    print('Введите корректный адрес электронной почты.<br/>');
+    $errors = TRUE;
+} elseif (preg_match('/\s/', $_POST['email'])) {
+    print('Адрес электронной почты не должен содержать пробелов.<br/>');
+    $errors = TRUE;
+}elseif (strlen($_POST['email']) > 150) {
+            print('Адрес электронной почты '.$_POST['email'].' не должен превышать 150 символов.<br/>');
+            $errors = TRUE;
+        }
+
 if (empty($_POST['bio'])) {
   print('Запоните биографию.<br/>');
   $errors = TRUE;
+}elseif (strlen($_POST['bio']) > 300) {
+            print('Биография '.$_POST['bio'].' не должна превышать 300 символов.<br/>');
+            $errors = TRUE;
+        }
+if (empty($_POST['abilities'])) {
+    print('Выберите хотя бы 1 язык программирования.<br/>');
+    $errors = TRUE;
 }
 
 
