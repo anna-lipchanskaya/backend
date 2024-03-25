@@ -45,7 +45,7 @@ if (empty($_POST['name'])) {
 } elseif (!preg_match('/^[\p{L}\s]+$/u', $_POST['name'])) {
     print('Имя может содержать только буквы и пробелы.<br/>');
     $errors = TRUE;
-} elseif (mb_strlen($_POST['name']) > 150) {
+} elseif (strlen($_POST['name']) > 150) {
     print('Имя '.$_POST['name'].' не должно превышать 150 символов.<br/>');
     $errors = TRUE;
 }
