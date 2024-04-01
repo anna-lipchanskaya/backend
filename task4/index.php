@@ -79,6 +79,21 @@ else {
   }
 
   // Сохранение в БД.
+  $user = 'u67440'; // Заменить на ваш логин uXXXXX
+$pass = '7848123'; // Заменить на пароль, такой же, как от SSH
+$db = new PDO('mysql:host=localhost;dbname=u67440', $user, $pass,
+  [PDO::ATTR_PERSISTENT => true, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]); // Заменить test на имя БД, совпадает с логином uXXXXX
+
+// Подготовленный запрос. Не именованные метки.
+try {
+  $stmt = $db->prepare("INSERT INTO test SET name = ?");
+  $stmt->execute([$_POST['fio']]);
+}
+catch(PDOException $e){
+  print('Error : ' . $e->getMessage());
+  exit();
+}
+
 
   // Сохраняем куку с признаком успешного сохранения.
   setcookie('save', '1');
