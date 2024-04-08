@@ -26,6 +26,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
   // Складываем признак ошибок в массив.
   $errors = array();
+  if (empty($_POST['name'])) {
+   // print('Заполните имя.<br/>');
+    $errors[name_empty] = TRUE;
+} elseif (!preg_match('/^[\p{L}\s]+$/u', $_POST['name'])) {
+    //print('Имя может содержать только буквы и пробелы.<br/>');
+    $errors[name_str] = TRUE;
+} elseif (strlen($_POST['name']) > 150) {
+    //print('Имя '.$_POST['name'].' не должно превышать 150 символов.<br/>');
+    $errors[name_len] = TRUE;
+}
+
   $errors['fio'] = !empty($_COOKIE['fio_error']);
   // TODO: аналогично все поля.
 
