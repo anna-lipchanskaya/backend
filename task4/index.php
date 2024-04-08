@@ -64,7 +64,6 @@ else {
     setcookie('name_error', '1', time() + 24 * 60 * 60);
     $errors = TRUE;
 }
-  }
   // Сохраняем ранее введенное в форму значение на месяц.
   setcookie('name_value', $_POST['name'], time() + 30 * 24 * 60 * 60);
 
@@ -116,3 +115,4 @@ catch(PDOException $e){
 
   // Делаем перенаправление.
   header('Location: index.php');
+}
