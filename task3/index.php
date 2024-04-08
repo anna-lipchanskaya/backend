@@ -60,7 +60,13 @@ if (empty($_POST['phone'])) {
             print('Телефон '.$_POST['phone'].' не должно превышать 11 символов.<br/>');
             $errors = TRUE;
         }
-
+if (empty($_POST['data'])) {
+  print('Заполните дату.<br/>');
+  $errors = TRUE;
+} elseif (!preg_match('/^\d{4}-\d{2}-\d{2}$/', $_POST['data'])) {
+  print('Дата должна быть в формате YYYY-MM-DD.<br/>');
+  $errors = TRUE;
+}
 if (empty($_POST['email'])) {
     print('Заполните адрес электронной почты.<br/>');
     $errors = TRUE;
@@ -71,7 +77,20 @@ if (empty($_POST['email'])) {
             print('Адрес электронной почты '.$_POST['email'].' не должен превышать 150 символов.<br/>');
             $errors = TRUE;
         }
+$allowed_languages = array("Pascal", "C", "C++", "JavaScript", "PHP", "Python", "Java", "Haskel");
 
+if (empty($_POST['abilities'])) {
+    print('Выберите хотя бы 1 язык программирования.<br/>');
+    $errors = TRUE;
+} else {
+    foreach ($_POST['abilities'] as $language) {
+        if (!in_array($language, $allowed_languages)) {
+            print('Выберите только представленные языки.<br/>');
+            $errors = TRUE;
+            break;
+        }
+    }
+}
 if (empty($_POST['bio'])) {
   print('Запоните биографию.<br/>');
   $errors = TRUE;
