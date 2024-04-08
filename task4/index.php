@@ -26,13 +26,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
   // Складываем признак ошибок в массив.
   $errors = array();
-  $errors['fio'] = !empty($_COOKIE['fio_error']);
+  $errors['name'] = !empty($_COOKIE['name_error']);
   // TODO: аналогично все поля.
 
   // Выдаем сообщения об ошибках.
-  if ($errors['fio']) {
+  if ($errors['name']) {
     // Удаляем куку, указывая время устаревания в прошлом.
-    setcookie('fio_error', '', 100000);
+    setcookie('name_error', '', 100000);
     // Выводим сообщение.
     $messages[] = '<div class="error">Заполните имя.</div>';
   }
@@ -40,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
   // Складываем предыдущие значения полей в массив, если есть.
   $values = array();
-  $values['fio'] = empty($_COOKIE['fio_value']) ? '' : $_COOKIE['fio_value'];
+  $values['name'] = empty($_COOKIE['name_value']) ? '' : $_COOKIE['name_value'];
   // TODO: аналогично все поля.
 
   // Включаем содержимое файла form.php.
@@ -52,14 +52,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 else {
   // Проверяем ошибки.
   $errors = FALSE;
-  if (empty($_POST['fio'])) {
-    // Выдаем куку на день с флажком об ошибке в поле fio.
-    setcookie('fio_error', '1', time() + 24 * 60 * 60);
+  if (empty($_POST['name'])) {
+    // Выдаем куку на день с флажком об ошибке в поле name.
+    setcookie('name_error', '1', time() + 24 * 60 * 60);
     $errors = TRUE;
-  }
+  }elseif (!preg_match('/^[\p{L}\s]+$/u', $_POST['name'])) {
+    setcookie('name_error', '1', time() + 24 * 60 * 60);
+    $errors = TRUE;
+} elseif (strlen($_POST['name']) > 150) {
+    setcookie('name_error', '1', time() + 24 * 60 * 60);
+    $errors = TRUE;
+}
   else {
     // Сохраняем ранее введенное в форму значение на месяц.
-    setcookie('fio_value', $_POST['fio'], time() + 30 * 24 * 60 * 60);
+    setcookie('name_value', $_POST['name'], time() + 30 * 24 * 60 * 60);
   }
 
 // *************
@@ -74,21 +80,31 @@ else {
   }
   else {
     // Удаляем Cookies с признаками ошибок.
-    setcookie('fio_error', '', 100000);
+    setcookie('name_error', '', 100000);
     // TODO: тут необходимо удалить остальные Cookies.
   }
 
-  // Сохранение в БД.
+// Сохранение в базу данных.
 $user = 'u67440'; // Заменить на ваш логин uXXXXX
 $pass = '7848123'; // Заменить на пароль, такой же, как от SSH
 $db = new PDO('mysql:host=localhost;dbname=u67440', $user, $pass,
   [PDO::ATTR_PERSISTENT => true, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]); // Заменить test на имя БД, совпадает с логином uXXXXX
- // Заменить test на имя БД, совпадает с логином uXXXXX
-
 // Подготовленный запрос. Не именованные метки.
 try {
-  $stmt = $db->prepare("INSERT INTO test SET name = ?");
-  $stmt->execute([$_POST['fio']]);
+$stmt = $db->prepare("INSERT INTO application (name, phone, email, data, pol, bio, ok) VALUES (?, ?, ?, ?, ?, ?, ?)");
+$stmt->execute([$_POST['name'], $_POST['phone'], $_POST['email'], $_POST['data'], $_POST['pol'], $_POST['bio'], $_POST['ok']]);
+$lastId = $db->lastInsertId();
+
+foreach ($_POST['abilities'] as $ability) {
+    $stmtLang = $db->prepare("SELECT id FROM language WHERE name = ?");
+    $stmtLang->execute([$ability]);
+    $languageId = $stmtLang->fetchColumn();
+
+    $stmtApLang = $db->prepare("INSERT INTO ap_lan (id_application, id_language) VALUES (:lastId, :languageId)");
+    $stmtApLang->bindParam(':lastId', $lastId);
+    $stmtApLang->bindParam(':languageId', $languageId);
+    $stmtApLang->execute();
+}
 }
 catch(PDOException $e){
   print('Error : ' . $e->getMessage());
