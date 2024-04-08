@@ -77,6 +77,21 @@ if (empty($_POST['email'])) {
             print('Адрес электронной почты '.$_POST['email'].' не должен превышать 150 символов.<br/>');
             $errors = TRUE;
         }
+if (empty($_POST['pol'])) {
+    print('Заполните пол.<br/>');
+    $errors = TRUE;
+} elseif ($_POST['pol'] !== 'W' && $_POST['pol'] !== 'M') {
+    print('Выберите только мужской или женский пол.<br/>');
+    $errors = TRUE;
+}
+
+if (empty($_POST['ok'])) {
+    print('Подтвердите соглашение.<br/>');
+    $errors = TRUE;
+} elseif ($_POST['pol'] !== 'on') {
+    print('Подтвердите соглашение.<br/>');
+    $errors = TRUE;
+}
 $allowed_languages = array("Pascal", "C", "C++", "JavaScript", "PHP", "Python", "Java", "Haskel");
 
 if (empty($_POST['abilities'])) {
