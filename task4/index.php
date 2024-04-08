@@ -116,4 +116,3 @@ catch(PDOException $e){
 
   // Делаем перенаправление.
   header('Location: index.php');
-}
