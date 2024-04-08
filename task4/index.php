@@ -26,40 +26,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
   // Складываем признак ошибок в массив.
   $errors = array();
-  if (empty($_COOKIE['name_error'])) {
-   // print('Заполните имя.<br/>');
-    $errors[name_empty] = TRUE;
-} elseif (!preg_match('/^[\p{L}\s]+$/u', $_COOKIE['name_error'])) {
-    //print('Имя может содержать только буквы и пробелы.<br/>');
-    $errors[name_str] = TRUE;
-} elseif (strlen($_COOKIE['name_error']) > 150) {
-    //print('Имя '.$_POST['name'].' не должно превышать 150 символов.<br/>');
-    $errors[name_len] = TRUE;
-}
-
-  //$errors['fio'] = !empty($_COOKIE['fio_error']);
+  $errors['name'] = !empty($_COOKIE['name_error']);
   // TODO: аналогично все поля.
 
   // Выдаем сообщения об ошибках.
-  if ($errors['name_empty']) {
+  if ($errors['name']) {
     // Удаляем куку, указывая время устаревания в прошлом.
-    setcookie('fio_error', '', 100000);
+    setcookie('name_error', '', 100000);
     // Выводим сообщение.
     $messages[] = '<div class="error">Заполните имя.</div>';
   }
-  if ($errors['name_str']) {
-    // Удаляем куку, указывая время устаревания в прошлом.
-    setcookie('name_error', '', 100000);
-    // Выводим сообщение.
-    $messages[] = '<div class="error">Имя может содержать только буквы и пробелы.</div>';
-  }
-    if ($errors['name_len']) {
-    // Удаляем куку, указывая время устаревания в прошлом.
-    setcookie('name_error', '', 100000);
-    // Выводим сообщение.
-    $messages[] = '<div class="error">'Имя не должно превышать 150 символов.</div>';
-  }
-  
   // TODO: тут выдать сообщения об ошибках в других полях.
 
   // Складываем предыдущие значения полей в массив, если есть.
@@ -76,14 +52,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 else {
   // Проверяем ошибки.
   $errors = FALSE;
-  if (empty($_POST['fio'])) {
-    // Выдаем куку на день с флажком об ошибке в поле fio.
-    setcookie('fio_error', '1', time() + 24 * 60 * 60);
+  if (empty($_POST['name'])) {
+    // Выдаем куку на день с флажком об ошибке в поле name.
+    setcookie('name_error', '1', time() + 24 * 60 * 60);
     $errors = TRUE;
-  }
+  }elseif (!preg_match('/^[\p{L}\s]+$/u', $_POST['name'])) {
+    setcookie('name_error', '1', time() + 24 * 60 * 60);
+    $errors = TRUE;
+} elseif (strlen($_POST['name']) > 150) {
+    setcookie('name_error', '1', time() + 24 * 60 * 60);
+    $errors = TRUE;
+}
   else {
     // Сохраняем ранее введенное в форму значение на месяц.
-    setcookie('fio_value', $_POST['fio'], time() + 30 * 24 * 60 * 60);
+    setcookie('name_value', $_POST['name'], time() + 30 * 24 * 60 * 60);
   }
 
 // *************
@@ -98,21 +80,31 @@ else {
   }
   else {
     // Удаляем Cookies с признаками ошибок.
-    setcookie('fio_error', '', 100000);
+    setcookie('name_error', '', 100000);
     // TODO: тут необходимо удалить остальные Cookies.
   }
 
-  // Сохранение в БД.
+// Сохранение в базу данных.
 $user = 'u67440'; // Заменить на ваш логин uXXXXX
 $pass = '7848123'; // Заменить на пароль, такой же, как от SSH
 $db = new PDO('mysql:host=localhost;dbname=u67440', $user, $pass,
   [PDO::ATTR_PERSISTENT => true, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]); // Заменить test на имя БД, совпадает с логином uXXXXX
- // Заменить test на имя БД, совпадает с логином uXXXXX
-
 // Подготовленный запрос. Не именованные метки.
 try {
-  $stmt = $db->prepare("INSERT INTO test SET name = ?");
-  $stmt->execute([$_POST['fio']]);
+$stmt = $db->prepare("INSERT INTO application (name, phone, email, data, pol, bio, ok) VALUES (?, ?, ?, ?, ?, ?, ?)");
+$stmt->execute([$_POST['name'], $_POST['phone'], $_POST['email'], $_POST['data'], $_POST['pol'], $_POST['bio'], $_POST['ok']]);
+$lastId = $db->lastInsertId();
+
+foreach ($_POST['abilities'] as $ability) {
+    $stmtLang = $db->prepare("SELECT id FROM language WHERE name = ?");
+    $stmtLang->execute([$ability]);
+    $languageId = $stmtLang->fetchColumn();
+
+    $stmtApLang = $db->prepare("INSERT INTO ap_lan (id_application, id_language) VALUES (:lastId, :languageId)");
+    $stmtApLang->bindParam(':lastId', $lastId);
+    $stmtApLang->bindParam(':languageId', $languageId);
+    $stmtApLang->execute();
+}
 }
 catch(PDOException $e){
   print('Error : ' . $e->getMessage());
