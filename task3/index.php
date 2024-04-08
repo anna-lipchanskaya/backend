@@ -88,7 +88,7 @@ if (empty($_POST['pol'])) {
 if (empty($_POST['ok'])) {
     print('Подтвердите соглашение.<br/>');
     $errors = TRUE;
-} elseif ($_POST['pol'] !== 'on') {
+} elseif ($_POST['ok'] !== 'on') {
     print('Подтвердите соглашение.<br/>');
     $errors = TRUE;
 }
