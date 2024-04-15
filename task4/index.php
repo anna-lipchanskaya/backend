@@ -26,25 +26,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
   // Складываем признак ошибок в массив.
   $errors = array();
-  $errors['name_error'] = !empty($_COOKIE['name_error']);
-  $errors['name_error_len'] = !empty($_COOKIE['name_error_len']);
-  $errors['name_error_struct'] = !empty($_COOKIE['name_error_struct']);
+  $errors['name'] = !empty($_COOKIE['name_error']);
+  $errors['name_len'] = !empty($_COOKIE['name_error_len']);
+  $errors['name_struct'] = !empty($_COOKIE['name_error_struct']);
   // TODO: аналогично все поля.
 
   // Выдаем сообщения об ошибках.
-  if ($errors['name_error']) {
+  if ($errors['name']) {
     // Удаляем куки, указывая время устаревания в прошлом.
     setcookie('name_error', '', 100000);
     setcookie('name_value', '', 100000);
     // Выводим сообщение.
     $messages[] = '<div class="error">Заполните имя.</div>';
   }
-  if($errors['name_error_len']) {
+  if($errors['name_len']) {
     setcookie('name_error_len', '', 100000);
     setcookie('name_value', '', 100000);
     $messages[] = '<div class="error">Имя должно содержать только буквы.</div>';
   }
-    if($errors['name_error_struct']) {
+    if($errors['name_struct']) {
     setcookie('name_error_struct', '', 100000);
     setcookie('name_value', '', 100000);
     $messages[] = '<div class="error">Имя должно быть не длиннее 150 слов.</div>';
