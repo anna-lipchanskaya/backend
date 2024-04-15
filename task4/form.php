@@ -9,7 +9,12 @@
   border: 2px solid red !important;
 }
   .f.error {
+  border: none;
   border: 2px solid red !important;
+  width: calc(100% - 18px);
+  padding: 8px;
+  margin-bottom: 20px;
+  outline: none;
 }
 html, body {
 min-height: 100%;
@@ -56,6 +61,7 @@ transform: rotate(10deg);
 width: calc(100% - 18px);
 padding: 8px;
 margin-bottom: 20px;
+border: 1px solid #1c87c9;
 outline: none;
 }
 input::placeholder {
@@ -138,7 +144,7 @@ justify-content: center;
 align-items: center;">Заявка</h1>
     <label>
       ФИО:<br />
-      <input name="name"
+      <input name="name" class = "f"
       placeholder="Введите ваше ФИО" <?php {print 'class="error"';} ?> value="<?php print $values['name']; ?>"/>
     <label>
     Телефон:<br />
