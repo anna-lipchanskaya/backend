@@ -42,6 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     setcookie('name_error', '', 100000);
     setcookie('name_value', '', 100000);
     $messages[] = '<div class="error">Имя должно состоять только из букв.</div>';
+  }
     elseif ($errors['name_no_len']){
     setcookie('name_error', '', 100000);
     setcookie('name_value', '', 100000);
