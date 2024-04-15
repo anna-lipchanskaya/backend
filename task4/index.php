@@ -26,9 +26,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
   // Складываем признак ошибок в массив.
   $errors = array();
-  $errors['name'] = !empty($_COOKIE['name_error']);
-  $errors['name_len'] = !empty($_COOKIE['name_error_len']);
-  $errors['name_struct'] = !empty($_COOKIE['name_error_struct']);
+  $errors['name_error'] = !empty($_COOKIE['name_error']);
+  $errors['name_error_len'] = !empty($_COOKIE['name_error_len']);
+  $errors['name_error_struct'] = !empty($_COOKIE['name_error_struct']);
   // TODO: аналогично все поля.
 
   // Выдаем сообщения об ошибках.
