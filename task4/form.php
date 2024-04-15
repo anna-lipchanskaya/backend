@@ -54,7 +54,6 @@ transform: rotate(10deg);
 }
 .f {
 width: calc(100% - 18px);
-border: 1px solid #1c87c9;
 padding: 8px;
 margin-bottom: 20px;
 outline: none;
