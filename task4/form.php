@@ -12,7 +12,6 @@
 .error1 {
   border: 2px solid red !important;
 }
-}
 html, body {
 min-height: 100%;
 padding: 0;
