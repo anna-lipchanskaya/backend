@@ -26,18 +26,26 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
   // Складываем признак ошибок в массив.
   $errors = array();
-  $errors['name'] = !empty($_COOKIE['name_error']);
+  $errors['name_empty'] = !empty($_COOKIE['name_error_empty']);
+  $errors['name_no_struct'] = !empty($_COOKIE['name_error_no_struct']);
+  $errors['name_no_len'] = !empty($_COOKIE['name_error_no_len']);
   // TODO: аналогично все поля.
 
   // Выдаем сообщения об ошибках.
-  if ($errors['name']) {
+  if ($errors['name_empty']) {
     // Удаляем куки, указывая время устаревания в прошлом.
     setcookie('name_error', '', 100000);
     setcookie('name_value', '', 100000);
     // Выводим сообщение.
     $messages[] = '<div class="error">Заполните имя.</div>';
-  }
-  // TODO: тут выдать сообщения об ошибках в других полях.
+  }elseif ($errors['name_no_struct']){
+    setcookie('name_error', '', 100000);
+    setcookie('name_value', '', 100000);
+    $messages[] = '<div class="error">Имя должно состоять только из букв.</div>';
+    elseif ($errors['name_no_len']){
+    setcookie('name_error', '', 100000);
+    setcookie('name_value', '', 100000);
+    $messages[] = '<div class="error">Имя должно быть не длиннее 150 слов.</div>';
 
   // Складываем предыдущие значения полей в массив, если есть.
   $values = array();
@@ -55,13 +63,13 @@ else {
   $errors = FALSE;
   if (empty($_POST['name'])) {
     // Выдаем куку на день с флажком об ошибке в поле name.
-    setcookie('name_error', '1', time() + 24 * 60 * 60);
+    setcookie('name_error_empty', '1', time() + 24 * 60 * 60);
     $errors = TRUE;
   }elseif (!preg_match('/^[\p{L}\s]+$/u', $_POST['name'])) {
-    setcookie('name_error', '1', time() + 24 * 60 * 60);
+    setcookie('name_error_no_struct', '1', time() + 24 * 60 * 60);
     $errors = TRUE;
 } elseif (strlen($_POST['name']) > 150) {
-    setcookie('name_error', '1', time() + 24 * 60 * 60);
+    setcookie('name_error_no_len', '1', time() + 24 * 60 * 60);
     $errors = TRUE;
 }
   // Сохраняем ранее введенное в форму значение на месяц.
