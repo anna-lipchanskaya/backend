@@ -32,19 +32,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   // TODO: аналогично все поля.
 
   // Выдаем сообщения об ошибках.
-  if ($errors['name']) {
+  if ($errors['name_error']) {
     // Удаляем куки, указывая время устаревания в прошлом.
     setcookie('name_error', '', 100000);
     setcookie('name_value', '', 100000);
     // Выводим сообщение.
     $messages[] = '<div class="error">Заполните имя.</div>';
   }
-  if($errors['name_len']) {
+  if($errors['name_error_len']) {
     setcookie('name_error_len', '', 100000);
     setcookie('name_value', '', 100000);
     $messages[] = '<div class="error">Имя должно содержать только буквы.</div>';
   }
-    if($errors['name_struct']) {
+    if($errors['name_error_struct']) {
     setcookie('name_error_struct', '', 100000);
     setcookie('name_value', '', 100000);
     $messages[] = '<div class="error">Имя должно быть не длиннее 150 слов.</div>';
