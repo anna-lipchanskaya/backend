@@ -5,11 +5,7 @@
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
 <style>
   /* Сообщения об ошибках и поля с ошибками выводим с красным бордюром. */
-  .error{
-      border: 2px solid red !important;
-    background: #1c87c9;
-    {
-.error1 {
+.error {
   border: 2px solid red !important;
 }
 html, body {
