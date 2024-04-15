@@ -5,16 +5,13 @@
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
 <style>
   /* Сообщения об ошибках и поля с ошибками выводим с красным бордюром. */
-.error {
+  .error{
+      border: 2px solid red !important;
+    background: #1c87c9;
+    {
+.error1 {
   border: 2px solid red !important;
 }
-  .f.error {
-  border: none;
-  border: 2px solid red !important;
-  width: calc(100% - 18px);
-  padding: 8px;
-  margin-bottom: 20px;
-  outline: none;
 }
 html, body {
 min-height: 100%;
@@ -150,7 +147,7 @@ padding: 8px;
 margin-bottom: 20px;
 border: 1px solid #1c87c9;
 outline: none;"
-      placeholder="Введите ваше ФИО" <?php {print 'class="error"';} ?> value="<?php print $values['name']; ?>"/>
+      placeholder="Введите ваше ФИО" <?php {print 'class="error1"';} ?> value="<?php print $values['name']; ?>"/>
     <label>
     Телефон:<br />
     <input class = "f" name="phone"
