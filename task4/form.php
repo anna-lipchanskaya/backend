@@ -145,11 +145,6 @@ align-items: center;">Заявка</h1>
     <label>
       ФИО:<br />
       <input 
-        style =
-      "width: calc(100% - 18px);
-padding: 8px;
-margin-bottom: 20px;
-outline: none;"
       name="name"
       placeholder="Введите ваше ФИО" <?php if ($errors['name'] & $errors['name_struct'] & $errors['name_len'] ) {print 'class="error"';} ?> value="<?php print $values['name']; ?>"/>
     <label>
