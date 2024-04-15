@@ -47,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     if($errors['name_struct']) {
     setcookie('name_error_struct', '', 100000);
     setcookie('name_value', '', 100000);
-    $messages[] = '<div class="error">Имя должно содержать только буквы.</div>';
+    $messages[] = '<div class="error">Имя должно быть не длиннее 150 слов.</div>';
   }
   // Складываем предыдущие значения полей в массив, если есть.
   $values = array();
@@ -71,7 +71,7 @@ else {
     setcookie('name_error_len', '1', time() + 24 * 60 * 60);
     $errors = TRUE;
 } elseif (strlen($_POST['name']) > 150) {
-    setcookie('name_error', '1', time() + 24 * 60 * 60);
+    setcookie('name_error_struct', '1', time() + 24 * 60 * 60);
     $errors = TRUE;
 }
   // Сохраняем ранее введенное в форму значение на месяц.
