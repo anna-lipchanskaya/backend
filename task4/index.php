@@ -27,15 +27,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   // Складываем признак ошибок в массив.
   $errors = array();
   $errors['name'] = !empty($_COOKIE['name_error']);
+  $errors['name_len'] = !empty($_COOKIE['name_error_len']);
   // TODO: аналогично все поля.
 
   // Выдаем сообщения об ошибках.
   if ($errors['name']) {
     // Удаляем куки, указывая время устаревания в прошлом.
-    setcookie('name_empty', '', 100000);
+    setcookie('name_error', '', 100000);
     setcookie('name_value', '', 100000);
     // Выводим сообщение.
     $messages[] = '<div class="error">Заполните имя.</div>';
+  }
+  if($errors['name_len']) {
+    setcookie('name_error_len', '', 100000);
+    setcookie('name_value', '', 100000);
+    $messages[] = '<div class="error">Имя должно содержать только буквы.</div>';
   }
   // Складываем предыдущие значения полей в массив, если есть.
   $values = array();
@@ -56,7 +62,7 @@ else {
     setcookie('name_error', '1', time() + 24 * 60 * 60);
     $errors = TRUE;
   }elseif (!preg_match('/^[\p{L}\s]+$/u', $_POST['name'])) {
-    setcookie('name_error', '1', time() + 24 * 60 * 60);
+    setcookie('name_error_len', '1', time() + 24 * 60 * 60);
     $errors = TRUE;
 } elseif (strlen($_POST['name']) > 150) {
     setcookie('name_error', '1', time() + 24 * 60 * 60);
