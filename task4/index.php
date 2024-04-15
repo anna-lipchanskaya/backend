@@ -28,6 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   $errors = array();
   $errors['name'] = !empty($_COOKIE['name_error']);
   $errors['name_len'] = !empty($_COOKIE['name_error_len']);
+  $errors['name_struct'] = !empty($_COOKIE['name_error_struct']);
   // TODO: аналогично все поля.
 
   // Выдаем сообщения об ошибках.
@@ -40,6 +41,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   }
   if($errors['name_len']) {
     setcookie('name_error_len', '', 100000);
+    setcookie('name_value', '', 100000);
+    $messages[] = '<div class="error">Имя должно содержать только буквы.</div>';
+  }
+    if($errors['name_struct']) {
+    setcookie('name_error_struct', '', 100000);
     setcookie('name_value', '', 100000);
     $messages[] = '<div class="error">Имя должно содержать только буквы.</div>';
   }
