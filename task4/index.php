@@ -34,17 +34,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   // Выдаем сообщения об ошибках.
   if ($errors['name_empty']) {
     // Удаляем куки, указывая время устаревания в прошлом.
-    setcookie('name_error', '', 100000);
+    setcookie('name_empty', '', 100000);
     setcookie('name_value', '', 100000);
     // Выводим сообщение.
     $messages[] = '<div class="error">Заполните имя.</div>';
   }elseif ($errors['name_no_struct']){
-    setcookie('name_error', '', 100000);
+    setcookie('name_no_struct', '', 100000);
     setcookie('name_value', '', 100000);
     $messages[] = '<div class="error">Имя должно состоять только из букв.</div>';
   }
     elseif ($errors['name_no_len']){
-    setcookie('name_error', '', 100000);
+    setcookie('name_no_len', '', 100000);
     setcookie('name_value', '', 100000);
     $messages[] = '<div class="error">Имя должно быть не длиннее 150 слов.</div>';
     }
