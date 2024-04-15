@@ -145,7 +145,7 @@ align-items: center;">Заявка</h1>
     <label>
       ФИО:<br />
       <input 
-        <style =
+        style =
       "width: calc(100% - 18px);
 padding: 8px;
 margin-bottom: 20px;
