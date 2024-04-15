@@ -26,28 +26,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
   // Складываем признак ошибок в массив.
   $errors = array();
-  $errors['name_empty'] = !empty($_COOKIE['name_error_empty']);
-  $errors['name_no_struct'] = !empty($_COOKIE['name_error_no_struct']);
-  $errors['name_no_len'] = !empty($_COOKIE['name_error_no_len']);
+  $errors['name'] = !empty($_COOKIE['name_error']);
   // TODO: аналогично все поля.
 
   // Выдаем сообщения об ошибках.
-  if ($errors['name_empty']) {
+  if ($errors['name']) {
     // Удаляем куки, указывая время устаревания в прошлом.
     setcookie('name_empty', '', 100000);
     setcookie('name_value', '', 100000);
     // Выводим сообщение.
     $messages[] = '<div class="error">Заполните имя.</div>';
-  }elseif ($errors['name_no_struct']){
-    setcookie('name_no_struct', '', 100000);
-    setcookie('name_value', '', 100000);
-    $messages[] = '<div class="error">Имя должно состоять только из букв.</div>';
   }
-    elseif ($errors['name_no_len']){
-    setcookie('name_no_len', '', 100000);
-    setcookie('name_value', '', 100000);
-    $messages[] = '<div class="error">Имя должно быть не длиннее 150 слов.</div>';
-    }
   // Складываем предыдущие значения полей в массив, если есть.
   $values = array();
   $values['name'] = empty($_COOKIE['name_value']) ? '' : $_COOKIE['name_value'];
@@ -64,13 +53,13 @@ else {
   $errors = FALSE;
   if (empty($_POST['name'])) {
     // Выдаем куку на день с флажком об ошибке в поле name.
-    setcookie('name_error_empty', '1', time() + 24 * 60 * 60);
+    setcookie('name_error', '1', time() + 24 * 60 * 60);
     $errors = TRUE;
   }elseif (!preg_match('/^[\p{L}\s]+$/u', $_POST['name'])) {
-    setcookie('name_error_no_struct', '1', time() + 24 * 60 * 60);
+    setcookie('name_error', '1', time() + 24 * 60 * 60);
     $errors = TRUE;
 } elseif (strlen($_POST['name']) > 150) {
-    setcookie('name_error_no_len', '1', time() + 24 * 60 * 60);
+    setcookie('name_error', '1', time() + 24 * 60 * 60);
     $errors = TRUE;
 }
   // Сохраняем ранее введенное в форму значение на месяц.
