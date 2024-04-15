@@ -47,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     setcookie('name_error', '', 100000);
     setcookie('name_value', '', 100000);
     $messages[] = '<div class="error">Имя должно быть не длиннее 150 слов.</div>';
-
+    }
   // Складываем предыдущие значения полей в массив, если есть.
   $values = array();
   $values['name'] = empty($_COOKIE['name_value']) ? '' : $_COOKIE['name_value'];
