@@ -150,7 +150,7 @@ padding: 8px;
 margin-bottom: 20px;
 border: 1px solid #1c87c9;
 outline: none;"
-      placeholder="Введите ваше ФИО" <?php {print 'class=".f.error"';} ?> value="<?php print $values['name']; ?>"/>
+      placeholder="Введите ваше ФИО" <?php {print 'class=".error"';} ?> value="<?php print $values['name']; ?>"/>
     <label>
     Телефон:<br />
     <input class = "f" name="phone"
