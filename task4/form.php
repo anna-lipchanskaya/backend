@@ -137,7 +137,7 @@ align-items: center;">Заявка</h1>
     <label>
       ФИО:<br />
       <input class = "f" name="name"
-      placeholder="Введите ваше ФИО" <?php if (true ) {echo 'error';} ?> value="<?php print $values['name']; ?>"/>
+      placeholder="Введите ваше ФИО" <?php echo 'error' ?> value="<?php print $values['name']; ?>"/>
     <label>
     Телефон:<br />
     <input class = "f" name="phone"
