@@ -145,7 +145,11 @@ align-items: center;">Заявка</h1>
     <label>
       ФИО:<br />
       <input 
-      name="name"
+      name="name" style = "width: calc(100% - 18px);
+padding: 8px;
+margin-bottom: 20px;
+border: 1px solid #1c87c9;
+outline: none;"
       placeholder="Введите ваше ФИО" <?php {print 'class="error"';} ?> value="<?php print $values['name']; ?>"/>
     <label>
     Телефон:<br />
