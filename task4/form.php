@@ -172,14 +172,13 @@ outline: none;" name="data"
           type="date" value="<?php echo isset($values['data']) ? $values['data'] : '2000-01-01'; ?>"
     type="date" <?php if ($errors['data']) {echo 'class="error"';} ?>/>
       </label>
-      Пол:<br />
-  <label><input type="radio" checked="checked"
-    name="pol" value="M" <?php if ($errors['pol'] || $errors['pol_struct']) {print 'class="error"';} ?>  value="<?php echo isset($values['pol']) ? $values['pol'] : M; ?>"/>
+Пол:<br />
+<label><input type="radio" 
+    name="pol" value="M" <?php if ($values['pol'] === 'M') {echo 'checked';} ?> <?php if ($errors['pol'] || $errors['pol_struct']) {echo 'class="error"';} ?>/>
     Мужской</label>
-  <label><input type="radio"
-    name="pol" value="W" <?php if ($errors['pol'] || $errors['pol_struct']) {print 'class="error"';} ?> value="<?php echo isset($values['pol']) ? $values['pol'] : W; ?>"/>/>
+<label><input type="radio"
+    name="pol" value="W" <?php if ($values['pol'] === 'W') {echo 'checked';} ?> <?php if ($errors['pol'] || $errors['pol_struct']) {echo 'class="error"';} ?>/>
     Женский</label><br />
-             <label>
                 <br />
       Любимый язык программирования:
       <br />
