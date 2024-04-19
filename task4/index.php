@@ -29,6 +29,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   $errors['name'] = !empty($_COOKIE['name_error']);
   $errors['name_len'] = !empty($_COOKIE['name_error_len']);
   $errors['name_struct'] = !empty($_COOKIE['name_error_struct']);
+  $errors['phone'] = !empty($_COOKIE['phone_error']);
+  $errors['phone_struct'] = !empty($_COOKIE['phone_error_struct']);
+  $errors['phone_len'] = !empty($_COOKIE['phone_error_len']);
   // TODO: аналогично все поля.
 
   // Выдаем сообщения об ошибках.
@@ -49,9 +52,28 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     setcookie('name_value', '', 100000);
     $messages[] = '<div class="error">Имя должно быть не длиннее 150 слов.</div>';
   }
+    if ($errors['phone']) {
+    // Удаляем куки, указывая время устаревания в прошлом.
+    setcookie('phone_error', '', 100000);
+    setcookie('phone_value', '', 100000);
+    // Выводим сообщение.
+    $messages[] = '<div class="error">Заполните имя.</div>';
+  }
+  if($errors['phone_len']) {
+    setcookie('phone_error_len', '', 100000);
+    setcookie('phone_value', '', 100000);
+    $messages[] = '<div class="error">Имя должно содержать только буквы.</div>';
+  }
+    if($errors['phone_struct']) {
+    setcookie('phone_error_struct', '', 100000);
+    setcookie('phone_value', '', 100000);
+    $messages[] = '<div class="error">Имя должно быть не длиннее 150 слов.</div>';
+  }
+  
   // Складываем предыдущие значения полей в массив, если есть.
   $values = array();
   $values['name'] = empty($_COOKIE['name_value']) ? '' : $_COOKIE['name_value'];
+  $values['phone'] = empty($_COOKIE['phone_value']) ? '' : $_COOKIE['phone_value'];
   // TODO: аналогично все поля.
 
   // Включаем содержимое файла form.php.
@@ -74,8 +96,19 @@ else {
     setcookie('name_error_struct', '1', time() + 24 * 60 * 60);
     $errors = TRUE;
 }
+  if (empty($_POST['phone'])) {
+    setcookie('phone_error', '1', time() + 24 * 60 * 60);
+    $errors = TRUE;
+} elseif (!preg_match('/^\d+$/', $_POST['phone'])) {
+    setcookie('phone_error_struct', '1', time() + 24 * 60 * 60);
+    $errors = TRUE;
+}elseif (strlen($_POST['phone']) > 11) {
+    setcookie('name_error_len', '1', time() + 24 * 60 * 60);
+            $errors = TRUE;
+        }
   // Сохраняем ранее введенное в форму значение на месяц.
   setcookie('name_value', $_POST['name'], time() + 30 * 24 * 60 * 60);
+  setcookie('phone_value', $_POST['phone'], time() + 30 * 24 * 60 * 60);
 
 // *************
 // TODO: тут необходимо проверить правильность заполнения всех остальных полей.
@@ -92,6 +125,9 @@ else {
     setcookie('name_error', '', 100000);
     setcookie('name_error_len', '', 100000);
     setcookie('name_error_struct', '', 100000);
+    setcookie('phone_error', '', 100000);
+    setcookie('phone_error_len', '', 100000);
+    setcookie('phone_error_struct', '', 100000);
     // TODO: тут необходимо удалить остальные Cookies.
   }
 
