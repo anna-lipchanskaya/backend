@@ -174,10 +174,10 @@ outline: none;" name="data"
       </label>
       Пол:<br />
   <label><input type="radio" checked="checked"
-    name="pol" value="M" <?php if ($errors['pol'] || $errors['pol_struct']) {print 'class="error"';} ?> value="<?php print $values['pol']; ?>"/>
+    name="pol" value="M" <?php if ($errors['pol'] || $errors['pol_struct']) {print 'class="error"';} ?>  value="<?php echo isset($values['pol']) ? $values['pol'] : M; ?>"/>
     Мужской</label>
   <label><input type="radio"
-    name="pol" value="W" <?php if ($errors['pol'] || $errors['pol_struct']) {print 'class="error"';} ?> value="<?php print $values['pol']; ?>"/>
+    name="pol" value="W" <?php if ($errors['pol'] || $errors['pol_struct']) {print 'class="error"';} ?> value="<?php echo isset($values['pol']) ? $values['pol'] : W; ?>"/>/>
     Женский</label><br />
              <label>
                 <br />
