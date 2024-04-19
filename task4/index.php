@@ -217,11 +217,7 @@ if (empty($_POST['pol'])) {
     setcookie('pol_error_struct', '1', time() + 24 * 60 * 60);
     $errors = TRUE;
 }
-
-if (empty($_POST['ok'])) {
-    setcookie('ok_error', '1', time() + 24 * 60 * 60);
-    $errors = TRUE;
-} elseif ($_POST['ok'] !== 'on') {
+elseif ($_POST['ok'] !== 'on') {
     setcookie('ok_error', '1', time() + 24 * 60 * 60);
     $errors = TRUE;
 }
