@@ -103,7 +103,7 @@ else {
     setcookie('phone_error_struct', '1', time() + 24 * 60 * 60);
     $errors = TRUE;
 }elseif (strlen($_POST['phone']) > 11) {
-    setcookie('name_error_len', '1', time() + 24 * 60 * 60);
+    setcookie('phone_error_len', '1', time() + 24 * 60 * 60);
             $errors = TRUE;
         }
   // Сохраняем ранее введенное в форму значение на месяц.
