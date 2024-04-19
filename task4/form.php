@@ -205,7 +205,7 @@ outline: none;" name="abilities[]" multiple="multiple" <?php if ($errors['abilit
 padding: 8px;
 margin-bottom: 20px;
 border: 1px solid #1c87c9;
-outline: none;" name="bio" placeholder="Ваша биография" <?php if ($errors['bio'] || $errors['bio_struct'] || $errors['bio_len'] ) {print 'class="error"';} ?>" value="<?php print $values['bio']; ?>"></textarea>
+outline: none;" name="bio" placeholder="Ваша биография" <?php if ($errors['bio'] || $errors['bio_struct']) {print 'class="error"';} ?>" value="<?php print $values['bio']; ?>"></textarea>
     </label><br />
   <label><input type="checkbox" checked="checked"
     name="ok" <?php if ($errors['ok']) {print 'class="error"';} ?> value="<?php print $values['ok']; ?>"/>    С контрактом ознакомлен(а)</label>
