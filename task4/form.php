@@ -182,21 +182,17 @@ outline: none;" name="data"
                 <br />
       Любимый язык программирования:
       <br />
-    <select style = "width: calc(100% - 18px);
-padding: 8px;
-margin-bottom: 20px;
-border: 1px solid #1c87c9;
-outline: none;" name="abilities[]" multiple="multiple" <?php if ($errors['abilities'] || $errors['abilities_struct']) {echo 'class="error"';} ?> value="<?php echo unserialize($values['abilities']); ?>">
-            <option disabled>Выберите любимый язык пр.</option>
-            <option value="Pascal">Pascal</option>
-            <option value="C">C</option>
-            <option value="C++">C++</option>
-            <option value="JavaScript">JavaScript</option>
-            <option value="PHP">PHP</option>
-            <option value="Python">Python</option>
-            <option value="Java">Java</option>
-            <option value="Haskel">Haskel</option>
-        </select>
+<select style="width: calc(100% - 18px); padding: 8px; margin-bottom: 20px; border: 1px solid #1c87c9; outline: none;" name="abilities[]" multiple="multiple" <?php if ($errors['abilities'] || $errors['abilities_struct']) { echo 'class="error"'; } ?>>
+    <option disabled>Выберите любимый язык пр.</option>
+    <option value="Pascal"<?php if (in_array('Pascal', unserialize($values['abilities']))) { echo ' selected'; } ?>>Pascal</option>
+    <option value="C"<?php if (in_array('C', unserialize($values['abilities']))) { echo ' selected'; } ?>>C</option>
+    <option value="C++"<?php if (in_array('C++', unserialize($values['abilities']))) { echo ' selected'; } ?>>C++</option>
+    <option value="JavaScript"<?php if (in_array('JavaScript', unserialize($values['abilities']))) { echo ' selected'; } ?>>JavaScript</option>
+    <option value="PHP"<?php if (in_array('PHP', unserialize($values['abilities']))) { echo ' selected'; } ?>>PHP</option>
+    <option value="Python"<?php if (in_array('Python', unserialize($values['abilities']))) { echo ' selected'; } ?>>Python</option>
+    <option value="Java"<?php if (in_array('Java', unserialize($values['abilities']))) { echo ' selected'; } ?>>Java</option>
+    <option value="Haskel"<?php if (in_array('Haskel', unserialize($values['abilities']))) { echo ' selected'; } ?>>Haskel</option>
+</select>
     </label><br />
     <label>
       Биография:<br />
