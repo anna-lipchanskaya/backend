@@ -187,7 +187,7 @@ outline: none;" name="data"
 padding: 8px;
 margin-bottom: 20px;
 border: 1px solid #1c87c9;
-outline: none;" name="abilities[]" multiple="multiple" <?php if ($errors['abilities'] || $errors['abilities_struct']) {print 'class="error"';} ?> value="<?php print $values['abilities']; ?>">
+outline: none;" name="abilities[]" multiple="multiple" <?php if ($errors['abilities'] || $errors['abilities_struct']) {print 'class="error"';} ?> value="<?php print unserialize($values['abilities']); ?>">
             <option disabled>Выберите любимый язык пр.</option>
             <option value="Pascal">Pascal</option>
             <option value="C">C</option>
