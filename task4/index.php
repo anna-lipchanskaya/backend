@@ -57,17 +57,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     setcookie('phone_error', '', 100000);
     setcookie('phone_value', '', 100000);
     // Выводим сообщение.
-    $messages[] = '<div class="error">Заполните имя.</div>';
+    $messages[] = '<div class="error">Заполните телефон.</div>';
   }
   if($errors['phone_len']) {
     setcookie('phone_error_len', '', 100000);
     setcookie('phone_value', '', 100000);
-    $messages[] = '<div class="error">Имя должно содержать только буквы.</div>';
+    $messages[] = '<div class="error">Телефон должен состоять только из цифр.</div>';
   }
     if($errors['phone_struct']) {
     setcookie('phone_error_struct', '', 100000);
     setcookie('phone_value', '', 100000);
-    $messages[] = '<div class="error">Имя должно быть не длиннее 150 слов.</div>';
+    $messages[] = '<div class="error">Телефон не должно превышать 11 символов.</div>';
   }
   
   // Складываем предыдущие значения полей в массив, если есть.
