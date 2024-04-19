@@ -145,9 +145,13 @@ outline: none;"
       placeholder="Введите ваше ФИО" <?php if ($errors['name'] || $errors['name_struct'] || $errors['name_len'] ) {print 'class="error"';} ?> value="<?php print $values['name']; ?>"/>
     <label>
     Телефон:<br />
-    <input class = "f" name="phone"
+    <input  style = "width: calc(100% - 18px);
+padding: 8px;
+margin-bottom: 20px;
+border: 1px solid #1c87c9;
+outline: none;" name="phone"
       type="tel"
-      placeholder="Введите ваш телефон" />
+      placeholder="Введите ваш телефон" <?php if ($errors['phone'] || $errors['phone_struct'] || $errors['phone_len'] ) {print 'class="error"';} ?> value="<?php print $values['phone']; ?>"/>
   </label><br />
   <label>
     Email:<br />
