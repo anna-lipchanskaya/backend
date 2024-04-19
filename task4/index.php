@@ -90,6 +90,8 @@ else {
   else {
     // Удаляем Cookies с признаками ошибок.
     setcookie('name_error', '', 100000);
+    setcookie('name_error_len', '', 100000);
+    setcookie('name_error_struct', '', 100000);
     // TODO: тут необходимо удалить остальные Cookies.
   }
 
