@@ -206,8 +206,8 @@ margin-bottom: 20px;
 border: 1px solid #1c87c9;
 outline: none;" name="bio" placeholder="Ваша биография" <?php if ($errors['bio'] || $errors['bio_len']) {print 'class="error"';} ?>" value="<?php print $values['bio']; ?>"></textarea>
     </label><br />
-  <label><input type="checkbox" checked="checked"
-    name="ok" <?php if ($errors['ok']) {print 'class="error"';} ?> value="<?php print $values['ok']; ?>"/>    С контрактом ознакомлен(а)</label>
+<label><input type="checkbox"
+    name="ok" <?php if ($values['ok'] === 'on') {echo 'checked';} ?> <?php if ($errors['ok']) {echo 'class="error"';} ?> value="on"/>    С контрактом ознакомлен(а)</label>
     <br />
 <button type="submit" href="/">Сохранить</button>
 </form>
