@@ -43,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   $errors['abilities'] = !empty($_COOKIE['abilities_error']);
   $errors['abilities_struct'] = !empty($_COOKIE['abilities_error_struct']);
   $errors['bio'] = !empty($_COOKIE['bio_error']);
-  $errors['bio_struct'] = !empty($_COOKIE['bio_error_len']);
+  $errors['bio_len'] = !empty($_COOKIE['bio_error_len']);
   
   // TODO: аналогично все поля.
 
@@ -149,8 +149,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     // Выводим сообщение.
     $messages[] = '<div class="error">Запоните биографию.</div>';
   }
-  if($errors['bio_struct']) {
-    setcookie('bio_error_struct', '', 100000);
+  if($errors['bio_len']) {
+    setcookie('bio_error_len', '', 100000);
     setcookie('bio_value', '', 100000);
     $messages[] = '<div class="error">Биография не должна превышать 300 символов.</div>';
   }
