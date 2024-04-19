@@ -245,10 +245,10 @@ if (empty($_POST['bio'])) {
   // Сохраняем ранее введенное в форму значение на месяц.
   setcookie('name_value', $_POST['name'], time() + 30 * 24 * 60 * 60);
   setcookie('phone_value', $_POST['phone'], time() + 30 * 24 * 60 * 60);
-  setcookie('email_value', $_POST['name'], time() + 30 * 24 * 60 * 60);
-  setcookie('data_value', $_POST['phone'], time() + 30 * 24 * 60 * 60);
-  setcookie('pol_value', $_POST['name'], time() + 30 * 24 * 60 * 60);
-  setcookie('abilities_value', $_POST['phone'], time() + 30 * 24 * 60 * 60);
+  setcookie('email_value', $_POST['email'], time() + 30 * 24 * 60 * 60);
+  setcookie('data_value', $_POST['data'], time() + 30 * 24 * 60 * 60);
+  setcookie('pol_value', $_POST['pol'], time() + 30 * 24 * 60 * 60);
+  setcookie('abilities_value', $_POST['abilities'], time() + 30 * 24 * 60 * 60);
   setcookie('bio_value', $_POST['bio'], time() + 30 * 24 * 60 * 60);
   setcookie('ok_value', $_POST['ok'], time() + 30 * 24 * 60 * 60);
 
@@ -270,6 +270,18 @@ if (empty($_POST['bio'])) {
     setcookie('phone_error', '', 100000);
     setcookie('phone_error_len', '', 100000);
     setcookie('phone_error_struct', '', 100000);
+    setcookie('email_error', '', 100000);
+    setcookie('email_error_len', '', 100000);
+    setcookie('email_error_struct', '', 100000);
+    setcookie('data_error', '', 100000);
+    setcookie('data_error_struct', '', 100000);
+    setcookie('pol_error', '', 100000);
+    setcookie('pol_error_struct', '', 100000);
+    setcookie('abilities_error', '', 100000);
+    setcookie('abilities_error_struct', '', 100000);
+    setcookie('bio_error', '', 100000);
+    setcookie('bio_error_len', '', 100000);
+    setcookie('ok_error', '', 100000);
     // TODO: тут необходимо удалить остальные Cookies.
   }
 
