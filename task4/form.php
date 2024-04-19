@@ -155,27 +155,39 @@ outline: none;" name="phone"
   </label><br />
   <label>
     Email:<br />
-    <input class = "f" name="email"
-      placeholder="Введите вашу почту" /></label>
+    <input  style = "width: calc(100% - 18px);
+padding: 8px;
+margin-bottom: 20px;
+border: 1px solid #1c87c9;
+outline: none;" name="email"
+      placeholder="Введите вашу почту" <?php if ($errors['email'] || $errors['email_struct'] || $errors['email_len'] ) {print 'class="error"';} ?> value="<?php print $values['email']; ?>"/></label>
       <label>
         <br />
         Дата рождения:<br />
-        <input class = "f" name="data"
+        <input style = "width: calc(100% - 18px);
+padding: 8px;
+margin-bottom: 20px;
+border: 1px solid #1c87c9;
+outline: none;" name="data"
           value="2000-01-01"
-          type="date" />
+          type="date" <?php if ($errors['data'] ) {print 'class="error"';} ?> value="<?php print $values['data']; ?>"/>
       </label>
       Пол:<br />
   <label><input type="radio" checked="checked"
-    name="pol" value="M" />
+    name="pol" value="M" <?php if ($errors['pol'] || $errors['pol_struct']) {print 'class="error"';} ?> value="<?php print $values['pol']; ?>"/>
     Мужской</label>
   <label><input type="radio"
-    name="pol" value="W" />
+    name="pol" value="W" <?php if ($errors['pol'] || $errors['pol_struct']) {print 'class="error"';} ?> value="<?php print $values['pol']; ?>/>
     Женский</label><br />
              <label>
                 <br />
       Любимый язык программирования:
       <br />
-    <select class = "f" name="abilities[]" multiple="multiple">
+    <select style = "width: calc(100% - 18px);
+padding: 8px;
+margin-bottom: 20px;
+border: 1px solid #1c87c9;
+outline: none;" name="abilities[]" multiple="multiple" <?php if ($errors['abilities'] || $errors['abilities_struct']) {print 'class="error"';} ?> value="<?php print $values['abilities']; ?>>
             <option disabled>Выберите любимый язык пр.</option>
             <option value="Pascal">Pascal</option>
             <option value="C">C</option>
@@ -189,10 +201,14 @@ outline: none;" name="phone"
     </label><br />
     <label>
       Биография:<br />
-      <textarea class = "f" name="bio" placeholder="Ваша биография" ></textarea>
+      <textarea style = "width: calc(100% - 18px);
+padding: 8px;
+margin-bottom: 20px;
+border: 1px solid #1c87c9;
+outline: none;" name="bio" placeholder="Ваша биография" <?php if ($errors['bio'] || $errors['bio_struct'] || $errors['bio_len'] ) {print 'class="error"';} ?> value="<?php print $values['bio']; ?>"></textarea>
     </label><br />
   <label><input type="checkbox" checked="checked"
-    name="ok" />    С контрактом ознакомлен(а)</label>
+    name="ok" <?php if ($errors['ok'] || $errors['ok_struct']) {print 'class="error"';} ?> value="<?php print $values['ok']; ?>"/>    С контрактом ознакомлен(а)</label>
     <br />
 <button type="submit" href="/">Сохранить</button>
 </form>
