@@ -62,12 +62,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   if($errors['phone_len']) {
     setcookie('phone_error_len', '', 100000);
     setcookie('phone_value', '', 100000);
-    $messages[] = '<div class="error">Телефон должен состоять только из цифр.</div>';
+    $messages[] = '<div class="error">Телефон не должно превышать 11 символов.</div>';
   }
     if($errors['phone_struct']) {
     setcookie('phone_error_struct', '', 100000);
     setcookie('phone_value', '', 100000);
-    $messages[] = '<div class="error">Телефон не должно превышать 11 символов.</div>';
+    $messages[] = '<div class="error">Телефон должен состоять только из цифр.</div>';
   }
   
   // Складываем предыдущие значения полей в массив, если есть.
