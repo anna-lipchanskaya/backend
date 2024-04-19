@@ -249,8 +249,8 @@ if (empty($_POST['bio'])) {
   setcookie('data_value', $_POST['phone'], time() + 30 * 24 * 60 * 60);
   setcookie('pol_value', $_POST['name'], time() + 30 * 24 * 60 * 60);
   setcookie('abilities_value', $_POST['phone'], time() + 30 * 24 * 60 * 60);
-  setcookie('bio_value', $_POST['name'], time() + 30 * 24 * 60 * 60);
-  setcookie('ok_value', $_POST['phone'], time() + 30 * 24 * 60 * 60);
+  setcookie('bio_value', $_POST['bio'], time() + 30 * 24 * 60 * 60);
+  setcookie('ok_value', $_POST['ok'], time() + 30 * 24 * 60 * 60);
 
 // *************
 // TODO: тут необходимо проверить правильность заполнения всех остальных полей.
