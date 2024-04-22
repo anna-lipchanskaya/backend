@@ -182,7 +182,7 @@ outline: none;" name="data"
                 <br />
       Любимый язык программирования:
       <br />
-    $abilities_array = is_array(unserialize($values['abilities'])) ? unserialize($values['abilities']) : [];
+    $abilities_array = is_array(unserialize($values['abilities']));
 <select style="width: calc(100% - 18px); padding: 8px; margin-bottom: 20px; border: 1px solid #1c87c9; outline: none;" name="abilities[]" multiple="multiple" <?php if ($errors['abilities'] || $errors['abilities_struct']) {echo 'class="error"';} ?>>
     <option disabled>Выберите любимый язык пр.</option>
     <option value="Pascal" <?php if(in_array('Pascal', unserialize($values['abilities']))) {echo 'selected';} ?>>Pascal</option>
