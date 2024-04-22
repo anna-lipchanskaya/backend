@@ -84,17 +84,6 @@ outline: none;" name="data"
       Любимый язык программирования:
       <br />
 $abilities_array = is_array($abilities_array) ? $abilities_array : [];
-<select name="abilities[]" multiple="multiple" <?php if ($errors['abilities'] || $errors['abilities_struct']) {echo 'class="error"';} ?>>
-    <option disabled>Выберите любимый язык пр.</option>
-    <option value="Pascal" <?php if(in_array('Pascal', unserialize($values['abilities']))) {echo 'selected';} ?>>Pascal</option>
-    <option value="C" <?php if(in_array('C', unserialize($values['abilities']))) {echo 'selected';} ?>>C</option>
-    <option value="C++" <?php if(in_array('C++', unserialize($values['abilities']))) {echo 'selected';} ?>>C++</option>
-    <option value="JavaScript" <?php if(in_array('JavaScript', unserialize($values['abilities']))) {echo 'selected';} ?>>JavaScript</option>
-    <option value="PHP" <?php if(in_array('PHP', unserialize($values['abilities']))) {echo 'selected';} ?>>PHP</option>
-    <option value="Python" <?php if(in_array('Python', unserialize($values['abilities']))) {echo 'selected';} ?>>Python</option>
-    <option value="Java" <?php if(in_array('Java', unserialize($values['abilities']))) {echo 'selected';} ?>>Java</option>
-    <option value="Haskel"<?php if (in_array('Haskel', ($values['abilities']))) { echo ' selected'; } ?>>Haskel</option>
-</select>
     </label><br />
     <label>
       Биография:<br />
