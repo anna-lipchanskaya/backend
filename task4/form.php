@@ -198,7 +198,7 @@ $abilities_array = is_array($abilities_array) ? $abilities_array : [];?>
 </select>
     <label>
       Биография:<br />
-     <textarea name="bio" placeholder="<?php print $values['bio']; ?>" <?php if ($errors['bio'] || $errors['bio_len']) { print 'class="error"'; } ?>><?php print $values['bio']; ?></textarea>
+     <textarea style="width: calc(100% - 18px); padding: 8px; margin-bottom: 20px; border: 1px solid #1c87c9; outline: none;" name="bio" placeholder="<?php print $values['bio']; ?>" <?php if ($errors['bio'] || $errors['bio_len']) { print 'class="error"'; } ?>><?php print $values['bio']; ?></textarea>
 <label><input type="checkbox"
     name="ok" <?php if ($values['ok'] === 'on') {echo 'checked';} ?> <?php if ($errors['ok']) {echo 'class="error"';} ?>/>    С контрактом ознакомлен(а)</label>
     <br />
