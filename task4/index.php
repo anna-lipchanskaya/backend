@@ -165,7 +165,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   $values['email'] = empty($_COOKIE['email_value']) ? '' : $_COOKIE['email_value'];
   $values['data'] = empty($_COOKIE['data_value']) ? '' : $_COOKIE['data_value'];
   $values['pol'] = empty($_COOKIE['pol_value']) ? '' : $_COOKIE['pol_value'];
-  $values['abilities'] = empty($_COOKIE['abilities_value']) ? '' : $_COOKIE['abilities_value'];
+  $values['abilities'] = isset($_COOKIE['abilities_value']) ? unserialize($_COOKIE['abilities_value']) : [];
   $values['bio'] = empty($_COOKIE['bio_value']) ? '' : $_COOKIE['bio_value'];
   $values['ok'] = empty($_COOKIE['ok_value']) ? '' : $_COOKIE['ok_value'];
   // TODO: аналогично все поля.
@@ -248,7 +248,7 @@ if (empty($_POST['bio'])) {
   setcookie('email_value', $_POST['email'], time() + 30 * 24 * 60 * 60);
   setcookie('data_value', $_POST['data'], time() + 30 * 24 * 60 * 60);
   setcookie('pol_value', $_POST['pol'], time() + 30 * 24 * 60 * 60);
-  setcookie('abilities_value', $_POST['abilities'], time() + 30 * 24 * 60 * 60);
+  setcookie('abilities_value', serialize($_POST['abilities']), time() + 30 * 24 * 60 * 60);
   setcookie('bio_value', $_POST['bio'], time() + 30 * 24 * 60 * 60);
   setcookie('ok_value', $_POST['ok'], time() + 30 * 24 * 60 * 60);
 
