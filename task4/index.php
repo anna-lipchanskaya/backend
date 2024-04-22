@@ -248,7 +248,7 @@ if (empty($_POST['bio'])) {
   setcookie('email_value', $_POST['email'], time() + 30 * 24 * 60 * 60);
   setcookie('data_value', $_POST['data'], time() + 30 * 24 * 60 * 60);
   setcookie('pol_value', $_POST['pol'], time() + 30 * 24 * 60 * 60);
-  setcookie('abilities_value', serialize($_POST['abilities']), time() + 30 * 24 * 60 * 60);
+  setcookie('abilities_value', $_POST['abilities'], time() + 30 * 24 * 60 * 60);
   setcookie('bio_value', $_POST['bio'], time() + 30 * 24 * 60 * 60);
   setcookie('ok_value', $_POST['ok'], time() + 30 * 24 * 60 * 60);
 
