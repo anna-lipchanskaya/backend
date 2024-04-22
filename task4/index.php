@@ -21,7 +21,29 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     // Удаляем куку, указывая время устаревания в прошлом.
     setcookie('save', '', 100000);
     // Если есть параметр save, то выводим сообщение пользователю.
-    $messages[] = 'Спасибо, результаты сохранены.';
+echo '<script>
+                    document.addEventListener("DOMContentLoaded", function() {
+                        var modal = document.createElement("div");
+                        modal.innerHTML = "Спасибо, результаты сохранены.";
+                        modal.style.position = "fixed";
+                        modal.style.zIndex = "1";
+                        modal.style.top = "0";
+                        modal.style.left = "0";
+                        modal.style.width = "100%";
+                        modal.style.height = "100%";
+                        modal.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
+                        modal.style.display = "flex";
+                        modal.style.justifyContent = "center";
+                        modal.style.alignItems = "center";
+                        modal.style.color = "#fff";
+                        modal.style.fontSize = "24px";
+                        modal.style.cursor = "pointer";
+                        modal.addEventListener("click", function() {
+                            modal.style.display = "none";
+                        });
+                        document.body.appendChild(modal);
+                    });
+              </script>';
   }
 
   // Складываем признак ошибок в массив.
