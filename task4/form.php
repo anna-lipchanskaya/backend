@@ -111,7 +111,14 @@ margin-left: 28%;
 </style>
 </head>
 <body>
-  <?php
+<div class="main-block">
+<div class="left-part">
+<i class="fas fa-envelope"></i>
+<i class="fas fa-at"></i>
+<i class="fas fa-mail-bulk"></i>
+</div>
+<form action="" method="POST">
+    <?php
 if (!empty($messages)) {
   print('<div id="messages">');
   // Выводим все сообщения.
@@ -124,13 +131,6 @@ if (!empty($messages)) {
 // Далее выводим форму отмечая элементы с ошибками классом error
 // и задавая начальные значения элементов ранее сохраненными.
 ?>
-<div class="main-block">
-<div class="left-part">
-<i class="fas fa-envelope"></i>
-<i class="fas fa-at"></i>
-<i class="fas fa-mail-bulk"></i>
-</div>
-<form action="" method="POST">
 <h1 style="display: flex;
 justify-content: center;
 align-items: center;">Заявка</h1>
