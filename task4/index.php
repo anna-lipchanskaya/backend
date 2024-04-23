@@ -187,7 +187,7 @@ echo '<script>
   $values['email'] = empty($_COOKIE['email_value']) ? '' : $_COOKIE['email_value'];
   $values['data'] = empty($_COOKIE['data_value']) ? '' : $_COOKIE['data_value'];
   $values['pol'] = empty($_COOKIE['pol_value']) ? '' : $_COOKIE['pol_value'];
-  $values['abilities'] = isset($_COOKIE['abilities_value']) ? $_COOKIE['abilities_value'] : [];
+ $values['abilities'] = isset($_COOKIE['abilities_value']) ? unserialize($_COOKIE['abilities_value']) : [];
   $values['bio'] = empty($_COOKIE['bio_value']) ? '' : $_COOKIE['bio_value'];
   $values['ok'] = empty($_COOKIE['ok_value']) ? '' : $_COOKIE['ok_value'];
   // TODO: аналогично все поля.
