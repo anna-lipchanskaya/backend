@@ -243,6 +243,13 @@ elseif ($_POST['ok'] !== 'on') {
     setcookie('ok_error', '1', time() + 24 * 60 * 60);
     $errors = TRUE;
 }
+  if (empty($_POST['data'])) {
+    setcookie('data_error', '1', time() + 24 * 60 * 60);
+  $errors = TRUE;
+} elseif (!preg_match('/^\d{4}-\d{2}-\d{2}$/', $_POST['data'])) {
+    setcookie('data_error_struct', '1', time() + 24 * 60 * 60);
+  $errors = TRUE;
+}
 $allowed_languages = array("Pascal", "C", "C++", "JavaScript", "PHP", "Python", "Java", "Haskel");
 
 if (empty($_POST['abilities'])) {
