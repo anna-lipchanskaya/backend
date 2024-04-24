@@ -129,7 +129,7 @@ else {
     
     // Подготовленный запрос. Не именованные метки.
     try {
-      $stmt = $db->prepare("INSERT INTO application (login, password, name) VALUES (?, ?, ?)");
+      $stmt = $db->prepare("INSERT INTO test (login, password, name) VALUES (?, ?, ?)");
       $stmt->execute([$login, $password, $_POST['fio']]);
     }
     catch(PDOException $e){
