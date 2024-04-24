@@ -15,8 +15,7 @@ header('Content-Type: text/html; charset=UTF-8');
 // В суперглобальном массиве $_SESSION хранятся переменные сессии.
 // Будем сохранять туда логин после успешной авторизации.
 $session_started = false;
-
-if (isset($_COOKIE[session_name()]) && session_start()) {
+if ($_COOKIE[session_name()] && session_start()) {
     $session_started = true;
     echo "Пользователь1";
     if (!empty($_SESSION['login'])) {
