@@ -104,9 +104,13 @@ else {
       session_start() && !empty($_SESSION['login'])) {
     // TODO: перезаписать данные в БД новыми данными,
     // кроме логина и пароля.
+    $user = 'u67440'; // Заменить на ваш логин uXXXXX
+    $pass = '7848123'; // Заменить на пароль
+    $db = new PDO('mysql:host=localhost;dbname=u67440', $user, $pass,
+      [PDO::ATTR_PERSISTENT => true, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]); // Заменить test на имя БД, совпадает с логином uXXXXX
     $sql = "UPDATE test SET name = :name WHERE login = :login";
     
-    $stmt = $conn->prepare($sql);
+    $stmt = $db->prepare($sql);
     $stmt->bindParam(':name', $_POST['fio']);
     $stmt->bindParam(':login', $_SESSION['login']);
     
