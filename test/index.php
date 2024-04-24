@@ -146,7 +146,8 @@ else {
     // Подготовленный запрос. Не именованные метки.
     try {
       $stmt = $db->prepare("INSERT INTO test (login, password, name) VALUES (?, ?, ?)");
-      $stmt->execute([$login, $hashedPassword, $_POST['fio']]);
+      $stmt->execute([$login, $p
+                     assword, $_POST['fio']]);
     }
     catch(PDOException $e){
       print('Error : ' . $e->getMessage());
