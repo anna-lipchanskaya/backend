@@ -171,5 +171,5 @@ else {
   setcookie('save', '1');
 
   // Делаем перенаправление.
-  header('Location: ./');
+  header('Location: login.php');
 }
