@@ -20,8 +20,10 @@ if (isset($_COOKIE[session_name()]) && session_start()) {
     $session_started = true;
 
     if (!empty($_SESSION['login'])) {
+                echo "Пользователь1";
         // Если есть логин в сессии, то пользователь уже авторизован.
         if (isset($_POST['logout'])) {
+                    echo "найден";
             // Выход пользователя из сессии
             session_destroy();
             header('Location: ./');
