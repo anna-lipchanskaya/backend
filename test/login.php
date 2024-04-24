@@ -27,7 +27,7 @@ if ($_COOKIE[session_name()] && session_start()) {
         }
 
         // Делаем перенаправление на форму.
-        header('Location: index.php');
+        header('Location: ./');
         exit();
     }
 }
