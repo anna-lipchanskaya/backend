@@ -25,12 +25,12 @@ if ($_COOKIE[session_name()] && session_start()) {
                     echo "найден";
             // Выход пользователя из сессии
             session_destroy();
-            header('Location: ./');
+            header('Location: login.php');
             exit();
         }
 
         // Делаем перенаправление на форму.
-        header('Location: ./');
+        header('Location: form.php');
         exit();
     }
 }
