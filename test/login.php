@@ -18,7 +18,7 @@ $session_started = false;
 
 if (isset($_COOKIE[session_name()]) && session_start()) {
     $session_started = true;
-
+    echo "Пользователь1";
     if (!empty($_SESSION['login'])) {
                 echo "Пользователь1";
         // Если есть логин в сессии, то пользователь уже авторизован.
