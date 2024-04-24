@@ -117,10 +117,22 @@ else {
     $stmt->execute();
   }
   else {
+    // Генерация случайной соли
+    function generateSalt($length = 16) {
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $salt = '';
+        for ($i = 0; $i < $length; $i++) {
+            $salt .= $characters[rand(0, $charactersLength - 1)];
+        }
+        return $salt;
+    }
     // Генерируем уникальный логин и пароль.
     // TODO: сделать механизм генерации, например функциями rand(), uniquid(), md5(), substr().
     $login = 'user_' . uniqid(); // Генерация уникального логина
     $password = substr(md5(rand()), 0, 8); // Генерация уникального пароля
+    $salt = generateSalt();; // Лучше генерировать уникальную соль для каждого пользователя
+    $hashedPassword = hash('sha256', $password . $salt);
     // Сохраняем в Cookies.
     setcookie('login', $login);
     setcookie('pass', $password);
@@ -134,7 +146,7 @@ else {
     // Подготовленный запрос. Не именованные метки.
     try {
       $stmt = $db->prepare("INSERT INTO test (login, password, name) VALUES (?, ?, ?)");
-      $stmt->execute([$login, $password, $_POST['fio']]);
+      $stmt->execute([$login, $hashedPassword, $_POST['fio']]);
     }
     catch(PDOException $e){
       print('Error : ' . $e->getMessage());
