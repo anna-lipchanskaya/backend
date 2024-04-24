@@ -45,6 +45,24 @@ else {
   // TODO: Проверть есть ли такой логин и пароль в базе данных.
   // Выдать сообщение об ошибках.
 
+  // Получение данных из формы
+    $login = $_POST['login'];
+    $password = $_POST['password'];
+    
+  // Подготовленный запрос для проверки логина и пароля
+    $stmt = $conn->prepare("SELECT * FROM users WHERE login = ? AND password = ?");
+    $stmt->bind_param("ss", $login, $password);
+    
+    $stmt->execute();
+    
+    $result = $stmt->get_result();
+    
+    if ($result->num_rows > 0) {
+        echo "Пользователь найден";
+    } else {
+        echo "Неправильный логин или пароль";
+    }
+
   if (!$session_started) {
     session_start();
   }
