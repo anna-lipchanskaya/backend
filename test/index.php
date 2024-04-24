@@ -107,7 +107,7 @@ else {
     $sql = "UPDATE test SET name = :name WHERE login = :login";
     
     $stmt = $conn->prepare($sql);
-    $stmt->bindParam(':name', $_POST['name']);
+    $stmt->bindParam(':name', $_POST['fio']);
     $stmt->bindParam(':login', $_SESSION['login']);
     
     $stmt->execute();
@@ -130,7 +130,7 @@ else {
     // Подготовленный запрос. Не именованные метки.
     try {
       $stmt = $db->prepare("INSERT INTO application (login, password, name) VALUES (?, ?, ?)");
-      $stmt->execute([$login, $password, $_POST['name']]);
+      $stmt->execute([$login, $password, $_POST['fio']]);
     }
     catch(PDOException $e){
       print('Error : ' . $e->getMessage());
