@@ -15,16 +15,23 @@ header('Content-Type: text/html; charset=UTF-8');
 // В суперглобальном массиве $_SESSION хранятся переменные сессии.
 // Будем сохранять туда логин после успешной авторизации.
 $session_started = false;
-if ($_COOKIE[session_name()] && session_start()) {
-  $session_started = true;
-  if (!empty($_SESSION['login'])) {
-    // Если есть логин в сессии, то пользователь уже авторизован.
-    // TODO: Сделать выход (окончание сессии вызовом session_destroy()
-    //при нажатии на кнопку Выход).
-    // Делаем перенаправление на форму.
-    header('Location: ./');
-    exit();
-  }
+
+if (isset($_COOKIE[session_name()]) && session_start()) {
+    $session_started = true;
+
+    if (!empty($_SESSION['login'])) {
+        // Если есть логин в сессии, то пользователь уже авторизован.
+        if (isset($_POST['logout'])) {
+            // Выход пользователя из сессии
+            session_destroy();
+            header('Location: ./');
+            exit();
+        }
+
+        // Делаем перенаправление на форму.
+        header('Location: ./');
+        exit();
+    }
 }
 
 // В суперглобальном массиве $_SERVER PHP сохраняет некторые заголовки запроса HTTP
