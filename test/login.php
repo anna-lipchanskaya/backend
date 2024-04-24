@@ -17,12 +17,9 @@ header('Content-Type: text/html; charset=UTF-8');
 $session_started = false;
 if ($_COOKIE[session_name()] && session_start()) {
     $session_started = true;
-    echo "Пользователь1";
     if (!empty($_SESSION['login'])) {
-                echo "Пользователь1";
         // Если есть логин в сессии, то пользователь уже авторизован.
         if (isset($_POST['logout'])) {
-                    echo "найден";
             // Выход пользователя из сессии
             session_destroy();
             header('Location: login.php');
