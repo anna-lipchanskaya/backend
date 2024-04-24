@@ -104,15 +104,22 @@ else {
       session_start() && !empty($_SESSION['login'])) {
     // TODO: перезаписать данные в БД новыми данными,
     // кроме логина и пароля.
+    $sql = "UPDATE test SET name = :name WHERE login = :login";
+    
+    $stmt = $conn->prepare($sql);
+    $stmt->bindParam(':name', $_POST['name']);
+    $stmt->bindParam(':login', $_SESSION['login']);
+    
+    $stmt->execute();
   }
   else {
     // Генерируем уникальный логин и пароль.
     // TODO: сделать механизм генерации, например функциями rand(), uniquid(), md5(), substr().
     $login = 'user_' . uniqid(); // Генерация уникального логина
-    $pass = substr(md5(rand()), 0, 8); // Генерация уникального пароля
+    $password = substr(md5(rand()), 0, 8); // Генерация уникального пароля
     // Сохраняем в Cookies.
     setcookie('login', $login);
-    setcookie('pass', $pass);
+    setcookie('pass', $password);
 
     // TODO: Сохранение данных формы, логина и хеш md5() пароля в базу данных.
     $user = 'u67440'; // Заменить на ваш логин uXXXXX
@@ -122,8 +129,8 @@ else {
     
     // Подготовленный запрос. Не именованные метки.
     try {
-      $stmt = $db->prepare("INSERT INTO application SET name = ?");
-      $stmt->execute([$_POST['fio']]);
+      $stmt = $db->prepare("INSERT INTO application (login, password, name) VALUES (?, ?, ?)");
+      $stmt->execute([$login, $password, $_POST['name']]);
     }
     catch(PDOException $e){
       print('Error : ' . $e->getMessage());
