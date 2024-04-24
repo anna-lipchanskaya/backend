@@ -28,8 +28,8 @@ if (!empty($messages)) {
       <input type="submit" name = "ok" value="ok" />
       <input type="submit" name="logout" value="Выход">
       <?php
-      if (isset($POST['logout'])) {
-          $_SESSION['login'] = $POST['logout'];
+      if (isset($_POST['logout'])) {
+          $_SESSION['login'] = $_POST['logout'];
       }
       ?>
     </form>
