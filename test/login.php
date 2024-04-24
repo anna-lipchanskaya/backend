@@ -27,7 +27,7 @@ if ($_COOKIE[session_name()] && session_start()) {
         }
 
         // Делаем перенаправление на форму.
-        header('Location: form.php');
+        header('Location: ./');
         exit();
     }
 }
@@ -77,5 +77,5 @@ else {
   $_SESSION['uid'] = 123;
 
   // Делаем перенаправление.
-  header('Location: login.php');
+  header('Location: ./');
 }
