@@ -16,13 +16,10 @@ header('Content-Type: text/html; charset=UTF-8');
 // Будем сохранять туда логин после успешной авторизации.
 $session_started = false;
 if ($_COOKIE[session_name()] && session_start()) {
-    echo "gggg";
     $session_started = true;
     if (!empty($_SESSION['login'])) {
-        echo "ppp";
         // Если есть логин в сессии, то пользователь уже авторизован.
-        if (isset($_POST['logout'])) {
-            echo "tttt";
+        if ($_POST['logout']) {
             // Выход пользователя из сессии
             session_destroy();
             header('Location: login.php');
