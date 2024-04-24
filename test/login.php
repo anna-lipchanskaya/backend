@@ -19,7 +19,7 @@ if ($_COOKIE[session_name()] && session_start()) {
     $session_started = true;
     if (!empty($_SESSION['login'])) {
         // Если есть логин в сессии, то пользователь уже авторизован.
-        if ($_POST['logout']) {
+        if (isset($_POST['logout'])) {
             // Выход пользователя из сессии
             session_destroy();
             header('Location: login.php');
