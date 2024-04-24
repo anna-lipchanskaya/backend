@@ -61,6 +61,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     // TODO: загрузить данные пользователя из БД
     // и заполнить переменную $values,
     // предварительно санитизовав.
+    $user = 'u67440'; // Заменить на ваш логин uXXXXX
+    $pass = '7848123'; // Заменить на пароль
+    $db = new PDO('mysql:host=localhost;dbname=u67440', $user, $pass,
+      [PDO::ATTR_PERSISTENT => true, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]); // Заменить test на имя БД, совпадает с логином uXXXXX
+    $stmt = $pdo->prepare("SELECT name, phone FROM users WHERE login = :login");
+    $stmt->execute(['login' => $_SESSION['login']]);
+    $row = $stmt->fetch();
+
+    $values = [
+        'fio' => htmlspecialchars($row['name'])
+    ];
+
     printf('Вход с логином %s, uid %d', $_SESSION['login'], $_SESSION['uid']);
   }
 
