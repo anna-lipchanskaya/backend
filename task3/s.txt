@@ -1,5 +1,5 @@
 CREATE TABLE application (
- id int(10) DEFAULT NULL,
+ id int(10) DEFAULT NULL AUTO_INCREMENT,
  name varchar(128) NOT NULL DEFAULT '',
  phone varchar(128) NOT NULL DEFAULT '',
  email varchar(128) NOT NULL DEFAULT '',
@@ -22,3 +22,11 @@ CREATE TABLE users (
   login varchar(128) NOT NULL DEFAULT '',
   password  varchar(128) NOT NULL DEFAULT '',
 );
+
+CREATE TABLE test (
+  id int(10) unsigned NOT NULL AUTO_INCREMENT,
+  login varchar(128) NOT NULL DEFAULT '',
+  password  varchar(128) NOT NULL DEFAULT '',
+  name varchar(128) NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`)
+)
