@@ -30,13 +30,7 @@ if (!empty($messages)) {
       <script>
         document.addEventListener("DOMContentLoaded", function() {
     var button = document.getElementById("myButton");
-    
-    // Устанавливаем начальное состояние кнопки
     button.style.display = "none";
-    
-    // Проверяем условие (например, что переменная isConditionMet равна true)
-    var isConditionMet = true;
-    
     if (session_start() && (!empty($_SESSION['login'])) && (!empty($_COOKIE[session_name()]))) {
         button.style.display = "block";
     }
