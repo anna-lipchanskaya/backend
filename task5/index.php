@@ -217,12 +217,12 @@ $db = new PDO('mysql:host=localhost;dbname=' . $db_name, $db_login, $db_pass,
     $row = $stmt->fetch();
 
     $values = [
-        'name' => htmlspecialchars($row['name'])
-        'phone' => htmlspecialchars($row['phone'])
-        'email' => htmlspecialchars($row['email'])
-        'data' => htmlspecialchars($row['data'])
-        'pol' => htmlspecialchars($row['pol'])
-        'bio' => htmlspecialchars($row['bio'])
+        'name' => htmlspecialchars($row['name']),
+        'phone' => htmlspecialchars($row['phone']),
+        'email' => htmlspecialchars($row['email']),
+        'data' => htmlspecialchars($row['data']),
+        'pol' => htmlspecialchars($row['pol']),
+        'bio' => htmlspecialchars($row['bio']),
         'ok' => htmlspecialchars($row['ok'])
     ];
     setcookie('name_value',$row['name'], time() + 30 * 24 * 60 * 60);
