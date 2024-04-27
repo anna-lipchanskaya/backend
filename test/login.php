@@ -23,7 +23,6 @@ if (session_start() && !empty($_COOKIE[session_name()])) {
             setcookie('logout', '', 100000);
             // Выход пользователя из сессии
             session_destroy();
-            exit();
         }
 
         // Делаем перенаправление на форму.
