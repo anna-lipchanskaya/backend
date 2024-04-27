@@ -160,9 +160,6 @@ if ($_POST['button'] == "ok"){
 
   // Сохраняем куку с признаком успешного сохранения.
   setcookie('save', '1');
-
-  // Делаем перенаправление.
-  header('Location: ./');
 }
   else
 {
@@ -173,4 +170,5 @@ if ($_POST['button'] == "ok"){
       exit();
 }
   }
+    header('Location: ./');
 }
