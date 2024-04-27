@@ -175,9 +175,12 @@ if ($_POST['button'] == "ok"){
   // Делаем перенаправление.
   header('Location: ./');
 }
-}
-if ($_POST['button'] == "exit") {
+else
+{
+    if ($_POST['button'] == "exit") {
         $_SESSION['logout'] = $_POST['logout'];
       $messages[] = 'EXIT';
           header('Location: login.php');
+}
+  }
 }
