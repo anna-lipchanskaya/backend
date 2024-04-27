@@ -170,6 +170,7 @@ if ($_POST['button'] == "ok"){
     setcookie('logout', 'exit', time() + 24 * 60 * 60);
     setcookie('fio_value','', 100000);
           header('Location: login.php');
+      exit();
 }
   }
 }
