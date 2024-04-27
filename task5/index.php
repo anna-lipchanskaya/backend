@@ -239,14 +239,12 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 $values = [];
 foreach ($rows as $row) {
-    $values['fio'][] = htmlspecialchars($row['name']);
+    $values['abilities'][] = htmlspecialchars($row['id_language']);
 }
 
-// Сериализуем массив перед передачей в куки
-$fio_serialized = serialize($values['fio']);
+$abilities_serialized = serialize($values['abilities']);
 
-// Устанавливаем куки с сериализованным значением
-setcookie('fio_value', $fio_serialized, time() + 30 * 24 * 60 * 60);
+setcookie('abilities_value', $abilities_serialized, time() + 30 * 24 * 60 * 60);
     printf('Вход с логином %s, uid %d', $_SESSION['login'], $_SESSION['uid']);
   }
 
