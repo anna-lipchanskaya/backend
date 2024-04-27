@@ -59,8 +59,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 ?>
 
 <form action="" method="post">
-  <input name="login" <?php if ($errors['login']) {print 'class="error"';} ?> value="<?php print $values['login']; ?>"/>
-  <input name="password" />
+  <input name="login" <?php if ($errors['error']) {print 'class="error"';} ?> value="<?php print $values['login']; ?>"/>
+  <input name="password" <?php if ($errors['error']) {print 'class="error"';} ?> value="<?php print $values['password']; ?>/>
   <input type="submit" value="Войти" />
 </form>
 
