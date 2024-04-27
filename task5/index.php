@@ -214,13 +214,12 @@ $db = new PDO('mysql:host=localhost;dbname=' . $db_name, $db_login, $db_pass,
   [PDO::ATTR_PERSISTENT => true, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]); // Заменить test на имя БД, совпадает с логином uXXXXX
 
     
-$stmt = $db->prepare("SELECT language2.name 
-    FROM ap_lan2 
-    JOIN language2 ON ap_lan2.id_language = language2.id 
-    WHERE ap_lan2.login = :login");
+$stmt = $db->prepare("SELECT l.name
+FROM ap_lan2 AS a
+JOIN languages AS l ON a.id_language = l.id
+WHERE a.login = :login");
 $stmt->execute(['login' => $_SESSION['login']]);
 $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
 $value = [];
 foreach ($rows as $row) {
     $value['abilities'][] = htmlspecialchars($row['name']);
