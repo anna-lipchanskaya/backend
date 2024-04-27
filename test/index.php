@@ -177,6 +177,7 @@ if (!empty($_POST['ok'])){
   header('Location: ./');
 }
 }
+$messages = array();
 if (!empty($_POST['logout'])) {
         $_SESSION['logout'] = $_POST['logout'];
       $messages[] = 'EXIT';
