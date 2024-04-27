@@ -36,12 +36,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   // Складываем признак ошибок в массив.
   $errors = array();
   $errors['fio'] = !empty($_COOKIE['fio_error']);
+  $error = true;
 
   // TODO: аналогично все поля.
 
   // Выдаем сообщения об ошибках.
   if (!empty($errors['fio'])) {
     // Удаляем куку, указывая время устаревания в прошлом.
+    $error = false;
     setcookie('fio_error', '', 100000);
     // Выводим сообщение.
     $messages[] = '<div class="error">Заполните имя.</div>';
@@ -56,7 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
   // Если нет предыдущих ошибок ввода, есть кука сессии, начали сессию и
   // ранее в сессию записан факт успешного логина.
-  if (session_start() && (!empty($_SESSION['login'])) && (!empty($_COOKIE[session_name()])) && (empty($errors))) {
+  if (session_start() && (!empty($_SESSION['login'])) && (!empty($_COOKIE[session_name()])) && $eror) {
     // TODO: загрузить данные пользователя из БД
     // и заполнить переменную $values,
     // предварительно санитизовав.
