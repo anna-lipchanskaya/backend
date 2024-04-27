@@ -177,7 +177,7 @@ if (!empty($_POST['ok'])){
   header('Location: ./');
 }
 }
-if (isset($_POST['logout'])) {
+if (!empty($_POST['logout'])) {
         $_SESSION['logout'] = $_POST['logout'];
       $messages[] = 'EXIT';
           header('Location: login.php');
