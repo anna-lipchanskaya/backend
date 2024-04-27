@@ -30,6 +30,7 @@ if (!empty($messages)) {
       <?php
       if (isset($_POST['logout'])) {
         print("NO");
+        print("NO");
         $_SESSION['logout'] = $_POST['logout'];
           header('Location: login.php');
 
