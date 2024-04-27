@@ -166,7 +166,7 @@ if ($_POST['button'] == "ok"){
 }
   else
 {
-    if ($_POST['button'] == "exit" && session_start()) {
+    if ($_POST['button'] == "exit" && session_start() && (!empty($_COOKIE[session_name()]))) {
     setcookie('logout', 'exit', time() + 24 * 60 * 60);
     setcookie('fio_value','', 100000);
           header('Location: login.php');
