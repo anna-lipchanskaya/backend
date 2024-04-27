@@ -90,10 +90,9 @@ else
   // TODO: Проверть есть ли такой логин и пароль в базе данных.
   // Выдать сообщение об ошибках.
 
-    $user = 'u67440'; // Заменить на ваш логин uXXXXX
-    $pass = '7848123'; // Заменить на пароль
-    $db = new PDO('mysql:host=localhost;dbname=u67440', $user, $pass,
-      [PDO::ATTR_PERSISTENT => true, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]); // Заменить test на имя БД, совпадает с логином uXXXXX
+    include('../db.php');
+$db = new PDO('mysql:host=localhost;dbname=' . $db_name, $db_login, $db_pass,
+  [PDO::ATTR_PERSISTENT => true, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]); // Заменить test на имя БД, совпадает с логином uXXXXX
   // Получение данных из формы
     $login = $_POST['login'];
     $password = $_POST['password'];
