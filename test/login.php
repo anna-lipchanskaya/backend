@@ -62,10 +62,10 @@ else {
 // Подготовка SQL-запроса
     $stmt = $db->prepare("SELECT * FROM test WHERE login = :login");
     $stmt->execute(array(':login' => $login));
-    $user = $stmt->fetch();
+    $use = $stmt->fetch();
 
     // Проверка наличия пользователя и совпадения пароля
-    if ($user && password_verify($password, $user['password'])) {
+    if ($use && password_verify($password, $use['password'])) {
         // Логин и пароль верные
         echo "Успешный вход!";
     } else {
