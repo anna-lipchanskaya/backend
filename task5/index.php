@@ -370,7 +370,7 @@ if (empty($_POST['bio'])) {
    include('../db.php');
 $db = new PDO('mysql:host=localhost;dbname=' . $db_name, $db_login, $db_pass,
   [PDO::ATTR_PERSISTENT => true, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]); // Заменить test на имя БД, совпадает с логином uXXXXX
-    $sql = "UPDATE aplication2 SET name = :name, phone = :phone, email = :email,  data = :data, pol = :pol, bio = :bio, ok = :ok WHERE login = :login";
+    $sql = "UPDATE application2 SET name = :name, phone = :phone, email = :email,  data = :data, pol = :pol, bio = :bio, ok = :ok WHERE login = :login";
     
     $stmt = $db->prepare($sql);
     $stmt->bindParam(':name', $_POST['name']);
