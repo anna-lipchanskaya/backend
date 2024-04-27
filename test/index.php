@@ -178,8 +178,7 @@ if ($_POST['button'] == "ok"){
 else
 {
     if ($_POST['button'] == "exit") {
-        $_SESSION['logout'] = $_POST['logout'];
-      $messages[] = 'EXIT';
+        $_SESSION['logout'] = $_POST['button'];
           header('Location: login.php');
 }
   }
