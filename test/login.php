@@ -7,20 +7,6 @@
 }
     </style>
   </head>
-  <?php
-if (!empty($messages)) {
-  print('<div id="messages">');
-  // Выводим все сообщения.
-  foreach ($messages as $message) {
-    print($message);
-  }
-  print('</div>');
-}
-
-// Далее выводим форму отмечая элементы с ошибками классом error
-// и задавая начальные значения элементов ранее сохраненными.
-?>
-<?php
 
 /**
  * Файл login.php для не авторизованного пользователя выводит форму логина.
@@ -57,6 +43,7 @@ if (session_start() && !empty($_COOKIE[session_name()])) {
 // и другие сведения о клиненте и сервере, например метод текущего запроса $_SERVER['REQUEST_METHOD'].
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $errors = array();
+      $messages = array();
   $errors['error'] = !empty($_COOKIE['error']);
 
   // TODO: аналогично все поля.
@@ -74,6 +61,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   $values['login'] = empty($_COOKIE['login_value']) ? '' : strip_tags($_COOKIE['login_value']);
   $values['password'] = empty($_COOKIE['password_value']) ? '' : strip_tags($_COOKIE['password_value']);
 ?>
+    <?php
+if (!empty($messages)) {
+  print('<div id="messages">');
+  // Выводим все сообщения.
+  foreach ($messages as $message) {
+    print($message);
+  }
+  print('</div>');
+}
+
+// Далее выводим форму отмечая элементы с ошибками классом error
+// и задавая начальные значения элементов ранее сохраненными.
+?>
 
 <form action="" method="post">
   <input name="login" <?php if ($errors['error']) {print 'class="error"';} ?> value="<?php print $values['login']; ?>"/>
@@ -85,7 +85,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 }
 else
 {
-    $messages = array();
 // Иначе, если запрос был методом POST, т.е. нужно сделать авторизацию с записью логина в сессию.
 
   // TODO: Проверть есть ли такой логин и пароль в базе данных.
