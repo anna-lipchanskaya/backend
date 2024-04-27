@@ -22,7 +22,7 @@ if (session_start() && !empty($_COOKIE[session_name()])) {
         if (!empty($_SESSION['logout'])) {
             // Выход пользователя из сессии
             session_destroy();
-            echo "Yes";
+            header('Location: ./');
             exit();
         }
 
