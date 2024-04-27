@@ -160,15 +160,16 @@ if ($_POST['button'] == "ok"){
 
   // Сохраняем куку с признаком успешного сохранения.
   setcookie('save', '1');
+
+      header('Location: ./');
 }
   else
 {
-    if ($_POST['button'] == "exit" && session_start() && (!empty($_SESSION['login']))) {
+    if ($_POST['button'] == "exit") {
     setcookie('logout', 'exit', time() + 24 * 60 * 60);
     setcookie('fio_value','', 100000);
           header('Location: login.php');
       exit();
 }
   }
-    header('Location: ./');
 }
