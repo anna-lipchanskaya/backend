@@ -26,6 +26,9 @@ if (!empty($messages)) {
     <form action="" method="POST">
       <input name="fio" <?php if ($errors['fio']) {print 'class="error"';} ?> value="<?php print $values['fio']; ?>" />
       <input type="submit" name = "ok" value="ok" />
+      <?php
+$_SESSION['ok'] = $_POST['ok'];
+?>
       <input type="submit" name="logout" value="Выход">
       <?php
         print($_POST['logout']);
