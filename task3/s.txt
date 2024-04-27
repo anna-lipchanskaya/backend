@@ -15,6 +15,7 @@ CREATE TABLE application2 (
 CREATE TABLE ap_lan2 (
   id int(10) unsigned NOT NULL AUTO_INCREMENT,
   id_application int(10) DEFAULT NULL,
+  login varchar(128) NOT NULL DEFAULT '',
   id_language int(10) DEFAULT NULL,
   PRIMARY KEY (id)
 );
