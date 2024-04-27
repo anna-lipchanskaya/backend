@@ -25,8 +25,8 @@ if (!empty($messages)) {
 
     <form action="" method="POST">
       <input name="fio" <?php if ($errors['fio']) {print 'class="error"';} ?> value="<?php print $values['fio']; ?>" />
-      <input type="submit" name = "ok" value="ok" />
-      <input type="submit" name="logout" value="Выход">
+      <input type="submit" name = "button" value="ok" />
+      <input type="submit" name="button" value="exit">
     </form>
   </body>
 </html>
