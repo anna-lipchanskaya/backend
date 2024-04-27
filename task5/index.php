@@ -241,7 +241,7 @@ $abilities_serialized = serialize($value['abilities']);
         'pol' => htmlspecialchars($row['pol']),
         'bio' => htmlspecialchars($row['bio']),
         'ok' => htmlspecialchars($row['ok']),
-        'abilities' => htmlspecialchars($value['abilities'])
+        'abilities' => htmlspecialchars($abilities_serialized)
     ];
     setcookie('name_value',$row['name'], time() + 30 * 24 * 60 * 60);
     setcookie('phone_value',$row['phone'], time() + 30 * 24 * 60 * 60);
