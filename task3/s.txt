@@ -1,5 +1,7 @@
-CREATE TABLE application (
+CREATE TABLE application2 (
  id int(10) DEFAULT NULL AUTO_INCREMENT,
+ login varchar(128) NOT NULL DEFAULT '',
+ password  varchar(128) NOT NULL DEFAULT '',
  name varchar(128) NOT NULL DEFAULT '',
  phone varchar(128) NOT NULL DEFAULT '',
  email varchar(128) NOT NULL DEFAULT '',
@@ -10,7 +12,7 @@ CREATE TABLE application (
  PRIMARY KEY (id)
 );
 
-CREATE TABLE ap_lan (
+CREATE TABLE ap_lan2 (
   id int(10) unsigned NOT NULL AUTO_INCREMENT,
   id_application int(10) DEFAULT NULL,
   id_language int(10) DEFAULT NULL,
