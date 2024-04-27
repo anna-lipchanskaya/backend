@@ -212,14 +212,26 @@ $errors = array();
  include('../db.php');
 $db = new PDO('mysql:host=localhost;dbname=' . $db_name, $db_login, $db_pass,
   [PDO::ATTR_PERSISTENT => true, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]); // Заменить test на имя БД, совпадает с логином uXXXXX
-    $stmt = $db->prepare("SELECT name FROM application2 WHERE login = :login");
+    $stmt = $db->prepare("SELECT name, phone, email, data, pol, bio, ok  FROM application2 WHERE login = :login");
     $stmt->execute(['login' => $_SESSION['login']]);
     $row = $stmt->fetch();
 
     $values = [
-        'fio' => htmlspecialchars($row['name'])
+        'name' => htmlspecialchars($row['name'])
+        'phone' => htmlspecialchars($row['phone'])
+        'email' => htmlspecialchars($row['email'])
+        'data' => htmlspecialchars($row['data'])
+        'pol' => htmlspecialchars($row['pol'])
+        'bio' => htmlspecialchars($row['bio'])
+        'ok' => htmlspecialchars($row['ok'])
     ];
-    setcookie('fio_value',$row['name'], time() + 30 * 24 * 60 * 60);
+    setcookie('name_value',$row['name'], time() + 30 * 24 * 60 * 60);
+    setcookie('phone_value',$row['phone'], time() + 30 * 24 * 60 * 60);
+    setcookie('email_value',$row['email'], time() + 30 * 24 * 60 * 60);
+    setcookie('data_value',$row['data'], time() + 30 * 24 * 60 * 60);
+    setcookie('pol_value',$row['pol'], time() + 30 * 24 * 60 * 60);
+    setcookie('bio_value',$row['bio'], time() + 30 * 24 * 60 * 60);
+    setcookie('ok_value',$row['ok'], time() + 30 * 24 * 60 * 60);
 
     printf('Вход с логином %s, uid %d', $_SESSION['login'], $_SESSION['uid']);
   }
