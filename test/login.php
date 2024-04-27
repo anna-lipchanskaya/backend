@@ -82,5 +82,5 @@ else {
   $_SESSION['uid'] = 123;
 
   // Делаем перенаправление.
-  header('Location: ./');
+  //header('Location: ./');
 }
