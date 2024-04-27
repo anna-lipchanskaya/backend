@@ -71,7 +71,10 @@ else {
     } else {
         // Логин или пароль неверные
         echo "Ошибка: Неверный логин или пароль!";
-        // print("Ваш недавно сгенерированный логин", $_COOKIE['login'], "и пароль",  $_COOKIE['pass']);
+        sprintf('Вы можете войти с логином <strong>%s</strong>
+        и паролем <strong>%s</strong> для изменения данных.',
+        strip_tags($_COOKIE['login']),
+        strip_tags($_COOKIE['pass']));
         exit();
     }
 
