@@ -82,7 +82,7 @@ else {
     $pass = '7848123'; // Заменить на пароль
     $db = new PDO('mysql:host=localhost;dbname=u67440', $user, $pass,
       [PDO::ATTR_PERSISTENT => true, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]); // Заменить test на имя БД, совпадает с логином uXXXXX
-    $stmt = $db->prepare("SELECT name FROM test WHERE login = :login");
+    $stmt = $db->prepare("SELECT id FROM test WHERE login = :login");
     $stmt->execute(['login' => $_SESSION['login']]);
     $row = $stmt->fetch();
   // Записываем ID пользователя.
