@@ -28,7 +28,7 @@ if (!empty($messages)) {
       <input type="submit" name = "ok" value="ok" />
       <input type="submit" name="logout" value="Выход">
       <?php
-        print($_POST['logout']);
+        print(isset($_POST['logout']));
       if (isset($_POST['logout'])) {
         print("NO");
         $_SESSION['logout'] = $_POST['logout'];
