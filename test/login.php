@@ -103,13 +103,16 @@ else
     $stmt->execute(array(':login' => $login));
     $use = $stmt->fetch();
 
+  
+  
     // Проверка наличия пользователя и совпадения пароля
     if ($use && ($password == $use['password'])) {
         // Логин и пароль верные
         echo "Успешный вход!";
     } else {
         // Логин или пароль неверные
-        $messages[] = "Ошибка: Неверный логин или пароль!";
+     setcookie('error', '1', time() + 24 * 60 * 60);
+    $errors = TRUE;
         exit();
     }
   if (!$session_started) {
