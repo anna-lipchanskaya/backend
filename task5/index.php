@@ -237,7 +237,7 @@ $stmt = $db->prepare("SELECT language.name
     FROM ap_lan2 
     JOIN language ON ap_lan2.id = id 
     WHERE ap_lan2.login = :login");
-$stmt->execute(['login' => $_SESSION['login']);
+$stmt->execute(['login' => $_SESSION['login']]);
 $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 $values = [];
