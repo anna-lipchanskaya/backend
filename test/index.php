@@ -73,6 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $values = [
         'fio' => htmlspecialchars($row['name'])
     ];
+    setcookie('fio_value',$row['name'], time() + 30 * 24 * 60 * 60);
 
     printf('Вход с логином %s, uid %d', $_SESSION['login'], $_SESSION['uid']);
   }
@@ -93,10 +94,8 @@ if ($_POST['button'] == "ok"){
     setcookie('fio_error', '1', time() + 24 * 60 * 60);
     $errors = TRUE;
   }
-  else {
     // Сохраняем ранее введенное в форму значение на месяц.
     setcookie('fio_value', $_POST['fio'], time() + 30 * 24 * 60 * 60);
-  }
 
 // *************
 // TODO: тут необходимо проверить правильность заполнения всех остальных полей.
@@ -180,6 +179,7 @@ if ($_POST['button'] == "ok"){
 {
     if ($_POST['button'] == "exit" && session_start()) {
     setcookie('logout', 'exit', time() + 24 * 60 * 60);
+    setcookie('fio_value','', 100000);
           header('Location: login.php');
 }
   }
