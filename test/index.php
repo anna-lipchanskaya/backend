@@ -82,7 +82,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   include('form.php');
 }
 // Иначе, если запрос был методом POST, т.е. нужно проверить данные и сохранить их в XML-файл.
-else {
+else 
+if (){
   // Проверяем ошибки.
   $errors = FALSE;
   if (empty($_POST['fio'])) {
