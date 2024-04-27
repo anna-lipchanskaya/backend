@@ -183,16 +183,18 @@ outline: none;" name="data"
       Любимый язык программирования:
       <br />
     </label><br />
-  <select style="width: calc(100% - 18px); padding: 8px; margin-bottom: 20px; border: 1px solid #1c87c9; outline: none;" name="abilities[]" multiple="multiple" <?php if ($errors['abilities'] || $errors['abilities_struct']) {echo 'class="error"';} ?>>
+  <select style="width: calc(100% - 18px); padding: 8px; margin-bottom: 20px; border: 1px solid #1c87c9; outline: none;" name="abilities[]" multiple="multiple" <?php if ($errors['abilities'] || $errors['abilities_struct']) {echo 'class="error"';} 
+$abilities_array = is_array($values['abilities']) ? $abilities_array : [];
+  ?>>
     <option disabled>Выберите любимый язык пр.</option>
-    <option value="Pascal" <?php if(in_array('Pascal', $values['abilities'])) {echo 'selected';}?>>Pascal</option>
-    <option value="C" <?php if(in_array('C', $values['abilities'])) {echo 'selected';} ?>>C</option>
-    <option value="C++" <?php if(in_array('C++', $values['abilities'])) {echo 'selected';} ?>>C++</option>
-    <option value="JavaScript" <?php if(in_array('JavaScript', $values['abilities'])) {echo 'selected';} ?>>JavaScript</option>
-    <option value="PHP" <?php if(in_array('PHP', $values['abilities'])) {echo 'selected';} ?>>PHP</option>
-    <option value="Python" <?php if(in_array('Python', $values['abilities'])) {echo 'selected';} ?>>Python</option>
-    <option value="Java" <?php if(in_array('Java', $values['abilities'])) {echo 'selected';} ?>>Java</option>
-    <option value="Haskel"<?php if (in_array('Haskel', $values['abilities'])) { echo ' selected'; } ?>>Haskel</option>
+    <option value="Pascal" <?php if(in_array('Pascal', $abilities_array)) {echo 'selected';}?>>Pascal</option>
+    <option value="C" <?php if(in_array('C', $abilities_array)) {echo 'selected';} ?>>C</option>
+    <option value="C++" <?php if(in_array('C++', $abilities_array)) {echo 'selected';} ?>>C++</option>
+    <option value="JavaScript" <?php if(in_array('JavaScript', $abilities_array)) {echo 'selected';} ?>>JavaScript</option>
+    <option value="PHP" <?php if(in_array('PHP', $abilities_array)) {echo 'selected';} ?>>PHP</option>
+    <option value="Python" <?php if(in_array('Python', $abilities_array)) {echo 'selected';} ?>>Python</option>
+    <option value="Java" <?php if(in_array('Java', $abilities_array)) {echo 'selected';} ?>>Java</option>
+    <option value="Haskel"<?php if (in_array('Haskel', $abilities_array)) { echo ' selected'; } ?>>Haskel</option>
 </select>
     <label>
       Биография:<br />
