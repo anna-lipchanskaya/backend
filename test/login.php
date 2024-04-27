@@ -60,8 +60,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   $values = array();
   $values['login'] = empty($_COOKIE['login_value']) ? '' : strip_tags($_COOKIE['login_value']);
   $values['password'] = empty($_COOKIE['password_value']) ? '' : strip_tags($_COOKIE['password_value']);
-?>
-    <?php
 if (!empty($messages)) {
   print('<div id="messages">');
   // Выводим все сообщения.
