@@ -103,12 +103,15 @@ else
     $stmt->execute(array(':login' => $login));
     $use = $stmt->fetch();
 
-  
+      // Сохраняем ранее введенное в форму значение на месяц.
+    setcookie('login_value', $_POST['login'], time() + 30 * 24 * 60 * 60);
+    setcookie('password_value', $_POST['password'], time() + 30 * 24 * 60 * 60);
   
     // Проверка наличия пользователя и совпадения пароля
     if ($use && ($password == $use['password'])) {
         // Логин и пароль верные
-        echo "Успешный вход!";
+   setcookie('login_value', '', 100000);
+    setcookie('password_value', '', 100000);
     } else {
         // Логин или пароль неверные
      setcookie('error', '1', time() + 24 * 60 * 60);
