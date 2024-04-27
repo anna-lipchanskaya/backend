@@ -27,16 +27,6 @@ if (!empty($messages)) {
       <input name="fio" <?php if ($errors['fio']) {print 'class="error"';} ?> value="<?php print $values['fio']; ?>" />
       <input type="submit" name = "ok" value="ok" />
       <input type="submit" name="logout" value="Выход">
-      <?php
-      if (isset($_POST['logout'])) {
-        $_SESSION['logout'] = $_POST['logout'];
-          header('Location: login.php');
-
-}
-
-// Далее выводим форму отмечая элементы с ошибками классом error
-// и задавая начальные значения элементов ранее сохраненными.
-?>
     </form>
   </body>
 </html>
