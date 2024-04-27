@@ -216,7 +216,7 @@ $db = new PDO('mysql:host=localhost;dbname=' . $db_name, $db_login, $db_pass,
     
 $stmt = $db->prepare("SELECT l.name
 FROM ap_lan2 AS a
-JOIN languages AS l ON a.id_language = l.id
+JOIN language2 AS l ON a.id_language = l.id
 WHERE a.login = :login");
 $stmt->execute(['login' => $_SESSION['login']]);
 $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
