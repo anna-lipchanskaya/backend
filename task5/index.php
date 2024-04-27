@@ -224,7 +224,6 @@ $db = new PDO('mysql:host=localhost;dbname=' . $db_name, $db_login, $db_pass,
         'pol' => htmlspecialchars($row['pol']),
         'bio' => htmlspecialchars($row['bio']),
         'ok' => htmlspecialchars($row['ok']),
-      'abilities' => htmlspecialchars($row['abilities'])
     ];
     setcookie('name_value',$row['name'], time() + 30 * 24 * 60 * 60);
     setcookie('phone_value',$row['phone'], time() + 30 * 24 * 60 * 60);
@@ -233,8 +232,21 @@ $db = new PDO('mysql:host=localhost;dbname=' . $db_name, $db_login, $db_pass,
     setcookie('pol_value',$row['pol'], time() + 30 * 24 * 60 * 60);
     setcookie('bio_value',$row['bio'], time() + 30 * 24 * 60 * 60);
     setcookie('ok_value',$row['ok'], time() + 30 * 24 * 60 * 60);
-    setcookie('abilities_value', serialize($row['abilities']), time() + 365 * 24 * 60 * 60);
+    
+    $stmt = $db->prepare("SELECT id_language FROM ap_lan2 WHERE login = :login");
+$stmt->execute(['login' => $_SESSION['login']);
+$rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+$values = [];
+foreach ($rows as $row) {
+    $values['fio'][] = htmlspecialchars($row['name']);
+}
+
+// Сериализуем массив перед передачей в куки
+$fio_serialized = serialize($values['fio']);
+
+// Устанавливаем куки с сериализованным значением
+setcookie('fio_value', $fio_serialized, time() + 30 * 24 * 60 * 60);
     printf('Вход с логином %s, uid %d', $_SESSION['login'], $_SESSION['uid']);
   }
 
