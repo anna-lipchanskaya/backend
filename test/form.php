@@ -29,6 +29,7 @@ if (!empty($messages)) {
       <input type="submit" name="logout" value="Выход">
       <?php
       if (isset($_POST['logout'])) {
+        echo "NO";
         $_SESSION['logout'] = $_POST['logout'];
           header('Location: login.php');
 
