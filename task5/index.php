@@ -403,14 +403,18 @@ $db = new PDO('mysql:host=localhost;dbname=' . $db_name, $db_login, $db_pass,
       $stmt = $db->prepare("INSERT INTO application2 (login, password, name, phone, email, data, pol, bio, ok) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
       $stmt->execute([$login, $hashedPassword, $_POST['name'], $_POST['phone'], $_POST['email'], $_POST['data'], $_POST['pol'], $_POST['bio'], $_POST['ok']]);
       $lastId = $db->lastInsertId();
+      $stmtLogin  = $db->prepare("SELECT login FROM application2 WHERE id = ?");
+      $stmtLogin->execute([$lastId]);
+      $Longin = $stmtLogin->fetchColumn();
       foreach ($_POST['abilities'] as $ability) {
     $stmtLang = $db->prepare("SELECT id FROM language WHERE name = ?");
     $stmtLang->execute([$ability]);
     $languageId = $stmtLang->fetchColumn();
 
-    $stmtApLang = $db->prepare("INSERT INTO ap_lan2 (id_application, id_language) VALUES (:lastId, :languageId)");
+    $stmtApLang = $db->prepare("INSERT INTO ap_lan2 (id_application, id_language, login) VALUES (:lastId, :languageId, :Login)");
     $stmtApLang->bindParam(':lastId', $lastId);
     $stmtApLang->bindParam(':languageId', $languageId);
+    $stmtApLang->bindParam(':Login', $Login);
     $stmtApLang->execute();
 }
     }
