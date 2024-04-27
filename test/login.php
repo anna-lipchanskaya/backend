@@ -43,6 +43,28 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 </form>
 
 <?php
+     // Складываем признак ошибок в массив.
+  $errors = array();
+  $errors['login_or_password'] = !empty($_COOKIE['error']);
+
+  // TODO: аналогично все поля.
+
+  // Выдаем сообщения об ошибках.
+  if (!empty($errors['login_or_password'])) {
+    // Удаляем куку, указывая время устаревания в прошлом.
+    $error = false;
+    setcookie('error', '', 100000);
+    // Выводим сообщение.
+    $messages[] = '<div class="error">Неправильный логин или пароль</div>';
+  }
+  // TODO: тут выдать сообщения об ошибках в других полях.
+
+  // Складываем предыдущие значения полей в массив, если есть.
+  // При этом санитизуем все данные для безопасного отображения в браузере.
+  $values = array();
+  $values['login'] = empty($_COOKIE['login']) ? '' : strip_tags($_COOKIE['login']);
+      $values['password'] = empty($_COOKIE['password']) ? '' : strip_tags($_COOKIE['password']);
+  // TODO: аналогично все поля.
 }
 // Иначе, если запрос был методом POST, т.е. нужно сделать авторизацию с записью логина в сессию.
 else {
