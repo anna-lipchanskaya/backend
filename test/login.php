@@ -65,6 +65,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 </form>
 
 <?php
+    $error = false;
+    setcookie('error', '', 100000);
+    // Выводим сообщение.
+    $messages[] = '<div class="error">Неправильный логин или пароль</div>';
+  }
+  // TODO: тут выдать сообщения об ошибках в других полях.
+
+  // Складываем предыдущие значения полей в массив, если есть.
+  // При этом санитизуем все данные для безопасного отображения в браузере.
+  $values = array();
+  $values['login'] = empty($_COOKIE['login_value']) ? '' : strip_tags($_COOKIE['login_value']);
+  $values['password'] = empty($_COOKIE['password_value']) ? '' : strip_tags($_COOKIE['password_value']);
 }
 else
 {
