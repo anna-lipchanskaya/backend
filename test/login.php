@@ -65,16 +65,12 @@ else {
     $user = $stmt->fetch();
 
     // Проверка наличия пользователя и совпадения пароля
-    if (($user && password_verify($password, $user['password'])) || (($_COOKIE['login'] == $login) && ($_COOKIE['pass'] == $password))) {
+    if ($user && password_verify($password, $user['password'])) {
         // Логин и пароль верные
         echo "Успешный вход!";
     } else {
         // Логин или пароль неверные
         echo "Ошибка: Неверный логин или пароль!";
-        sprintf('Вы можете войти с логином <strong>%s</strong>
-        и паролем <strong>%s</strong> для изменения данных.',
-        strip_tags($_COOKIE['login']),
-        strip_tags($_COOKIE['pass']));
         exit();
     }
 
