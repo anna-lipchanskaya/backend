@@ -33,3 +33,9 @@ CREATE TABLE test (
   name varchar(128) NOT NULL DEFAULT '',
   PRIMARY KEY (`id`)
 )
+
+CREATE TABLE language2 (
+  id int(10) unsigned NOT NULL,
+  name varchar(128) NOT NULL DEFAULT '',
+  PRIMARY KEY (id)
+);
