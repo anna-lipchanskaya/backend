@@ -56,16 +56,7 @@ if (session_start() && !empty($_COOKIE[session_name()])) {
 // В суперглобальном массиве $_SERVER PHP сохраняет некторые заголовки запроса HTTP
 // и другие сведения о клиненте и сервере, например метод текущего запроса $_SERVER['REQUEST_METHOD'].
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-?>
-
-<form action="" method="post">
-  <input name="login" <?php if ($errors['error']) {print 'class="error"';} ?> value="<?php print $values['login']; ?>"/>
-  <input name="password" <?php if ($errors['error']) {print 'class="error"';} ?> value="<?php print $values['password']; ?>/>
-  <input type="submit" value="Войти" />
-</form>
-
-<?php
-    $error = false;
+  $error = false;
     setcookie('error', '', 100000);
     // Выводим сообщение.
     $messages[] = '<div class="error">Неправильный логин или пароль</div>';
@@ -75,6 +66,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   $values = array();
   $values['login'] = empty($_COOKIE['login_value']) ? '' : strip_tags($_COOKIE['login_value']);
   $values['password'] = empty($_COOKIE['password_value']) ? '' : strip_tags($_COOKIE['password_value']);
+?>
+
+<form action="" method="post">
+  <input name="login" <?php if ($errors['error']) {print 'class="error"';} ?> value="<?php print $values['login']; ?>"/>
+  <input name="password" <?php if ($errors['error']) {print 'class="error"';} ?> value="<?php print $values['password']; ?>/>
+  <input type="submit" value="Войти" />
+</form>
+
+<?php
 }
 else
 {
