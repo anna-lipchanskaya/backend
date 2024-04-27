@@ -112,7 +112,7 @@ else
     } else {
         // Логин или пароль неверные
      setcookie('error', '1', time() + 24 * 60 * 60);
-    $errors = TRUE;
+      header('Location: login.php');
         exit();
     }
   if (!$session_started) {
