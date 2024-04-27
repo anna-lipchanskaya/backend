@@ -68,6 +68,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 }
 // Иначе, если запрос был методом POST, т.е. нужно сделать авторизацию с записью логина в сессию.
 else {
+    $errors = FALSE;
+  if ((empty($_POST['login'])) || (empty($_POST['password']))) {
+    // Выдаем куку на день с флажком об ошибке в поле fio.
+    setcookie('error', '1', time() + 24 * 60 * 60);
+    $errors = TRUE;
+  }
+    // Сохраняем ранее введенное в форму значение на месяц.
+    setcookie('login_value', $_POST['login'], time() + 30 * 24 * 60 * 60);
+    setcookie('password_value', $_POST['password'], time() + 30 * 24 * 60 * 60);
+
   // TODO: Проверть есть ли такой логин и пароль в базе данных.
   // Выдать сообщение об ошибках.
 
