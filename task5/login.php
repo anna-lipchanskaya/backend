@@ -99,7 +99,7 @@ $db = new PDO('mysql:host=localhost;dbname=' . $db_name, $db_login, $db_pass,
     
   // Подготовленный запрос для проверки логина и пароля
 // Подготовка SQL-запроса
-    $stmt = $db->prepare("SELECT * FROM test WHERE login = :login");
+    $stmt = $db->prepare("SELECT * FROM application2 WHERE login = :login");
     $stmt->execute(array(':login' => $login));
     $use = $stmt->fetch();
 
