@@ -56,7 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
   // Если нет предыдущих ошибок ввода, есть кука сессии, начали сессию и
   // ранее в сессию записан факт успешного логина.
-  if (session_start()&& isset($_SESSION['login']) && empty($errors) && !empty($_COOKIE[session_name()])) {
+  if (session_start()&& isset($_SESSION['login']) && empty($errors) && isset($_COOKIE[session_name()])) {
     // TODO: загрузить данные пользователя из БД
     // и заполнить переменную $values,
     // предварительно санитизовав.
