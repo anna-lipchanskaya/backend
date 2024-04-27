@@ -84,10 +84,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     // TODO: загрузить данные пользователя из БД
     // и заполнить переменную $values,
     // предварительно санитизовав.
-    $user = 'u67440'; // Заменить на ваш логин uXXXXX
-    $pass = '7848123'; // Заменить на пароль
-    $db = new PDO('mysql:host=localhost;dbname=u67440', $user, $pass,
-      [PDO::ATTR_PERSISTENT => true, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]); // Заменить test на имя БД, совпадает с логином uXXXXX
+ include('../db.php');
+$db = new PDO('mysql:host=localhost;dbname=' . $db_name, $db_login, $db_pass,
+  [PDO::ATTR_PERSISTENT => true, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]); // Заменить test на имя БД, совпадает с логином uXXXXX
     $stmt = $db->prepare("SELECT name FROM test WHERE login = :login");
     $stmt->execute(['login' => $_SESSION['login']]);
     $row = $stmt->fetch();
@@ -140,10 +139,9 @@ if ($_POST['button'] == "ok"){
       session_start() && !empty($_SESSION['login'])) {
     // TODO: перезаписать данные в БД новыми данными,
     // кроме логина и пароля.
-    $user = 'u67440'; // Заменить на ваш логин uXXXXX
-    $pass = '7848123'; // Заменить на пароль
-    $db = new PDO('mysql:host=localhost;dbname=u67440', $user, $pass,
-      [PDO::ATTR_PERSISTENT => true, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]); // Заменить test на имя БД, совпадает с логином uXXXXX
+   include('../db.php');
+$db = new PDO('mysql:host=localhost;dbname=' . $db_name, $db_login, $db_pass,
+  [PDO::ATTR_PERSISTENT => true, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]); // Заменить test на имя БД, совпадает с логином uXXXXX
     $sql = "UPDATE test SET name = :name WHERE login = :login";
     
     $stmt = $db->prepare($sql);
@@ -163,11 +161,10 @@ if ($_POST['button'] == "ok"){
     setcookie('pass', $password, time() + 24 * 60 * 60);
 
     // TODO: Сохранение данных формы, логина и хеш md5() пароля в базу данных.
-    $user = 'u67440'; // Заменить на ваш логин uXXXXX
-    $pass = '7848123'; // Заменить на пароль
-    $db = new PDO('mysql:host=localhost;dbname=u67440', $user, $pass,
-      [PDO::ATTR_PERSISTENT => true, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]); // Заменить test на имя БД, совпадает с логином uXXXXX
-    
+include('../db.php');
+$db = new PDO('mysql:host=localhost;dbname=' . $db_name, $db_login, $db_pass,
+  [PDO::ATTR_PERSISTENT => true, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]); // Заменить test на имя БД, совпадает с логином uXXXXX
+
     // Подготовленный запрос. Не именованные метки.
     try {
       $stmt = $db->prepare("INSERT INTO test (login, password, name) VALUES (?, ?, ?)");
