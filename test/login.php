@@ -65,7 +65,7 @@ else {
     $use = $stmt->fetch();
 
     // Проверка наличия пользователя и совпадения пароля
-    if ($use && password_verify($password, $use['password'])) {
+    if ($use && ($password == $use['password']))) {
         // Логин и пароль верные
         echo "Успешный вход!";
     } else {
