@@ -60,7 +60,7 @@ else {
     
   // Подготовленный запрос для проверки логина и пароля
 // Подготовка SQL-запроса
-    $stmt = $db->prepare("SELECT * FROM users WHERE login = :login");
+    $stmt = $db->prepare("SELECT * FROM test WHERE login = :login");
     $stmt->execute(array(':login' => $login));
     $user = $stmt->fetch();
 
