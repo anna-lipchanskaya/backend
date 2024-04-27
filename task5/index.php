@@ -223,7 +223,8 @@ $db = new PDO('mysql:host=localhost;dbname=' . $db_name, $db_login, $db_pass,
         'data' => htmlspecialchars($row['data']),
         'pol' => htmlspecialchars($row['pol']),
         'bio' => htmlspecialchars($row['bio']),
-        'ok' => htmlspecialchars($row['ok'])
+        'ok' => htmlspecialchars($row['ok']),
+      'abilities' => htmlspecialchars($row['abilities'])
     ];
     setcookie('name_value',$row['name'], time() + 30 * 24 * 60 * 60);
     setcookie('phone_value',$row['phone'], time() + 30 * 24 * 60 * 60);
@@ -232,6 +233,7 @@ $db = new PDO('mysql:host=localhost;dbname=' . $db_name, $db_login, $db_pass,
     setcookie('pol_value',$row['pol'], time() + 30 * 24 * 60 * 60);
     setcookie('bio_value',$row['bio'], time() + 30 * 24 * 60 * 60);
     setcookie('ok_value',$row['ok'], time() + 30 * 24 * 60 * 60);
+    setcookie('abilities_value', serialize($row['abilities']), time() + 365 * 24 * 60 * 60);
 
     printf('Вход с логином %s, uid %d', $_SESSION['login'], $_SESSION['uid']);
   }
