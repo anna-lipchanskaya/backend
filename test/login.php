@@ -109,7 +109,7 @@ else
     setcookie('password_value', $_POST['password'], time() + 30 * 24 * 60 * 60);
   
     // Проверка наличия пользователя и совпадения пароля
-    if ($use && ($password == $use['password'])) {
+    if ($use && password_verify($password, $use['password'])) {
         // Логин и пароль верные
    setcookie('login_value', '', 100000);
     setcookie('password_value', '', 100000);
