@@ -250,6 +250,8 @@ $abilities_serialized = serialize($values['abilities']);
 
 // Устанавливаем куки с сериализованным значением
 setcookie('abilities_value', $abilities_serialized, time() + 30 * 24 * 60 * 60);
+printf('Вход с логином %s, uid %d', $_SESSION['login'], $_SESSION['uid']);
+  }
   // Включаем содержимое файла form.php.
   // В нем будут доступны переменные $messages, $errors и $values для вывода 
   // сообщений, полей с ранее заполненными данными и признаками ошибок.
