@@ -31,7 +31,7 @@ if (!empty($messages)) {
         document.addEventListener("DOMContentLoaded", function() {
     var button = document.getElementById("myButton");
     button.style.display = "none";
-    if (session_start() && (!empty($_SESSION['login']))) {
+    if (session_start()) {
         button.style.display = "block";
     }
 });
