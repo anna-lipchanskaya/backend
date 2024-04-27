@@ -27,7 +27,7 @@ if (session_start() && !empty($_COOKIE[session_name()])) {
         }
 
         // Делаем перенаправление на форму.
-        header('Location: ./');
+        //header('Location: ./');
         exit();
     }
 }
