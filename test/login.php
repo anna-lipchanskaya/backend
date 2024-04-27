@@ -40,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
 <form action="" method="post">
   <input name="login" />
-  <input name="pass" />
+  <input name="password" />
   <input type="submit" value="Войти" />
 </form>
 
