@@ -148,8 +148,8 @@ if ($_POST['button'] == "ok"){
     $salt = generateSalt();; // Лучше генерировать уникальную соль для каждого пользователя
     $hashedPassword = hash('sha256', $password . $salt);
     // Сохраняем в Cookies.
-    setcookie('login', $login);
-    setcookie('pass', $password);
+    setcookie('login', $login, time() + 24 * 60 * 60);
+    setcookie('pass', $password, time() + 24 * 60 * 60);
 
     // TODO: Сохранение данных формы, логина и хеш md5() пароля в базу данных.
     $user = 'u67440'; // Заменить на ваш логин uXXXXX
