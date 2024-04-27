@@ -23,7 +23,29 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     setcookie('login', '', 100000);
     setcookie('pass', '', 100000);
     // Выводим сообщение пользователю.
-    $messages[] = 'Спасибо, результаты сохранены.';
+ echo '<script>
+                    document.addEventListener("DOMContentLoaded", function() {
+                        var modal = document.createElement("div");
+                        modal.innerHTML = "Спасибо, результаты сохранены.";
+                        modal.style.position = "fixed";
+                        modal.style.zIndex = "1";
+                        modal.style.top = "0";
+                        modal.style.left = "0";
+                        modal.style.width = "100%";
+                        modal.style.height = "100%";
+                        modal.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
+                        modal.style.display = "flex";
+                        modal.style.justifyContent = "center";
+                        modal.style.alignItems = "center";
+                        modal.style.color = "#fff";
+                        modal.style.fontSize = "24px";
+                        modal.style.cursor = "pointer";
+                        modal.addEventListener("click", function() {
+                            modal.style.display = "none";
+                        });
+                        document.body.appendChild(modal);
+                    });
+              </script>';
     // Если в куках есть пароль, то выводим сообщение.
     if (!empty($_COOKIE['pass'])) {
       $messages[] = sprintf('Вы можете <a href="login.php">войти</a> с логином <strong>%s</strong>
