@@ -179,5 +179,6 @@ if (!empty($_POST['ok'])){
 }
 if (isset($_POST['logout'])) {
         $_SESSION['logout'] = $_POST['logout'];
+      $messages[] = 'EXIT';
           header('Location: login.php');
 }
