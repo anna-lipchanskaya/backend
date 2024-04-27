@@ -84,8 +84,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 // Иначе, если запрос был методом POST, т.е. нужно проверить данные и сохранить их в XML-файл.
 else 
 {
-if (!empty($_SESSION['ok'])){
-  $_SESSION['ok'] = NULL;
+if (!empty($_POST['ok'])){
+  $_POST['ok'] = NULL;
   // Проверяем ошибки.
   $errors = FALSE;
   if (empty($_POST['fio'])) {
@@ -176,4 +176,8 @@ if (!empty($_SESSION['ok'])){
   // Делаем перенаправление.
   header('Location: ./');
 }
+}
+if (isset($_POST['logout'])) {
+        $_SESSION['logout'] = $_POST['logout'];
+          header('Location: login.php');
 }
