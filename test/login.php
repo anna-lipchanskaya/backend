@@ -58,17 +58,18 @@ else {
     $password = $_POST['password'];
     
   // Подготовленный запрос для проверки логина и пароля
-    $stmt = $db->prepare("SELECT * FROM users WHERE login = ? AND password = ?");
-    $stmt->bind_param("ss", $login, $password);
-    
-    $stmt->execute();
-    
-    $result = $stmt->get_result();
-    
-    if ($result->num_rows > 0) {
-        echo "Пользователь найден";
+// Подготовка SQL-запроса
+    $stmt = $db->prepare("SELECT * FROM users WHERE login = :login");
+    $stmt->execute(array(':login' => $login));
+    $user = $stmt->fetch();
+
+    // Проверка наличия пользователя и совпадения пароля
+    if ($user && password_verify($password, $user['password'])) {
+        // Логин и пароль верные
+        echo "Успешный вход!";
     } else {
-        echo "Неправильный логин или пароль";
+        // Логин или пароль неверные
+        echo "Ошибка: Неверный логин или пароль!";
     }
 
   if (!$session_started) {
