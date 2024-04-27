@@ -59,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 ?>
 
 <form action="" method="post">
-  <input name="login" />
+  <input name="login" <?php if ($errors['login']) {print 'class="error"';} ?> value="<?php print $values['login']; ?>"/>
   <input name="password" />
   <input type="submit" value="Войти" />
 </form>
@@ -71,8 +71,8 @@ else
       $messages = array();
 // Иначе, если запрос был методом POST, т.е. нужно сделать авторизацию с записью логина в сессию.
     // Сохраняем ранее введенное в форму значение на месяц.
-    //setcookie('login_value', $_POST['login'], time() + 30 * 24 * 60 * 60);
-    //setcookie('password_value', $_POST['password'], time() + 30 * 24 * 60 * 60);
+    setcookie('login_value', $_POST['login'], time() + 30 * 24 * 60 * 60);
+    setcookie('password_value', $_POST['password'], time() + 30 * 24 * 60 * 60);
 
   // TODO: Проверть есть ли такой логин и пароль в базе данных.
   // Выдать сообщение об ошибках.
