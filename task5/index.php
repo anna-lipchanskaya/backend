@@ -233,7 +233,7 @@ $db = new PDO('mysql:host=localhost;dbname=' . $db_name, $db_login, $db_pass,
     setcookie('bio_value',$row['bio'], time() + 30 * 24 * 60 * 60);
     setcookie('ok_value',$row['ok'], time() + 30 * 24 * 60 * 60);
     
-$stmt = $db->prepare("SELECT language.name 
+$stmt = $db->prepare("SELECT language2.name 
     FROM ap_lan2 
     JOIN language ON ap_lan2.id_language = id 
     WHERE ap_lan2.login = :login");
