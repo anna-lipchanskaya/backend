@@ -124,9 +124,6 @@ $db = new PDO('mysql:host=localhost;dbname=' . $db_name, $db_login, $db_pass,
   // Если все ок, то авторизуем пользователя.
   $_SESSION['login'] = $_POST['login'];
   // Записываем ID пользователя.
-  include('../db.php');
-$db = new PDO('mysql:host=localhost;dbname=' . $db_name, $db_login, $db_pass,
-  [PDO::ATTR_PERSISTENT => true, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
   $_SESSION['uid'] = rand(1, 100);
 
   // Делаем перенаправление.
