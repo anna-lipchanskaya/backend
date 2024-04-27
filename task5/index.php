@@ -212,6 +212,23 @@ $errors = array();
  include('../db.php');
 $db = new PDO('mysql:host=localhost;dbname=' . $db_name, $db_login, $db_pass,
   [PDO::ATTR_PERSISTENT => true, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]); // Заменить test на имя БД, совпадает с логином uXXXXX
+
+    
+$stmt = $db->prepare("SELECT language2.name 
+    FROM ap_lan2 
+    JOIN language2 ON ap_lan2.id_language = language2.id 
+    WHERE ap_lan2.login = :login");
+$stmt->execute(['login' => $_SESSION['login']]);
+$rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+$value = [];
+foreach ($rows as $row) {
+    $value['abilities'][] = htmlspecialchars($row['name']);
+}
+
+// Сериализуем массив перед передачей в куки
+$abilities_serialized = serialize($value['abilities']);
+
     $stmt = $db->prepare("SELECT name, phone, email, data, pol, bio, ok  FROM application2 WHERE login = :login");
     $stmt->execute(['login' => $_SESSION['login']]);
     $row = $stmt->fetch();
@@ -224,6 +241,7 @@ $db = new PDO('mysql:host=localhost;dbname=' . $db_name, $db_login, $db_pass,
         'pol' => htmlspecialchars($row['pol']),
         'bio' => htmlspecialchars($row['bio']),
         'ok' => htmlspecialchars($row['ok']),
+        'abilities' => htmlspecialchars($value['abilities'])
     ];
     setcookie('name_value',$row['name'], time() + 30 * 24 * 60 * 60);
     setcookie('phone_value',$row['phone'], time() + 30 * 24 * 60 * 60);
@@ -232,24 +250,7 @@ $db = new PDO('mysql:host=localhost;dbname=' . $db_name, $db_login, $db_pass,
     setcookie('pol_value',$row['pol'], time() + 30 * 24 * 60 * 60);
     setcookie('bio_value',$row['bio'], time() + 30 * 24 * 60 * 60);
     setcookie('ok_value',$row['ok'], time() + 30 * 24 * 60 * 60);
-    
-$stmt = $db->prepare("SELECT language2.name 
-    FROM ap_lan2 
-    JOIN language2 ON ap_lan2.id_language = language2.id 
-    WHERE ap_lan2.login = :login");
-$stmt->execute(['login' => $_SESSION['login']]);
-$rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-$values = [];
-foreach ($rows as $row) {
-    $values['abilities'][] = htmlspecialchars($row['name']);
-}
-
-// Сериализуем массив перед передачей в куки
-$abilities_serialized = serialize($values['abilities']);
-
-// Устанавливаем куки с сериализованным значением
-setcookie('abilities_value', $abilities_serialized, time() + 30 * 24 * 60 * 60);
+    setcookie('abilities_value', $abilities_serialized, time() + 30 * 24 * 60 * 60);
 printf('Вход с логином %s, uid %d', $_SESSION['login'], $_SESSION['uid']);
   }
   // Включаем содержимое файла form.php.
