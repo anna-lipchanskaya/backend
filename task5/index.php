@@ -221,7 +221,6 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 $languages = [];
 foreach ($rows as $row) {
     $languages[] = htmlspecialchars($row['name']);
-  printf($row['name']);
 }
 
 // Сериализуем массив перед передачей в куки
