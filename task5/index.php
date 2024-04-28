@@ -402,16 +402,13 @@ $db = new PDO('mysql:host=localhost;dbname=' . $db_name, $db_login, $db_pass,
 $stmt = $db->prepare("SELECT id_application FROM ap_lan2 WHERE login = :login");
 $stmt->bindParam(':login', $_SESSION['login']);
 $stmt->execute();
-$result = $stmt->fetchAll(PDO::FETCH_COLUMN);
+$id_application = $stmt->fetchColumn();
 // Удаление строк из таблицы ap_lan2 с найденным id_application
-if (empty($result)) {
-    $id_application = $result[0];
-    printf($id_application);
     $stmt_delete = $db->prepare("DELETE FROM ap_lan2 WHERE id_application = :id_application");
     $stmt_delete->bindParam(':id_application', $id_application);
     $stmt_delete->execute();
   
-    foreach ($_POST['abilities'] as $ability) {
+       foreach ($_POST['abilities'] as $ability) {
     $stmtLang = $db->prepare("SELECT id FROM language WHERE name = ?");
     $stmtLang->execute([$ability]);
     $languageId = $stmtLang->fetchColumn();
@@ -421,7 +418,6 @@ if (empty($result)) {
     $stmtApLang->bindParam(':languageId', $languageId);
     $stmtApLang->bindParam(':Login', $_SESSION['login']);
     $stmtApLang->execute();
-}
    
 }
   }
