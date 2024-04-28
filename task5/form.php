@@ -38,6 +38,16 @@ margin: 25px;
 box-shadow: 0 2px 5px #f5f5f5; 
 background: #f5f5f5; 
 }
+.login-link{
+  text-decoration: none;
+  font-weight: bold;
+}
+.login{
+    color: #1c87c9;
+}
+.password{
+    color: #1c87c9;
+}
 .fas {
 margin: 25px 10px 0;
 font-size: 72px;
