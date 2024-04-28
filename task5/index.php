@@ -398,11 +398,7 @@ $db = new PDO('mysql:host=localhost;dbname=' . $db_name, $db_login, $db_pass,
     $stmt->bindParam(':ok', $_POST['ok']);
     $stmt->bindParam(':login', $_SESSION['login']);
     $stmt->execute();
-
-$stmt = $db->prepare("SELECT id_application FROM ap_lan2 WHERE login = :login");
-$stmt->bindParam(':login', $_SESSION['login']);
-$stmt->execute();
-$id_application = $stmt->fetchColumn();
+      
 // Удаление строк из таблицы ap_lan2 с найденным id_application
     $stmt_delete = $db->prepare("DELETE FROM ap_lan2 WHERE id_application = :id_application");
     $stmt_delete->bindParam(':id_application', $id_application);
@@ -413,8 +409,7 @@ $id_application = $stmt->fetchColumn();
     $stmtLang->execute([$ability]);
     $languageId = $stmtLang->fetchColumn();
 
-    $stmtApLang = $db->prepare("INSERT INTO ap_lan2 (id_application, id_language, login) VALUES (:lastId, :languageId, :Login)");
-    $stmtApLang->bindParam(':lastId', $id_application);
+    $stmtApLang = $db->prepare("INSERT INTO ap_lan2 (id_language, login) VALUES (:languageId, :Login)");
     $stmtApLang->bindParam(':languageId', $languageId);
     $stmtApLang->bindParam(':Login', $_SESSION['login']);
     $stmtApLang->execute();
@@ -445,14 +440,12 @@ $db = new PDO('mysql:host=localhost;dbname=' . $db_name, $db_login, $db_pass,
     try {
       $stmt = $db->prepare("INSERT INTO application2 (login, password, name, phone, email, data, pol, bio, ok) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
       $stmt->execute([$login, $hashedPassword, $_POST['name'], $_POST['phone'], $_POST['email'], $_POST['data'], $_POST['pol'], $_POST['bio'], $_POST['ok']]);
-      $lastId = $db->lastInsertId();
       foreach ($_POST['abilities'] as $ability) {
     $stmtLang = $db->prepare("SELECT id FROM language WHERE name = ?");
     $stmtLang->execute([$ability]);
     $languageId = $stmtLang->fetchColumn();
 
-    $stmtApLang = $db->prepare("INSERT INTO ap_lan2 (id_application, id_language, login) VALUES (:lastId, :languageId, :Login)");
-    $stmtApLang->bindParam(':lastId', $lastId);
+    $stmtApLang = $db->prepare("INSERT INTO ap_lan2 ( id_language, login) VALUES ( :languageId, :Login)");
     $stmtApLang->bindParam(':languageId', $languageId);
     $stmtApLang->bindParam(':Login', $login);
     $stmtApLang->execute();
