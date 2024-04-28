@@ -403,17 +403,15 @@ $stmt = $db->prepare("SELECT id_application FROM ap_lan2 WHERE login = :login");
 $stmt->bindParam(':login', $_SESSION['login']);
 $stmt->execute();
 $result = $stmt->fetchAll(PDO::FETCH_COLUMN);
-
 // Удаление строк из таблицы ap_lan2 с найденным id_application
-if (!empty($result)) {
+if (empty($result)) {
     $id_application = $result[0];
-  printf($id_application);
+    printf($id_application);
     $stmt_delete = $db->prepare("DELETE FROM ap_lan2 WHERE id_application = :id_application");
     $stmt_delete->bindParam(':id_application', $id_application);
     $stmt_delete->execute();
   
-      foreach ($_POST['abilities'] as $ability) {
-        printf($ability);
+    foreach ($_POST['abilities'] as $ability) {
     $stmtLang = $db->prepare("SELECT id FROM language WHERE name = ?");
     $stmtLang->execute([$ability]);
     $languageId = $stmtLang->fetchColumn();
