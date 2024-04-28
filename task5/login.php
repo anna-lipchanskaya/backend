@@ -27,7 +27,7 @@ input {
 }
 
 input[type="submit"] {
-  background-color: #4CAF50;
+  background-color: #1c87c9;
   color: white;
   border: none;
   border-radius: 3px;
