@@ -248,7 +248,12 @@ $abilities_serialized = serialize($languages);
     setcookie('bio_value',$row['bio'], time() + 30 * 24 * 60 * 60);
     setcookie('ok_value',$row['ok'], time() + 30 * 24 * 60 * 60);
     setcookie('abilities_value', $abilities_serialized, time() + 30 * 24 * 60 * 60);
-printf('Вход с логином %s, uid %d', $_SESSION['login'], $_SESSION['uid']);
+    //printf('Вход с логином %s, uid %d', $_SESSION['login'], $_SESSION['uid']);
+ $messages[] = sprintf('Вход с логином <strong class="login">%d</strong>
+        и id <strong class="login">%d</strong>.',
+        $_SESSION['login'],
+        $_SESSION['uid']);
+
   }
   // Включаем содержимое файла form.php.
   // В нем будут доступны переменные $messages, $errors и $values для вывода 
