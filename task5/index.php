@@ -218,14 +218,14 @@ $stmt = $db->prepare("SELECT l.name
 FROM ap_lan2 AS a JOIN language2 AS l ON a.id_language = l.id WHERE a.login = :login");
 $stmt->execute(['login' => $_SESSION['login']]);
 $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
-$values = [];
+$languages = [];
 foreach ($rows as $row) {
-    $values['abilities'][] = htmlspecialchars($row['name']);
-  print($row['name']);
+    $languages[] = htmlspecialchars($row['name']);
+  printf($row['name']);
 }
 
 // Сериализуем массив перед передачей в куки
-$abilities_serialized = serialize($values['abilities']);
+$abilities_serialized = serialize($languages);
 
     $stmt = $db->prepare("SELECT name, phone, email, data, pol, bio, ok  FROM application2 WHERE login = :login");
     $stmt->execute(['login' => $_SESSION['login']]);
@@ -238,7 +238,8 @@ $abilities_serialized = serialize($values['abilities']);
         'data' => htmlspecialchars($row['data']),
         'pol' => htmlspecialchars($row['pol']),
         'bio' => htmlspecialchars($row['bio']),
-        'ok' => htmlspecialchars($row['ok'])
+        'ok' => htmlspecialchars($row['ok']),
+        'abilities' => htmlspecialchars($abilities_serialize)
     ];
     setcookie('name_value',$row['name'], time() + 30 * 24 * 60 * 60);
     setcookie('phone_value',$row['phone'], time() + 30 * 24 * 60 * 60);
