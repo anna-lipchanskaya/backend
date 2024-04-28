@@ -221,6 +221,7 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 $values = [];
 foreach ($rows as $row) {
     $values['abilities'][] = htmlspecialchars($row['name']);
+  print($row['name']);
 }
 
 // Сериализуем массив перед передачей в куки
