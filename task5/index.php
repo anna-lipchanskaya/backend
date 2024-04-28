@@ -419,7 +419,7 @@ if (!empty($result)) {
     $stmtApLang = $db->prepare("INSERT INTO ap_lan2 (id_application, id_language, login) VALUES (:lastId, :languageId, :Login)");
     $stmtApLang->bindParam(':lastId', $id_application);
     $stmtApLang->bindParam(':languageId', $languageId);
-    $stmtApLang->bindParam(':Login', $login);
+    $stmtApLang->bindParam(':Login', $_SESSION['login']);
     $stmtApLang->execute();
 }
    
