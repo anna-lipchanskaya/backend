@@ -400,8 +400,8 @@ $db = new PDO('mysql:host=localhost;dbname=' . $db_name, $db_login, $db_pass,
     $stmt->execute();
       
 // Удаление строк из таблицы ap_lan2 с найденным id_application
-    $stmt_delete = $db->prepare("DELETE FROM ap_lan2 WHERE id_application = :id_application");
-    $stmt_delete->bindParam(':id_application', $id_application);
+    $stmt_delete = $db->prepare("DELETE FROM ap_lan2 WHERE login = :login");
+    $stmt_delete->bindParam(':login', $_SESSION['login']);
     $stmt_delete->execute();
   
        foreach ($_POST['abilities'] as $ability) {
