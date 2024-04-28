@@ -403,7 +403,6 @@ $stmt = $db->prepare("SELECT id_application FROM ap_lan2 WHERE login = :login");
 $stmt->bindParam(':login', $_SESSION['login']);
 $stmt->execute();
 $result = $stmt->fetchAll(PDO::FETCH_COLUMN);
-      printf($result);
 
 // Удаление строк из таблицы ap_lan2 с найденным id_application
 if (!empty($result)) {
