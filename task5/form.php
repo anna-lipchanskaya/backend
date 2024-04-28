@@ -202,7 +202,7 @@ $abilities_array = is_array($values['abilities']) ? $values['abilities'] : [];
     name="ok" <?php if ($values['ok'] === 'on') {echo 'checked';} ?> <?php if ($errors['ok']) {echo 'class="error"';} ?>/>    С контрактом ознакомлен(а)</label>
     <br />
 <button type="submit" name = "button" value="ok">Сохранить</button>
-<br>
+<br />
 <button type="submit" name="button"  value="exit">Выход</button>
 </form>
 </div>
