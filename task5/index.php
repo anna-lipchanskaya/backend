@@ -385,6 +385,8 @@ if (empty($_POST['bio'])) {
    include('../db.php');
 $db = new PDO('mysql:host=localhost;dbname=' . $db_name, $db_login, $db_pass,
   [PDO::ATTR_PERSISTENT => true, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]); // Заменить test на имя БД, совпадает с логином uXXXXX
+    try
+    {
     $sql = "UPDATE application2 SET name = :name, phone = :phone, email = :email,  data = :data, pol = :pol, bio = :bio, ok = :ok WHERE login = :login";
     
     $stmt = $db->prepare($sql);
@@ -397,6 +399,38 @@ $db = new PDO('mysql:host=localhost;dbname=' . $db_name, $db_login, $db_pass,
     $stmt->bindParam(':ok', $_POST['ok']);
     $stmt->bindParam(':login', $_SESSION['login']);
     $stmt->execute();
+
+$stmt = $db->prepare("SELECT id_application FROM ap_lan2 WHERE login = :login");
+$stmt->bindParam(':login', $_SESSION['login']);
+$stmt->execute();
+$result = $stmt->fetchAll(PDO::FETCH_COLUMN);
+      printf($result);
+
+// Удаление строк из таблицы ap_lan2 с найденным id_application
+if (!empty($result)) {
+    $id_application = $result[0];
+    $stmt_delete = $db->prepare("DELETE FROM ap_lan2 WHERE id_application = :id_application");
+    $stmt_delete->bindParam(':id_application', $id_application);
+    $stmt_delete->execute();
+  
+      foreach ($_POST['abilities'] as $ability) {
+    $stmtLang = $db->prepare("SELECT id FROM language WHERE name = ?");
+    $stmtLang->execute([$ability]);
+    $languageId = $stmtLang->fetchColumn();
+
+    $stmtApLang = $db->prepare("INSERT INTO ap_lan2 (id_application, id_language, login) VALUES (:lastId, :languageId, :Login)");
+    $stmtApLang->bindParam(':lastId', $id_application);
+    $stmtApLang->bindParam(':languageId', $languageId);
+    $stmtApLang->bindParam(':Login', $login);
+    $stmtApLang->execute();
+}
+   
+}
+  }
+    catch(PDOException $e){
+      print('Error : ' . $e->getMessage());
+      exit();
+    }
   }
   else {
     // Генерируем уникальный логин и пароль.
