@@ -239,7 +239,7 @@ $abilities_serialized = serialize($languages);
         'pol' => htmlspecialchars($row['pol']),
         'bio' => htmlspecialchars($row['bio']),
         'ok' => htmlspecialchars($row['ok']),
-        'abilities' => htmlspecialchars($abilities_serialize)
+        'abilities' => $languages
     ];
     setcookie('name_value',$row['name'], time() + 30 * 24 * 60 * 60);
     setcookie('phone_value',$row['phone'], time() + 30 * 24 * 60 * 60);
