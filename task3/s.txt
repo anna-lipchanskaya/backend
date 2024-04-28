@@ -9,7 +9,7 @@ CREATE TABLE application2 (
  pol char(1),
  bio varchar(1024) NOT NULL DEFAULT '',
  ok char(5),
- PRIMARY KEY (login)
+ PRIMARY KEY (id)
 );
 
 CREATE TABLE ap_lan2 (
