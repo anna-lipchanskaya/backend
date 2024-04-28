@@ -11,7 +11,6 @@
       form {
   max-width: 300px;
   margin: 0 auto;
-  margin-top: 50 px;
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 5px;
