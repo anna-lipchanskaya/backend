@@ -96,7 +96,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   $values = array();
   $values['login'] = empty($_COOKIE['login_value']) ? '' : strip_tags($_COOKIE['login_value']);
   $values['password'] = empty($_COOKIE['password_value']) ? '' : strip_tags($_COOKIE['password_value']);
-if (!empty($messages)) {
+
+// Далее выводим форму отмечая элементы с ошибками классом error
+// и задавая начальные значения элементов ранее сохраненными.
+?>
+<body>
+<form action="" method="post">
+  <?php 
+  if (!empty($messages)) {
   print('<div id="messages">');
   // Выводим все сообщения.
   foreach ($messages as $message) {
@@ -104,12 +111,7 @@ if (!empty($messages)) {
   }
   print('</div>');
 }
-
-// Далее выводим форму отмечая элементы с ошибками классом error
-// и задавая начальные значения элементов ранее сохраненными.
-?>
-<body>
-<form action="" method="post">
+    ?>
   <input name="login" <?php if ($errors['error']) {print 'class="error"';} ?> value="<?php print $values['login']; ?>"/>
   <input name="password" <?php if ($errors['error']) {print 'class="error"';} ?> value="<?php print $values['password']; ?>"/>
   <input type="submit" value="Войти" />
