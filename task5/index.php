@@ -216,11 +216,11 @@ $db = new PDO('mysql:host=localhost;dbname=' . $db_name, $db_login, $db_pass,
     try{
     $stmt = $db->prepare("SELECT userid  FROM users WHERE login = :login");
     $stmt->execute(['login' => $_SESSION['login']]);
-    $UserId = $stmt->fetch();
+    $data = $stmt->fetch(PDO::FETCH_ASSOC);
     
 $stmt = $db->prepare("SELECT l.name
 FROM ap_lan3 AS a JOIN language2 AS l ON a.id_language = l.id WHERE a.userid = :userid");
-$stmt->execute(['userid' => $UserId]);
+$stmt->execute(['userid' => $data['userid']]);
 $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 $languages = [];
 foreach ($rows as $row) {
@@ -231,7 +231,7 @@ foreach ($rows as $row) {
 $abilities_serialized = serialize($languages);
     
     $stmt = $db->prepare("SELECT name, phone, email, data, pol, bio, ok  FROM application3 WHERE userid = :userid");
-    $stmt->execute(['userid' => $UserId]);
+    $stmt->execute(['userid' => $data['userid']]);
     $row = $stmt->fetch();
 
     $values = [
