@@ -161,7 +161,19 @@ $db = new PDO('mysql:host=localhost;dbname=' . $db_name, $db_login, $db_pass,
   // Если все ок, то авторизуем пользователя.
   $_SESSION['login'] = $_POST['login'];
   // Записываем ID пользователя.
-  $_SESSION['uid'] = rand(1, 100);
+try {
+    // Получаем personId из таблицы personAuthentificationData
+    $stmt = $db->prepare("SELECT id FROM application2 WHERE login = :login");
+    $stmt->execute([':login' => $login]);
+    $authData = $stmt->fetch(PDO::FETCH_ASSOC);
+    $personId = $authData['id'];
+
+    $_SESSION['uid'] = $id;
+
+  } catch(PDOException $e){
+    print('Error : ' . $e->getMessage());
+    exit();
+  }
 
   // Делаем перенаправление.
   header('Location: ./');
