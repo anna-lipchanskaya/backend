@@ -38,3 +38,33 @@ CREATE TABLE language2 (
   name varchar(128) NOT NULL DEFAULT '',
   PRIMARY KEY (id)
 );
+
+
+CREATE TABLE application3 (
+ userid int(10) unsigned NOT NULL AUTO_INCREMENT,
+ name varchar(128) NOT NULL DEFAULT '',
+ phone varchar(128) NOT NULL DEFAULT '',
+ email varchar(128) NOT NULL DEFAULT '',
+ data DATE NOT NULL DEFAULT "2000-01-01",
+ pol char(1),
+ bio varchar(1024) NOT NULL DEFAULT '',
+ ok char(5),
+ PRIMARY KEY (userid)
+);
+
+CREATE TABLE users (
+  userid int(10) unsigned NOT NULL,
+  login varchar(128) NOT NULL DEFAULT '',
+  password  varchar(128) NOT NULL DEFAULT '',
+foreign key (userid) references application3 (userid),
+ PRIMARY KEY (login, password)
+);
+
+
+CREATE TABLE ap_lan3 (
+  userid int(10) unsigned DEFAULT NULL,
+  id_language int(10) unsigned DEFAULT NULL,
+  foreign key (userid) references application3 (userid),
+  foreign key (id_language) references language2 (id),
+  PRIMARY KEY (id_language)
+);
