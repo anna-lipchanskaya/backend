@@ -454,16 +454,20 @@ while (in_array($login, $logins)) {
     try {
       $stmt = $db->prepare("INSERT INTO application3 (name, phone, email, data, pol, bio, ok) VALUES (?, ?, ?, ?, ?, ?, ?)");
       $stmt->execute([$_POST['name'], $_POST['phone'], $_POST['email'], $_POST['data'], $_POST['pol'], $_POST['bio'], $_POST['ok']]);
+      $lastId = $db->lastInsertId();
 
+      $stmt = $db->prepare("INSERT INTO users (userid, login, password) VALUES (?, ?, ?)");
+      $stmt->execute([$lastId, $login, $hashedPassword]);
+      $lastId = $db->lastInsertId();
       
       foreach ($_POST['abilities'] as $ability) {
-    $stmtLang = $db->prepare("SELECT id FROM language WHERE name = ?");
+    $stmtLang = $db->prepare("SELECT id FROM language2 WHERE name = ?");
     $stmtLang->execute([$ability]);
     $languageId = $stmtLang->fetchColumn();
 
-    $stmtApLang = $db->prepare("INSERT INTO ap_lan2 ( id_language, login) VALUES ( :languageId, :Login)");
+    $stmtApLang = $db->prepare("INSERT INTO ap_lan3 (userid, id_language) VALUES (:UserId, :languageId)");
     $stmtApLang->bindParam(':languageId', $languageId);
-    $stmtApLang->bindParam(':Login', $login);
+    $stmtApLang->bindParam(':UserId', $lastId);
     $stmtApLang->execute();
 }
     }
