@@ -452,8 +452,10 @@ while (in_array($login, $logins)) {
 
     // Подготовленный запрос. Не именованные метки.
     try {
-      $stmt = $db->prepare("INSERT INTO application2 (login, password, name, phone, email, data, pol, bio, ok) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
-      $stmt->execute([$login, $hashedPassword, $_POST['name'], $_POST['phone'], $_POST['email'], $_POST['data'], $_POST['pol'], $_POST['bio'], $_POST['ok']]);
+      $stmt = $db->prepare("INSERT INTO application3 (name, phone, email, data, pol, bio, ok) VALUES (?, ?, ?, ?, ?, ?, ?)");
+      $stmt->execute([$_POST['name'], $_POST['phone'], $_POST['email'], $_POST['data'], $_POST['pol'], $_POST['bio'], $_POST['ok']]);
+
+      
       foreach ($_POST['abilities'] as $ability) {
     $stmtLang = $db->prepare("SELECT id FROM language WHERE name = ?");
     $stmtLang->execute([$ability]);
