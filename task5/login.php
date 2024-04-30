@@ -173,9 +173,9 @@ try {
     // Получаем personId из таблицы personAuthentificationData
     $stmt = $db->prepare("SELECT userid  FROM users WHERE login = :login");
     $stmt->execute(['login' => $_SESSION['login']]);
-    $UserId = $stmt->fetch();
+    $data = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    $_SESSION['uid'] = $UserId;
+    $_SESSION['uid'] = $data['userid'];
 
   } catch(PDOException $e){
     print('Error : ' . $e->getMessage());
