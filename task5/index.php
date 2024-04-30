@@ -427,9 +427,21 @@ $db = new PDO('mysql:host=localhost;dbname=' . $db_name, $db_login, $db_pass,
     }
   }
   else {
+    include('../db.php');
+$db = new PDO('mysql:host=localhost;dbname=' . $db_name, $db_login, $db_pass,
+  [PDO::ATTR_PERSISTENT => true, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]); // Заменить test на имя БД, совпадает с логином uXXXXX
     // Генерируем уникальный логин и пароль.
-    // TODO: сделать механизм генерации, например функциями rand(), uniquid(), md5(), substr().
     $login = 'user_' . uniqid(); // Генерация уникального логина
+
+    // Запрос для выбора всех логинов из базы данных
+$statement = $db->prepare("SELECT login FROM application2");
+$statement->execute();
+$logins = $statement->fetchAll(PDO::FETCH_COLUMN);
+
+// Проверка уникальности сгенерированного логина
+while (in_array($login, $logins)) {
+    $login = 'user_' . uniqid(); // Генерация нового уникального логина
+}
     $password = substr(md5(rand()), 0, 8); // Генерация уникального пароля
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
     // Сохраняем в Cookies.
@@ -437,9 +449,6 @@ $db = new PDO('mysql:host=localhost;dbname=' . $db_name, $db_login, $db_pass,
     setcookie('pass', $password, time() + 24 * 60 * 60);
 
     // TODO: Сохранение данных формы, логина и хеш md5() пароля в базу данных.
-include('../db.php');
-$db = new PDO('mysql:host=localhost;dbname=' . $db_name, $db_login, $db_pass,
-  [PDO::ATTR_PERSISTENT => true, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]); // Заменить test на имя БД, совпадает с логином uXXXXX
 
     // Подготовленный запрос. Не именованные метки.
     try {
