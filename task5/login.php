@@ -141,11 +141,6 @@ $db = new PDO('mysql:host=localhost;dbname=' . $db_name, $db_login, $db_pass,
     $stmt->execute(array(':login' => $login));
     $use = $stmt->fetch();
 
-  }
-    catch(PDOException $e){
-      print('Error : ' . $e->getMessage());
-      exit();
-    }
 
 
       // Сохраняем ранее введенное в форму значение на месяц.
@@ -171,10 +166,9 @@ $db = new PDO('mysql:host=localhost;dbname=' . $db_name, $db_login, $db_pass,
   // Если все ок, то авторизуем пользователя.
   $_SESSION['login'] = $_POST['login'];
   // Записываем ID пользователя.
-try {
     // Получаем personId из таблицы personAuthentificationData
-    $stmt = $db->prepare("SELECT userid  FROM users WHERE login = :login AND pass = :pass");
-        $stmt->execute([':login' => $login, ':pass' => $password]);
+    $stmt = $db->prepare("SELECT userid  FROM users WHERE login = :login");
+        $stmt->execute([':login' => $login]);
     $data = $stmt->fetch(PDO::FETCH_ASSOC);
 
     $_SESSION['uid'] = $data['userid'];
