@@ -142,7 +142,6 @@ $db = new PDO('mysql:host=localhost;dbname=' . $db_name, $db_login, $db_pass,
     $use = $stmt->fetch();
 
   }
-    }
     catch(PDOException $e){
       print('Error : ' . $e->getMessage());
       exit();
