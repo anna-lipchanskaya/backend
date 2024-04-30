@@ -213,10 +213,14 @@ $errors = array();
 $db = new PDO('mysql:host=localhost;dbname=' . $db_name, $db_login, $db_pass,
   [PDO::ATTR_PERSISTENT => true, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]); // Заменить test на имя БД, совпадает с логином uXXXXX
 
+    try{
+    $stmt = $db->prepare("SELECT userid  FROM users WHERE login = :login");
+    $stmt->execute(['login' => $_SESSION['login']]);
+    $UserId = $stmt->fetch();
     
 $stmt = $db->prepare("SELECT l.name
-FROM ap_lan2 AS a JOIN language2 AS l ON a.id_language = l.id WHERE a.login = :login");
-$stmt->execute(['login' => $_SESSION['login']]);
+FROM ap_lan3 AS a JOIN language2 AS l ON a.id_language = l.id WHERE a.userid = :userid");
+$stmt->execute(['userid' => $UserId]);
 $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 $languages = [];
 foreach ($rows as $row) {
@@ -225,9 +229,9 @@ foreach ($rows as $row) {
 
 // Сериализуем массив перед передачей в куки
 $abilities_serialized = serialize($languages);
-
-    $stmt = $db->prepare("SELECT name, phone, email, data, pol, bio, ok  FROM application2 WHERE login = :login");
-    $stmt->execute(['login' => $_SESSION['login']]);
+    
+    $stmt = $db->prepare("SELECT name, phone, email, data, pol, bio, ok  FROM application3 WHERE userid = :userid");
+    $stmt->execute(['userid' => $UserId]);
     $row = $stmt->fetch();
 
     $values = [
@@ -240,6 +244,11 @@ $abilities_serialized = serialize($languages);
         'ok' => htmlspecialchars($row['ok']),
         'abilities' => $languages
     ];
+     }
+    catch(PDOException $e){
+      print('Error : ' . $e->getMessage());
+      exit();
+    }
     setcookie('name_value',$row['name'], time() + 30 * 24 * 60 * 60);
     setcookie('phone_value',$row['phone'], time() + 30 * 24 * 60 * 60);
     setcookie('email_value',$row['email'], time() + 30 * 24 * 60 * 60);
@@ -391,7 +400,10 @@ $db = new PDO('mysql:host=localhost;dbname=' . $db_name, $db_login, $db_pass,
   [PDO::ATTR_PERSISTENT => true, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]); // Заменить test на имя БД, совпадает с логином uXXXXX
     try
     {
-    $sql = "UPDATE application2 SET name = :name, phone = :phone, email = :email,  data = :data, pol = :pol, bio = :bio, ok = :ok WHERE login = :login";
+    $stmt = $db->prepare("SELECT userid  FROM users WHERE login = :login");
+    $stmt->execute(['login' => $_SESSION['login']]);
+    $UserId = $stmt->fetch();
+    $sql = "UPDATE application3 SET name = :name, phone = :phone, email = :email,  data = :data, pol = :pol, bio = :bio, ok = :ok WHERE userid = :userid";
     
     $stmt = $db->prepare($sql);
     $stmt->bindParam(':name', $_POST['name']);
@@ -401,22 +413,22 @@ $db = new PDO('mysql:host=localhost;dbname=' . $db_name, $db_login, $db_pass,
     $stmt->bindParam(':pol', $_POST['pol']);
     $stmt->bindParam(':bio', $_POST['bio']);
     $stmt->bindParam(':ok', $_POST['ok']);
-    $stmt->bindParam(':login', $_SESSION['login']);
+    $stmt->bindParam(':userid', $UserId);
     $stmt->execute();
       
 // Удаление строк из таблицы ap_lan2 с найденным id_application
-    $stmt_delete = $db->prepare("DELETE FROM ap_lan2 WHERE login = :login");
-    $stmt_delete->bindParam(':login', $_SESSION['login']);
+    $stmt_delete = $db->prepare("DELETE FROM ap_lan3 WHERE userid = :userid");
+    $stmt_delete->bindParam(':userid', $UserId);
     $stmt_delete->execute();
   
        foreach ($_POST['abilities'] as $ability) {
-    $stmtLang = $db->prepare("SELECT id FROM language WHERE name = ?");
+    $stmtLang = $db->prepare("SELECT id FROM language2 WHERE name = ?");
     $stmtLang->execute([$ability]);
     $languageId = $stmtLang->fetchColumn();
 
-    $stmtApLang = $db->prepare("INSERT INTO ap_lan2 (id_language, login) VALUES (:languageId, :Login)");
+    $stmtApLang = $db->prepare("INSERT INTO ap_lan3 (userid, id_language) VALUES (:UserId, :languageId)");
     $stmtApLang->bindParam(':languageId', $languageId);
-    $stmtApLang->bindParam(':Login', $_SESSION['login']);
+    $stmtApLang->bindParam(':UserId', $UserId);
     $stmtApLang->execute();
    
 }
@@ -432,12 +444,16 @@ $db = new PDO('mysql:host=localhost;dbname=' . $db_name, $db_login, $db_pass,
   [PDO::ATTR_PERSISTENT => true, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]); // Заменить test на имя БД, совпадает с логином uXXXXX
     // Генерируем уникальный логин и пароль.
     $login = 'user_' . uniqid(); // Генерация уникального логина
-
+try{
     // Запрос для выбора всех логинов из базы данных
 $statement = $db->prepare("SELECT login FROM application2");
 $statement->execute();
 $logins = $statement->fetchAll(PDO::FETCH_COLUMN);
-
+ }
+    catch(PDOException $e){
+      print('Error : ' . $e->getMessage());
+      exit();
+    }
 // Проверка уникальности сгенерированного логина
 while (in_array($login, $logins)) {
     $login = 'user_' . uniqid(); // Генерация нового уникального логина
@@ -454,12 +470,11 @@ while (in_array($login, $logins)) {
     try {
       $stmt = $db->prepare("INSERT INTO application3 (name, phone, email, data, pol, bio, ok) VALUES (?, ?, ?, ?, ?, ?, ?)");
       $stmt->execute([$_POST['name'], $_POST['phone'], $_POST['email'], $_POST['data'], $_POST['pol'], $_POST['bio'], $_POST['ok']]);
-      $lastId = $db->lastInsertId();
+      $UserId = $db->lastInsertId();
 
       $stmt = $db->prepare("INSERT INTO users (userid, login, password) VALUES (?, ?, ?)");
-      $stmt->execute([$lastId, $login, $hashedPassword]);
-      $lastId = $db->lastInsertId();
-      
+      $stmt->execute([$UserId, $login, $hashedPassword]);
+
       foreach ($_POST['abilities'] as $ability) {
     $stmtLang = $db->prepare("SELECT id FROM language2 WHERE name = ?");
     $stmtLang->execute([$ability]);
@@ -467,7 +482,7 @@ while (in_array($login, $logins)) {
 
     $stmtApLang = $db->prepare("INSERT INTO ap_lan3 (userid, id_language) VALUES (:UserId, :languageId)");
     $stmtApLang->bindParam(':languageId', $languageId);
-    $stmtApLang->bindParam(':UserId', $lastId);
+    $stmtApLang->bindParam(':UserId', $UserId);
     $stmtApLang->execute();
 }
     }
