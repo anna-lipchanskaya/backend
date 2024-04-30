@@ -402,7 +402,7 @@ $db = new PDO('mysql:host=localhost;dbname=' . $db_name, $db_login, $db_pass,
     {
     $stmt = $db->prepare("SELECT userid  FROM users WHERE login = :login");
     $stmt->execute(['login' => $_SESSION['login']]);
-    $UserId = $stmt->fetch();
+    $data = $stmt->fetch(PDO::FETCH_ASSOC);
     $sql = "UPDATE application3 SET name = :name, phone = :phone, email = :email,  data = :data, pol = :pol, bio = :bio, ok = :ok WHERE userid = :userid";
     
     $stmt = $db->prepare($sql);
@@ -413,12 +413,12 @@ $db = new PDO('mysql:host=localhost;dbname=' . $db_name, $db_login, $db_pass,
     $stmt->bindParam(':pol', $_POST['pol']);
     $stmt->bindParam(':bio', $_POST['bio']);
     $stmt->bindParam(':ok', $_POST['ok']);
-    $stmt->bindParam(':userid', $UserId);
+    $stmt->bindParam(':userid', $data['userid']);
     $stmt->execute();
       
 // Удаление строк из таблицы ap_lan3 с найденным userid
     $stmt_delete = $db->prepare("DELETE FROM ap_lan3 WHERE userid = :userid");
-    $stmt_delete->bindParam(':userid', $UserId);
+    $stmt_delete->bindParam(':userid', $data['userid']);
     $stmt_delete->execute();
   
        foreach ($_POST['abilities'] as $ability) {
@@ -428,7 +428,7 @@ $db = new PDO('mysql:host=localhost;dbname=' . $db_name, $db_login, $db_pass,
 
     $stmtApLang = $db->prepare("INSERT INTO ap_lan3 (userid, id_language) VALUES (:UserId, :languageId)");
     $stmtApLang->bindParam(':languageId', $languageId);
-    $stmtApLang->bindParam(':UserId', $UserId);
+    $stmtApLang->bindParam(':UserId', $data['userid']);
     $stmtApLang->execute();
    
 }
