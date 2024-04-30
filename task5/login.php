@@ -163,12 +163,11 @@ $db = new PDO('mysql:host=localhost;dbname=' . $db_name, $db_login, $db_pass,
   // Записываем ID пользователя.
 try {
     // Получаем personId из таблицы personAuthentificationData
-    $stmt = $db->prepare("SELECT id FROM application2 WHERE login = :login");
-    $stmt->execute([':login' => $login]);
-    $authData = $stmt->fetch(PDO::FETCH_ASSOC);
-    $personId = $authData['id'];
+    $stmt = $db->prepare("SELECT userid  FROM users WHERE login = :login");
+    $stmt->execute(['login' => $_SESSION['login']]);
+    $UserId = $stmt->fetch();
 
-    $_SESSION['uid'] = $id;
+    $_SESSION['uid'] = UserId;
 
   } catch(PDOException $e){
     print('Error : ' . $e->getMessage());
