@@ -416,7 +416,7 @@ $db = new PDO('mysql:host=localhost;dbname=' . $db_name, $db_login, $db_pass,
     $stmt->bindParam(':userid', $UserId);
     $stmt->execute();
       
-// Удаление строк из таблицы ap_lan2 с найденным id_application
+// Удаление строк из таблицы ap_lan3 с найденным userid
     $stmt_delete = $db->prepare("DELETE FROM ap_lan3 WHERE userid = :userid");
     $stmt_delete->bindParam(':userid', $UserId);
     $stmt_delete->execute();
