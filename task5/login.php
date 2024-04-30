@@ -133,12 +133,21 @@ $db = new PDO('mysql:host=localhost;dbname=' . $db_name, $db_login, $db_pass,
   // Получение данных из формы
     $login = $_POST['login'];
     $password = $_POST['password'];
-    
+
+  try{
   // Подготовленный запрос для проверки логина и пароля
 // Подготовка SQL-запроса
-    $stmt = $db->prepare("SELECT * FROM application2 WHERE login = :login");
+    $stmt = $db->prepare("SELECT * FROM users WHERE login = :login");
     $stmt->execute(array(':login' => $login));
     $use = $stmt->fetch();
+
+  }
+    }
+    catch(PDOException $e){
+      print('Error : ' . $e->getMessage());
+      exit();
+    }
+
 
       // Сохраняем ранее введенное в форму значение на месяц.
     setcookie('login_value', $_POST['login'], time() + 30 * 24 * 60 * 60);
