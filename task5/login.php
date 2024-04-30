@@ -166,13 +166,15 @@ $db = new PDO('mysql:host=localhost;dbname=' . $db_name, $db_login, $db_pass,
   if (!$session_started) {
     session_start();
   }
+  $login = $_POST['login'];
+  $password = $_POST['password'];
   // Если все ок, то авторизуем пользователя.
   $_SESSION['login'] = $_POST['login'];
   // Записываем ID пользователя.
 try {
     // Получаем personId из таблицы personAuthentificationData
-    $stmt = $db->prepare("SELECT userid  FROM users WHERE login = :login");
-    $stmt->execute(['login' => $_SESSION['login']]);
+    $stmt = $db->prepare("SELECT userid  FROM users WHERE login = :login AND pass = :pass");
+        $stmt->execute([':login' => $login, ':pass' => $password]);
     $data = $stmt->fetch(PDO::FETCH_ASSOC);
 
     $_SESSION['uid'] = $data['userid'];
