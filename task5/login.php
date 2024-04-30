@@ -175,7 +175,7 @@ try {
     $stmt->execute(['login' => $_SESSION['login']]);
     $UserId = $stmt->fetch();
 
-    $_SESSION['uid'] = UserId;
+    $_SESSION['uid'] = $UserId;
 
   } catch(PDOException $e){
     print('Error : ' . $e->getMessage());
