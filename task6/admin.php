@@ -17,7 +17,6 @@ if (empty($_SERVER['PHP_AUTH_USER']) ||
   print('<h1>401 Требуется авторизация</h1>');
   exit();
 }
-if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 echo 'Вы успешно авторизовались и видите защищенные паролем данные.'."<br>";
 
  include('../db.php');
@@ -48,7 +47,6 @@ try {
 
 } catch (PDOException $e) {
     echo 'Ошибка: ' . $e->getMessage();
-}
 }
     
 // *********
