@@ -55,8 +55,11 @@ try {
 // *********
 ?>
     <form action="" method="POST">
-            <input name="UserId"/>
+            <input name="delete"/>
           <input type="submit" name = "button" value="Delete" />
+        <br>
+            <input name="update"/>
+          <input type="submit" name = "button" value="Update" />
     </form>
 <?php
 if ($_SERVER['REQUEST_METHOD'] == 'POST')
@@ -64,9 +67,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
      include('../db.php');
 $db = new PDO('mysql:host=localhost;dbname=' . $db_name, $db_login, $db_pass,
   [PDO::ATTR_PERSISTENT => true, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]); // Заменить test на имя БД, совпадает с логином uXXXXX
-    if($_POST['button'] == "Delete" && (!empty($_POST['UserId'])))
+    if($_POST['button'] == "Delete" && (!empty($_POST['delete'])))
     {
-    $userid = $_POST['UserId'];
+    $userid = $_POST['delete'];
     $result = $db->query("SELECT userid FROM users WHERE userid = $userid");
 
 if ($result->rowCount() > 0) {
@@ -87,6 +90,13 @@ if ($result->rowCount() > 0) {
 }
     }
     else{
+            echo "заполните userid";
+        }
+        if($_POST['button'] == "Update" && (!empty($_POST['update'])))
+    {
+        
+    }
+        else{
             echo "заполните userid";
         }
 }
