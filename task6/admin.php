@@ -17,7 +17,7 @@ if (empty($_SERVER['PHP_AUTH_USER']) ||
   print('<h1>401 Требуется авторизация</h1>');
   exit();
 }
-
+if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 echo 'Вы успешно авторизовались и видите защищенные паролем данные.'."<br>";
 
  include('../db.php');
@@ -49,17 +49,19 @@ try {
 } catch (PDOException $e) {
     echo 'Ошибка: ' . $e->getMessage();
 }
+}
     
 // *********
 // Здесь нужно прочитать отправленные ранее пользователями данные и вывести в таблицу.
 // Реализовать просмотр и удаление всех данных.
 // *********
 ?>
-    <form>
+    <form action = "">
             <input name="UserId"/>
           <input type="submit" name = "button" value="Delete" />
     </form>
 <?php
+else{
     if($_POST['button'] == "Delete")
     {
     $sql = "SELECT userid FROM users WHERE userid = $userid";
@@ -81,4 +83,5 @@ if ($result->num_rows > 0) {
     echo "userid не найден в базе данных.";
 }
     }
+}
 ?>
