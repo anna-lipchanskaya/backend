@@ -97,10 +97,20 @@ if ($result->rowCount() > 0) {
           if (!$session_started) {
     session_start();
   }
-  $login = $_POST['login'];
-  $password = $_POST['password'];
-  // Если все ок, то авторизуем пользователя.
-  $_SESSION['login'] = $_POST['login'];
+  $userid = $_POST['update'];
+    $result = $db->query("SELECT userid FROM users WHERE userid = $userid");
+    if ($result->rowCount() > 0) {
+    $stmt = $db->prepare("SELECT login FROM users WHERE userid = :userid");
+        $stmt->execute([':userid' => $userid]);
+    $data = $stmt->fetch(PDO::FETCH_ASSOC);
+    $_SESSION['login'] = $data['login'];
+
+    $_SESSION['uid'] = $userid;
+    header('Location: index.php');
+    }
+    else {
+    echo "userid не найден в базе данных.";
+}
     }
         else{
             echo "заполните userid";
