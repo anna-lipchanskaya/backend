@@ -63,6 +63,9 @@ try {
 <?php
 if ($_SERVER['REQUEST_METHOD'] == 'POST')
 {
+     include('../db.php');
+$db = new PDO('mysql:host=localhost;dbname=' . $db_name, $db_login, $db_pass,
+  [PDO::ATTR_PERSISTENT => true, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]); // Заменить test на имя БД, совпадает с логином uXXXXX
     if($_POST['button'] == "Delete" && (!empty($_POST['UserId'])))
     {
     $userid = $_POST['UserId'];
