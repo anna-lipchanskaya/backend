@@ -57,7 +57,6 @@ try {
     <form action="" method="POST">
             <input name="delete"/>
           <input type="submit" name = "button" value="Delete" />
-    </form>
 <?php
 if ($_SERVER['REQUEST_METHOD'] == 'POST')
 {
@@ -94,7 +93,6 @@ if ($result->rowCount() > 0) {
         }
     ?>
     <br>
-        <form action="" method="POST">
             <input name="update"/>
           <input type="submit" name = "button" value="Update" />
     </form>
