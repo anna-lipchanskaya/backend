@@ -61,7 +61,7 @@ try {
           <input type="submit" name = "button" value="Delete" />
     </form>
 <?php
-else
+if ($_SERVER['REQUEST_METHOD'] == 'POST')
 {
     if($_POST['button'] == "Delete")
     {
