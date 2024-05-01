@@ -81,6 +81,7 @@ if ($result->rowCount() > 0) {
     $db->query($sql_delete_application);
 
     echo "Данные успешно удалены.";
+    header(Location: admin.php);
 } else {
     echo "userid не найден в базе данных.";
 }
