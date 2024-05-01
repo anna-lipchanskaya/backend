@@ -264,7 +264,7 @@ $abilities_serialized = serialize($languages);
         $_SESSION['uid']);
 
   }
-  else{
+  /**else{
           if (!empty($_SERVER['PHP_AUTH_USER']) ||
     !empty($_SERVER['PHP_AUTH_PW']) ||
     $_SERVER['PHP_AUTH_USER'] == 'admin' ||
@@ -274,6 +274,7 @@ $abilities_serialized = serialize($languages);
     exit();
   }
   }
+  */
   // Включаем содержимое файла form.php.
   // В нем будут доступны переменные $messages, $errors и $values для вывода 
   // сообщений, полей с ранее заполненными данными и признаками ошибок.
