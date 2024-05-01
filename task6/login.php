@@ -123,6 +123,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 }
 else
 {
+    if($_POST['button'] == 'Войти')
+  {
 // Иначе, если запрос был методом POST, т.е. нужно сделать авторизацию с записью логина в сессию.
 
   // TODO: Проверть есть ли такой логин и пароль в базе данных.
@@ -181,4 +183,9 @@ $db = new PDO('mysql:host=localhost;dbname=' . $db_name, $db_login, $db_pass,
 
   // Делаем перенаправление.
   header('Location: ./');
+  }
+    else{
+        header('Location: admin.php');
+      exit();
+    }
 }
