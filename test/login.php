@@ -76,8 +76,8 @@ if (!empty($messages)) {
 <form action="" method="post">
   <input name="login" <?php if ($errors['error']) {print 'class="error"';} ?> value="<?php print $values['login']; ?>"/>
   <input name="password" <?php if ($errors['error']) {print 'class="error"';} ?> value="<?php print $values['password']; ?>"/>
-  <input type="submit" value="Войти" />
-  <input type="submit" value="Вход для админа" />
+  <input type="submit" name = "button" value="Войти" />
+  <input type="submit" name = "button" value="Вход для админа" />
 </form>
   </body>
 </html>
@@ -86,6 +86,8 @@ if (!empty($messages)) {
 }
 else
 {
+  if($_POST['button'] == 'Войти')
+  {
 // Иначе, если запрос был методом POST, т.е. нужно сделать авторизацию с записью логина в сессию.
 
   // TODO: Проверть есть ли такой логин и пароль в базе данных.
@@ -131,4 +133,9 @@ $db = new PDO('mysql:host=localhost;dbname=' . $db_name, $db_login, $db_pass,
 
   // Делаем перенаправление.
   header('Location: ./');
+  }
+  else{
+      header('Location: admin.php');
+    exit;
+  }
 }
