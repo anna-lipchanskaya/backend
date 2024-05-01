@@ -18,7 +18,7 @@ if (empty($_SERVER['PHP_AUTH_USER']) ||
   exit();
 }
 
-print('Вы успешно авторизовались и видите защищенные паролем данные.');
+echo 'Вы успешно авторизовались и видите защищенные паролем данные.'."<br>";
 
  include('../db.php');
 $db = new PDO('mysql:host=localhost;dbname=' . $db_name, $db_login, $db_pass,
@@ -30,8 +30,8 @@ try {
     $results = $query->fetchAll(PDO::FETCH_ASSOC);
 
     // Вывод данных
-    echo "Пользователь";
     foreach ($results as $row) {
+        echo "Пользователь"."<br>";
         echo "Name: " . $row['name'] . "<br>";
         echo "Phone: " . $row['phone'] . "<br>";
         echo "Email: " . $row['email'] . "<br>";
