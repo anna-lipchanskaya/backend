@@ -94,7 +94,13 @@ if ($result->rowCount() > 0) {
         }
         if($_POST['button'] == "Update" && (!empty($_POST['update'])))
     {
-        
+          if (!$session_started) {
+    session_start();
+  }
+  $login = $_POST['login'];
+  $password = $_POST['password'];
+  // Если все ок, то авторизуем пользователя.
+  $_SESSION['login'] = $_POST['login'];
     }
         else{
             echo "заполните userid";
