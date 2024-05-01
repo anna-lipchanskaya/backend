@@ -57,9 +57,6 @@ try {
     <form action="" method="POST">
             <input name="delete"/>
           <input type="submit" name = "button" value="Delete" />
-        <br>
-            <input name="update"/>
-          <input type="submit" name = "button" value="Update" />
     </form>
 <?php
 if ($_SERVER['REQUEST_METHOD'] == 'POST')
@@ -67,7 +64,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
      include('../db.php');
 $db = new PDO('mysql:host=localhost;dbname=' . $db_name, $db_login, $db_pass,
   [PDO::ATTR_PERSISTENT => true, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]); // Заменить test на имя БД, совпадает с логином uXXXXX
-    if($_POST['button'] == "Delete" && (!empty($_POST['delete'])))
+    if($_POST['button'] == "Delete")
+    {
+        if(!empty($_POST['delete']))
     {
     $userid = $_POST['delete'];
     $result = $db->query("SELECT userid FROM users WHERE userid = $userid");
@@ -85,19 +84,27 @@ if ($result->rowCount() > 0) {
 
     echo "Данные успешно удалены.";
     header('Location: admin.php');
-} else {
+}
+    }else {
     echo "userid не найден в базе данных.";
 }
     }
     else{
             echo "заполните userid";
         }
-        if($_POST['button'] == "Update" && (!empty($_POST['update'])))
+    ?>
+    <br>
+        <form action="" method="POST">
+            <input name="update"/>
+          <input type="submit" name = "button" value="Update" />
+    </form>
+    <?php
+        if($_POST['button'] == "Update")
     {
-          if (!$session_started) {
-    session_start();
-  }
-  $userid = $_POST['update'];
+        if(!empty($_POST['update']))
+        {
+        session_start();
+      $userid = $_POST['update'];
     $result = $db->query("SELECT userid FROM users WHERE userid = $userid");
     if ($result->rowCount() > 0) {
     $stmt = $db->prepare("SELECT login FROM users WHERE userid = :userid");
@@ -115,5 +122,6 @@ if ($result->rowCount() > 0) {
         else{
             echo "заполните userid";
         }
+    }
 }
 ?>
