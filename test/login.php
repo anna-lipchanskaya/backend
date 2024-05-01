@@ -112,8 +112,9 @@ $db = new PDO('mysql:host=localhost;dbname=' . $db_name, $db_login, $db_pass,
         // Логин и пароль верные
    setcookie('login_value', '', 100000);
     setcookie('password_value', '', 100000);
-    } elseif($_SERVER['PHP_AUTH_USER'] == 'admin' && ){
-      
+    } elseif(($_SERVER['PHP_AUTH_USER'] == 'admin') && (md5($_SERVER['PHP_AUTH_PW']) == md5('123'))){
+            header('Location: admin.php');
+              exit();
     }
   else
     {
