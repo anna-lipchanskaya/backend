@@ -113,7 +113,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     ?>
   <input name="login" <?php if ($errors['error']) {print 'class="error"';} ?> value="<?php print $values['login']; ?>"/>
   <input name="password" <?php if ($errors['error']) {print 'class="error"';} ?> value="<?php print $values['password']; ?>"/>
-  <input type="submit" value="Войти" />
+  <input type="submit" name = "button" value="Войти" />
+  <input type="submit" name = "button" value="Вход для админа" />
 </form>
   </body>
 </html>
