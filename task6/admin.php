@@ -56,7 +56,7 @@ try {
 // Реализовать просмотр и удаление всех данных.
 // *********
 ?>
-    <form action = "">
+    <form action="" method="POST">
             <input name="UserId"/>
           <input type="submit" name = "button" value="Delete" />
     </form>
@@ -64,6 +64,7 @@ try {
 else{
     if($_POST['button'] == "Delete")
     {
+    $userid = $_POST['UserId']
     $sql = "SELECT userid FROM users WHERE userid = $userid";
     $result = $db->query($sql);
 
