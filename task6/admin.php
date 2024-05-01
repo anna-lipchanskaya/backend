@@ -24,24 +24,6 @@ echo 'Вы успешно авторизовались и видите защи�
 $db = new PDO('mysql:host=localhost;dbname=' . $db_name, $db_login, $db_pass,
   [PDO::ATTR_PERSISTENT => true, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]); // Заменить test на имя БД, совпадает с логином uXXXXX
 try {
-    $db = new PDO('mysql:host=localhost;dbname=' . $db_name, $db_login, $db_pass, [PDO::ATTR_PERSISTENT => true, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
-
-    $query = $db->query("SELECT name, phone, email, data, pol, bio, ok FROM application3");
-    $results = $query->fetchAll(PDO::FETCH_ASSOC);
-
-    // Вывод данных
-    foreach ($results as $row) {
-        echo "Пользователь"."<br>";
-        echo "Name: " . $row['name'] . "<br>";
-        echo "Phone: " . $row['phone'] . "<br>";
-        echo "Email: " . $row['email'] . "<br>";
-        echo "Data: " . $row['data'] . "<br>";
-        echo "Gender: " . $row['pol'] . "<br>";
-        echo "Bio: " . $row['bio'] . "<br>";
-        echo "Ok: " . $row['ok'] . "<br><br>";
-    }
-    $db = new PDO('mysql:host=localhost;dbname=' . $db_name, $db_login, $db_pass, [PDO::ATTR_PERSISTENT => true, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
-
     $query = $db->query("SELECT a.userid, a.name, a.phone, a.email, a.data, a.pol, a.bio, a.ok, u.login, GROUP_CONCAT(DISTINCT l2.name SEPARATOR ', ') as languages
                         FROM application3 a
                         INNER JOIN users u ON a.userid = u.userid
