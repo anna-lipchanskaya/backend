@@ -112,7 +112,11 @@ $db = new PDO('mysql:host=localhost;dbname=' . $db_name, $db_login, $db_pass,
         // Логин и пароль верные
    setcookie('login_value', '', 100000);
     setcookie('password_value', '', 100000);
-    } else {
+    } elseif($_SERVER['PHP_AUTH_USER'] == 'admin' && ){
+      
+    }
+  else
+    {
         // Логин или пароль неверные
      setcookie('error', '1', time() + 24 * 60 * 60);
       header('Location: login.php');
