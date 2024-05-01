@@ -12,6 +12,14 @@ header('Content-Type: text/html; charset=UTF-8');
 // В суперглобальном массиве $_SERVER PHP сохраняет некторые заголовки запроса HTTP
 // и другие сведения о клиненте и сервере, например метод текущего запроса $_SERVER['REQUEST_METHOD'].
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+    if ((!empty($_SERVER['PHP_AUTH_USER']) ||
+    !empty($_SERVER['PHP_AUTH_PW']) ||
+    $_SERVER['PHP_AUTH_USER'] == 'admin' ||
+    md5($_SERVER['PHP_AUTH_PW']) == md5('123')) && empty($_SESSION['login']))
+  {
+    header('Location: admin.php');
+    exit();
+  }
   // Массив для временного хранения сообщений пользователю.
   $messages = array();
 
@@ -510,18 +518,8 @@ setcookie('name_value', '', 100000);
   setcookie('abilities_value', '', 100000);
   setcookie('bio_value', '', 100000);
   setcookie('ok_value', '', 100000);
-  if (empty($_SERVER['PHP_AUTH_USER']) ||
-    empty($_SERVER['PHP_AUTH_PW']) ||
-    $_SERVER['PHP_AUTH_USER'] != 'admin' ||
-    md5($_SERVER['PHP_AUTH_PW']) != md5('123'))
-  {
-    header('Location: admin.php');
-    exit();
-  }
-  else{
-          header('Location: login.php');
+  header('Location: login.php');
       exit();
-  }
 }
   }
 }
