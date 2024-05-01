@@ -49,8 +49,18 @@ try {
 } catch (PDOException $e) {
     echo 'Ошибка: ' . $e->getMessage();
 }
+    
 // *********
 // Здесь нужно прочитать отправленные ранее пользователями данные и вывести в таблицу.
 // Реализовать просмотр и удаление всех данных.
 // *********
+?>
+    <form>
+          <input type="submit" name = "button" value="Delete" />
+    </form>
+<?php
+    if($_POST['button'] == "Delete")
+    {
+        
+    }
 ?>
