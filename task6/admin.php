@@ -66,8 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     if($_POST['button'] == "Delete")
     {
     $userid = $_POST['UserId']
-    $sql = "SELECT userid FROM users WHERE userid = $userid";
-    $result = $db->query($sql);
+    $result = $db->query("SELECT userid FROM users WHERE userid = $userid");
 
 if ($result->num_rows > 0) {
     // userid существует - выполняем операции удаления
