@@ -77,6 +77,7 @@ if (!empty($messages)) {
   <input name="login" <?php if ($errors['error']) {print 'class="error"';} ?> value="<?php print $values['login']; ?>"/>
   <input name="password" <?php if ($errors['error']) {print 'class="error"';} ?> value="<?php print $values['password']; ?>"/>
   <input type="submit" value="Войти" />
+  <a href = "./admin.php"><input type="submit" value="Вход для админа" /></a>
 </form>
   </body>
 </html>
@@ -112,9 +113,6 @@ $db = new PDO('mysql:host=localhost;dbname=' . $db_name, $db_login, $db_pass,
         // Логин и пароль верные
    setcookie('login_value', '', 100000);
     setcookie('password_value', '', 100000);
-    } elseif(($_SERVER['PHP_AUTH_USER'] == 'admin') && (md5($_SERVER['PHP_AUTH_PW']) == md5('123'))){
-            header('Location: admin.php');
-              exit();
     }
   else
     {
