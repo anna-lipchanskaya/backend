@@ -77,7 +77,7 @@ if (!empty($messages)) {
   <input name="login" <?php if ($errors['error']) {print 'class="error"';} ?> value="<?php print $values['login']; ?>"/>
   <input name="password" <?php if ($errors['error']) {print 'class="error"';} ?> value="<?php print $values['password']; ?>"/>
   <input type="submit" value="Войти" />
-  <a href = "./admin.php"><input type="submit" value="Вход для админа" /></a>
+  <input type="submit" value="Вход для админа" />
 </form>
   </body>
 </html>
