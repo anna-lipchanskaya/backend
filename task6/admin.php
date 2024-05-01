@@ -88,13 +88,14 @@ if ($result->rowCount() > 0) {
     echo "Данные успешно удалены.";
     header('Location: admin.php');
 }
-    }else {
+else {
     echo "userid не найден в базе данных.";
 }
     }
     else{
             echo "заполните userid";
         }
+    }
         if($_POST['button'] == "Update")
     {
         if(!empty($_POST['update']))
