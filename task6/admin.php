@@ -48,6 +48,21 @@ try {
 } catch (PDOException $e) {
     echo 'Ошибка: ' . $e->getMessage();
 }
+try{
+    echo "Статистика языков " . "<br>";
+    $stmt = $db->query("SELECT a.name, count(*) AS count_users
+            FROM application3 a 
+            INNER JOIN ap_lan3 l ON a.userid = l.userid
+            GROUP BY l.userid");
+
+    // Вывод результатов
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        echo "Пользователь {$row['name']} любит язык. Количество пользователей: {$row['count_users']} <br>";
+    }
+
+} catch(PDOException $e) {
+    echo "Ошибка: " . $e->getMessage();
+}
     
 // *********
 // Здесь нужно прочитать отправленные ранее пользователями данные и вывести в таблицу.
