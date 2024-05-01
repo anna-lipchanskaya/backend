@@ -61,7 +61,8 @@ try {
           <input type="submit" name = "button" value="Delete" />
     </form>
 <?php
-else{
+else
+{
     if($_POST['button'] == "Delete")
     {
     $userid = $_POST['UserId']
