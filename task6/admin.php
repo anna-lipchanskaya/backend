@@ -63,9 +63,9 @@ try {
 <?php
 if ($_SERVER['REQUEST_METHOD'] == 'POST')
 {
-    if($_POST['button'] == "Delete")
+    if($_POST['button'] == "Delete" && (!empty($_POST['UserId'])))
     {
-    $userid = $_POST['UserId']
+    $userid = $_POST['UserId'];
     $result = $db->query("SELECT userid FROM users WHERE userid = $userid");
 
 if ($result->num_rows > 0) {
@@ -84,5 +84,8 @@ if ($result->num_rows > 0) {
     echo "userid не найден в базе данных.";
 }
     }
+    else{
+            echo "заполните userid";
+        }
 }
 ?>
