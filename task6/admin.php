@@ -57,6 +57,10 @@ try {
     <form action="" method="POST">
             <input name="delete"/>
           <input type="submit" name = "button" value="Delete" />
+        <br>
+            <input name="update"/>
+          <input type="submit" name = "button" value="Update" />
+    </form>
 <?php
 if ($_SERVER['REQUEST_METHOD'] == 'POST')
 {
@@ -91,12 +95,6 @@ if ($result->rowCount() > 0) {
     else{
             echo "заполните userid";
         }
-    ?>
-    <br>
-            <input name="update"/>
-          <input type="submit" name = "button" value="Update" />
-    </form>
-    <?php
         if($_POST['button'] == "Update")
     {
         if(!empty($_POST['update']))
