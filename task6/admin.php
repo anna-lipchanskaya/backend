@@ -50,14 +50,14 @@ try {
 }
 try{
     echo "Статистика языков " . "<br>";
-    $stmt = $db->query("SELECT a.name, count(*) AS count_users
+    $stmt = $db->query("SELECT l.name, count(*) AS count_users
             FROM application3 a 
             INNER JOIN ap_lan3 l ON a.userid = l.userid
             GROUP BY l.userid");
 
     // Вывод результатов
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-        echo "Пользователь {$row['name']} любит язык. Количество пользователей: {$row['count_users']} <br>";
+        echo "{$row['name']} язык любят: {$row['count_users']} пользователя <br>";
     }
 
 } catch(PDOException $e) {
