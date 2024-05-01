@@ -50,10 +50,11 @@ try {
 }
 try{
     echo "Статистика языков " . "<br>";
-    $stmt = $db->query("SELECT l.name, count(*) AS count_users
+    $stmt = $db->query("SELECT l2.name, count(*) AS count_users
             FROM application3 a 
-            INNER JOIN ap_lan3 l ON a.userid = l.userid
-            GROUP BY l.userid");
+            INNER JOIN ap_lan3 al3 ON a.userid = al3.userid
+            INNER JOIN language2 l2 ON al3.id_language = l2.id
+            GROUP BY l2.name");
 
     // Вывод результатов
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
