@@ -40,6 +40,29 @@ try {
         echo "Bio: " . $row['bio'] . "<br>";
         echo "Ok: " . $row['ok'] . "<br><br>";
     }
+    $db = new PDO('mysql:host=localhost;dbname=' . $db_name, $db_login, $db_pass, [PDO::ATTR_PERSISTENT => true, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
+
+    $query = $db->query("SELECT a.userid, a.name, a.phone, a.email, a.data, a.pol, a.bio, a.ok, u.login, GROUP_CONCAT(DISTINCT l2.name SEPARATOR ', ') as languages
+                        FROM application3 a
+                        INNER JOIN users u ON a.userid = u.userid
+                        LEFT JOIN ap_lan3 al3 ON a.userid = al3.userid
+                        LEFT JOIN language2 l2 ON al3.id_language = l2.id
+                        GROUP BY a.userid, a.name, a.phone, a.email, a.data, a.pol, a.bio, a.ok, u.login");
+    
+    $results = $query->fetchAll(PDO::FETCH_ASSOC);
+
+    // Вывод данных
+    foreach ($results as $row) {
+        echo "Пользователь с login" . $row['login'] ." и id ". $row['userid'] . "<br>";
+        echo "Name: " . $row['name'] . "<br>";
+        echo "Phone: " . $row['phone'] . "<br>";
+        echo "Email: " . $row['email'] . "<br>";
+        echo "Data: " . $row['data'] . "<br>";
+        echo "Gender: " . $row['pol'] . "<br>";
+        echo "Bio: " . $row['bio'] . "<br>";
+        echo "Ok: " . $row['ok'] . "<br>";
+        echo "Languages: " . $row['languages'] . "<br><br>";
+    }
 
 } catch (PDOException $e) {
     echo 'Ошибка: ' . $e->getMessage();
