@@ -56,11 +56,29 @@ try {
 // *********
 ?>
     <form>
+            <input name="UserId"/>
           <input type="submit" name = "button" value="Delete" />
     </form>
 <?php
     if($_POST['button'] == "Delete")
     {
-        
+    $sql = "SELECT userid FROM users WHERE userid = $userid";
+    $result = $db->query($sql);
+
+if ($result->num_rows > 0) {
+    // userid существует - выполняем операции удаления
+    $sql_delete_application = "DELETE FROM application3 WHERE userid = $userid";
+    $sql_delete_ap_lan = "DELETE FROM ap_lan3 WHERE userid = $userid";
+    $sql_delete_users = "DELETE FROM users WHERE userid = $userid";
+
+    // Выполнение операций удаления
+    $db->query($sql_delete_application);
+    $db->query($sql_delete_ap_lan);
+    $db->query($sql_delete_users);
+
+    echo "Данные успешно удалены.";
+} else {
+    echo "userid не найден в базе данных.";
+}
     }
 ?>
