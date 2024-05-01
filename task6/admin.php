@@ -71,7 +71,7 @@ $db = new PDO('mysql:host=localhost;dbname=' . $db_name, $db_login, $db_pass,
     $userid = $_POST['UserId'];
     $result = $db->query("SELECT userid FROM users WHERE userid = $userid");
 
-if ($result->num_rows > 0) {
+if ($result->rowCount() > 0) {
     // userid существует - выполняем операции удаления
     $sql_delete_application = "DELETE FROM application3 WHERE userid = $userid";
     $sql_delete_ap_lan = "DELETE FROM ap_lan3 WHERE userid = $userid";
