@@ -19,7 +19,7 @@ CREATE TABLE ap_lan2 (
   PRIMARY KEY (id)
 );
 
-CREATE TABLE users (
+CREATE TABLE admin (
   id int(10) unsigned NOT NULL AUTO_INCREMENT,
   login varchar(128) NOT NULL DEFAULT '',
   password  varchar(128) NOT NULL DEFAULT '',
