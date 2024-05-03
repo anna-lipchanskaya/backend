@@ -9,8 +9,7 @@ $db = new PDO('mysql:host=localhost;dbname=' . $db_name, $db_login, $db_pass,
   [PDO::ATTR_PERSISTENT => true, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]); // Заменить test на имя БД, совпадает с логином uXXXXX
   try{
   // Подготовленный запрос для проверки логина и пароля
-$result = $conn->query("SELECT login FROM admin");
-    $result = $conn->query($sql);
+$result = $db->query("SELECT login FROM admin");
   } catch(PDOException $e){
     print('Error : ' . $e->getMessage());
     exit();
