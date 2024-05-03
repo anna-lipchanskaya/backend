@@ -10,7 +10,7 @@ $db = new PDO('mysql:host=localhost;dbname=' . $db_name, $db_login, $db_pass,
   try{
   // Подготовленный запрос для проверки логина и пароля
 $result = $db->query("SELECT login, password FROM admin");
-    $row = $result->fetch_assoc(PDO::FETCH_ASSOC);
+    $row = $result->fetch(PDO::FETCH_ASSOC);
   } catch(PDOException $e){
     print('Error : ' . $e->getMessage());
     exit();
