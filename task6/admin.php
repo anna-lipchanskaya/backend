@@ -25,7 +25,6 @@ $db = new PDO('mysql:host=localhost;dbname=' . $db_name, $db_login, $db_pass,
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
     // Подготовленный запрос. Не именованные метки.
-    try {
     $stmtApLang = $db->prepare("INSERT INTO admin (login, password) VALUES (:Login, :Password)");
     $stmtApLang->bindParam(':Login', $login);
     $stmtApLang->bindParam(':Password', $password);
