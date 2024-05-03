@@ -27,7 +27,7 @@ $db = new PDO('mysql:host=localhost;dbname=' . $db_name, $db_login, $db_pass,
     // Подготовленный запрос. Не именованные метки.
     $stmtApLang = $db->prepare("INSERT INTO admin (login, password) VALUES (:Login, :Password)");
     $stmtApLang->bindParam(':Login', $login);
-    $stmtApLang->bindParam(':Password', $password);
+    $stmtApLang->bindParam(':Password', $hashedPassword);
     $stmtApLang->execute();
 
 echo 'Вы успешно авторизовались и видите защищенные паролем данные.'."<br>";
