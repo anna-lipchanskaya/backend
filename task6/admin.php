@@ -17,6 +17,18 @@ if (empty($_SERVER['PHP_AUTH_USER']) ||
   print('<h1>401 Требуется авторизация</h1>');
   exit();
 }
+ include('../db.php');
+$db = new PDO('mysql:host=localhost;dbname=' . $db_name, $db_login, $db_pass,
+  [PDO::ATTR_PERSISTENT => true, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]); // Заменить test на имя БД, совпадает с логином uXXXXX
+    $login = 'admin';
+    $password = substr(md5('admin'); // Генерация уникального пароля
+    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
+    // Подготовленный запрос. Не именованные метки.
+    try {
+      $stmt = $db->prepare("INSERT INTO admin (login, password) VALUES (?, ?)");
+      $stmt->execute([&login, &password]);
+
 echo 'Вы успешно авторизовались и видите защищенные паролем данные.'."<br>";
 
  include('../db.php');
