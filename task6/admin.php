@@ -7,7 +7,7 @@
   include('../db.php');
 $db = new PDO('mysql:host=localhost;dbname=' . $db_name, $db_login, $db_pass,
   [PDO::ATTR_PERSISTENT => true, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]); // Заменить test на имя БД, совпадает с логином uXXXXX
-
+$row = $result->fetch_assoc());
   try{
   // Подготовленный запрос для проверки логина и пароля
 $result = $conn->query("SELECT login FROM users");
@@ -15,14 +15,13 @@ $result = $conn->query("SELECT login FROM users");
     print('Error : ' . $e->getMessage());
     exit();
   }
-$row = $result->fetch_assoc());
 // Пример HTTP-аутентификации.
 // PHP хранит логин и пароль в суперглобальном массиве $_SERVER.
 // Подробнее см. стр. 26 и 99 в учебном пособии Веб-программирование и веб-сервисы.
 if (empty($_SERVER['PHP_AUTH_USER']) ||
     empty($_SERVER['PHP_AUTH_PW']) ||
     $_SERVER['PHP_AUTH_USER'] != $row["login"] ||
-    md5($_SERVER['PHP_AUTH_PW']) != md5($row["password"])) {
+    password_verify($_SERVER['PHP_AUTH_PW'], $row["password"])) {
   header('HTTP/1.1 401 Unanthorized');
   header('WWW-Authenticate: Basic realm="My site"');
   print('<h1>401 Требуется авторизация</h1>');
