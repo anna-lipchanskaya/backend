@@ -23,6 +23,7 @@ CREATE TABLE admin (
   id int(10) unsigned NOT NULL AUTO_INCREMENT,
   login varchar(128) NOT NULL DEFAULT '',
   password  varchar(128) NOT NULL DEFAULT '',
+  PRIMARY KEY (id)
 );
 
 CREATE TABLE test (
