@@ -34,10 +34,10 @@ function db_query($query) {
 }
 function db_result($query) {
   global $db;
-  $q = $db->prepare($query);
+  $stmt = $db->prepare($query);
   $args = func_get_args();
   array_shift($args);
-  $res = $q->execute($args);
+  $res = $stmt->execute($args);
   if ($res) {
       return db_row($res)[0];
   }
