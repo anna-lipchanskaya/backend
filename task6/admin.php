@@ -4,6 +4,7 @@
  * HTTP-авторизации для просмотра и удаления результатов.
  **/
 require_once('db.php');   
+require_once('auth.php'); 
 echo 'Вы успешно авторизовались и видите защищенные паролем данные.'."<br>"; 
 $results = db_get_Alluser();
 
