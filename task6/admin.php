@@ -4,7 +4,29 @@
  * HTTP-авторизации для просмотра и удаления результатов.
  **/
 require_once('db.php');
-require_once('auth.php');
+ include('../db.php');
+$db = new PDO('mysql:host=localhost;dbname=' . $db_name, $db_login, $db_pass,
+  [PDO::ATTR_PERSISTENT => true, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]); // Заменить test на имя БД, совпадает с логином uXXXXX
+  try{
+  // Подготовленный запрос для проверки логина и пароля
+$result = $db->query("SELECT login, password FROM admin");
+    $row = $result->fetch(PDO::FETCH_ASSOC);
+  } catch(PDOException $e){
+    print('Error : ' . $e->getMessage());
+    exit();
+  }
+// Пример HTTP-аутентификации.
+// PHP хранит логин и пароль в суперглобальном массиве $_SERVER.
+// Подробнее см. стр. 26 и 99 в учебном пособии Веб-программирование и веб-сервисы.
+if (empty($_SERVER['PHP_AUTH_USER']) ||
+    empty($_SERVER['PHP_AUTH_PW']) ||
+    $_SERVER['PHP_AUTH_USER'] != $row["login"] ||
+    password_verify($_SERVER['PHP_AUTH_PW'], $row["password"])) {
+  header('HTTP/1.1 401 Unanthorized');
+  header('WWW-Authenticate: Basic realm="My site"');
+  print('<h1>401 Требуется авторизация</h1>');
+  exit();
+}
 echo 'Вы успешно авторизовались и видите защищенные паролем данные.'."<br>";
 $query = "SELECT a.userid, a.name, a.phone, a.email, a.data, a.pol, a.bio, a.ok, u.login, GROUP_CONCAT(DISTINCT l2.name SEPARATOR ', ') as languages
                         FROM application3 a
