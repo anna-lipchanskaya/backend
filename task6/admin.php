@@ -36,7 +36,7 @@ $query = "SELECT a.userid, a.name, a.phone, a.email, a.data, a.pol, a.bio, a.ok,
                         LEFT JOIN language2 l2 ON al3.id_language = l2.id
                         GROUP BY a.userid, a.name, a.phone, a.email, a.data, a.pol, a.bio, a.ok, u.login";
     
-    $results = 
+    $results = executeQuery($query);
 
     // Вывод данных
     foreach ($results as $row) {
