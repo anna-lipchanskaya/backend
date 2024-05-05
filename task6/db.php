@@ -39,8 +39,9 @@ function db_result($query) {
   array_shift($args);
   $res = $stmt->execute($args);
   if ($res) {
-    $row = db_row($stmt);
-    return $row[0];
+if ($row = db_row($res)) {
+      return $row[0];
+    }
   } else {
     return false;
   }
