@@ -4,19 +4,6 @@
  * HTTP-авторизации для просмотра и удаления результатов.
  **/
 require_once('db.php');   
-    $row = db_get_Pass_Login();
-// Пример HTTP-аутентификации.
-// PHP хранит логин и пароль в суперглобальном массиве $_SERVER.
-// Подробнее см. стр. 26 и 99 в учебном пособии Веб-программирование и веб-сервисы.
-if (empty($_SERVER['PHP_AUTH_USER']) ||
-    empty($_SERVER['PHP_AUTH_PW']) ||
-    $_SERVER['PHP_AUTH_USER'] != $row["login"] ||
-    password_verify($_SERVER['PHP_AUTH_PW'], $row["password"])) {
-  header('HTTP/1.1 401 Unanthorized');
-  header('WWW-Authenticate: Basic realm="My site"');
-  print('<h1>401 Требуется авторизация</h1>');
-  exit();
-}
 echo 'Вы успешно авторизовались и видите защищенные паролем данные.'."<br>"; 
 $results = db_get_Alluser();
 
