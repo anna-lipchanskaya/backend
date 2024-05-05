@@ -82,7 +82,7 @@ $db = new PDO('mysql:host=localhost;dbname=' . $db_name, $db_login, $db_pass,
 
 if ($result) {
     // userid существует - выполняем операции удаления
-    $result = db_delete_by_id();
+    $result = db_delete_by_id($userid);
   if($result){
     echo "Данные успешно удалены.";
     header('Location: admin.php');
