@@ -94,16 +94,14 @@ $query = "SELECT l2.name, count(*) AS count_users
   }
 }
 
-function db_get_UserId($default = FALSE) {
-  $query = "SELECT userid FROM users WHERE userid = $userid";
-  $value = db_command($query);
-  if (!$value) {
+function db_get_UserId() {
+  $value = db_result("SELECT userid FROM users WHERE userid = ?", $userid);
+  if ($value === FALSE) {
     return FALSE;
   }
   else {
-    return $value;
-  }
-}*/
+    return TRUE;
+}
 
 function db_set($name, $value) {
   if (strlen($name) == 0) {
