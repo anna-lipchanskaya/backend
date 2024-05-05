@@ -124,22 +124,6 @@ function db_set($name, $value) {
         logError($e->getMessage());
     }
 }
-function executePrepare($query) {
-    global $db;
-    $stmt = $db->prepare($query);
-    return $stmt;
-          if ($stmt) {
-            // Запрос успешно выполнен
-            return $stmt;
-        } else {
-            // Запрос не удался, логируем ошибку
-            logError(db_error());
-        }
-    } catch (PDOException $e) {
-        // Ошибка при выполнении запроса, логируем исключение
-        logError($e->getMessage());
-    }
-}
 
 function db_error() {
     global $db;
