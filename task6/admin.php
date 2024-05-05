@@ -92,9 +92,9 @@ if ($result->rowCount() > 0) {
     $sql_delete_users = "DELETE FROM users WHERE userid = $userid";
 
     // Выполнение операций удаления
-    $db->query($sql_delete_ap_lan);
-    $db->query($sql_delete_users);
-    $db->query($sql_delete_application);
+    Query($sql_delete_ap_lan);
+    Query($sql_delete_users);
+    Query($sql_delete_application);
 
     echo "Данные успешно удалены.";
     header('Location: admin.php');
