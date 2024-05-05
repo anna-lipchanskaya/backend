@@ -1,15 +1,37 @@
 <?php
-
+include('../db.php');
 global $db;
-$db = new PDO('mysql:host=' . conf('db_host') . ';dbname=' . conf('db_name'), conf('db_user'), conf('db_psw'),
-  array(PDO::MYSQL_ATTR_FOUND_ROWS => true, PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
-
-function db_row($stmt) {
-  return $stmt->fetch(PDO::FETCH_ASSOC);
+$db = new PDO('mysql:host=localhost;dbname=' . $db_name, $db_login, $db_pass,
+  [PDO::ATTR_PERSISTENT => true, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]); // Заменить test на имя БД, совпадает с логином uXXXXX
+    function executeQuery($query) {
+    global $db;
+    try {
+        $result = $db->query($query);
+        if ($result) {
+            // Запрос успешно выполнен
+            return $result->fetchAll(PDO::FETCH_ASSOC);
+        } else {
+            // Запрос не удался, логируем ошибку
+            logError(db_error());
+        }
+    } catch (PDOException $e) {
+        // Ошибка при выполнении запроса, логируем исключение
+        logError($e->getMessage());
+    }
 }
 
 function db_error() {
-  global $db;
-  return $db->errorInfo();
+    global $db;
+    return $db->errorInfo();
 }
+
+function logError($errorInfo) {
+    // Здесь должен быть ваш код для логирования ошибок
+    // Например, запись в файл или отправка уведомления администратору
+    error_log(print_r($errorInfo, true));
+}
+
+// Пример вызова функции
+$query = "SELECT * FROM users WHERE id = 1";
+$userData = executeQuery($query);
 ?>
