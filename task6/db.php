@@ -116,6 +116,15 @@ function db_get_Login($userid, $default = FALSE) {
     return $value;
   }
 }
+function db_get_Pass_Login($default = FALSE) {
+  $value = db_result("SELECT login FROM users WHERE userid = ?", $userid);
+  if (!$value) {
+    return $default;
+  }
+  else {
+    return $value;
+  }
+}
 
 function db_set($name, $value) {
   if (strlen($name) == 0) {
