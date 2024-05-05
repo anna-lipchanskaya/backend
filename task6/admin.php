@@ -49,7 +49,24 @@ $query = "SELECT a.userid, a.name, a.phone, a.email, a.data, a.pol, a.bio, a.ok,
         echo "Ok: " . $row['ok'] . "<br>";
         echo "Languages: " . $row['languages'] . "<br><br>";
     }
+try{
     echo "Статистика языков " . "<br>";
+    $stmt = $db->query("SELECT l2.name, count(*) AS count_users
+            FROM application3 a 
+            INNER JOIN ap_lan3 al3 ON a.userid = al3.userid
+            INNER JOIN language2 l2 ON al3.id_language = l2.id
+            GROUP BY l2.name");
+
+    // Вывод результатов
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        echo "{$row['name']} язык любят: {$row['count_users']} пользователя <br>";
+    }
+
+} catch(PDOException $e) {
+    echo "Ошибка: " . $e->getMessage();
+}
+   
+    /*echo "Статистика языков " . "<br>";
     $query = "SELECT l2.name, count(*) AS count_users
             FROM application3 a 
             INNER JOIN ap_lan3 al3 ON a.userid = al3.userid
@@ -60,7 +77,7 @@ $query = "SELECT a.userid, a.name, a.phone, a.email, a.data, a.pol, a.bio, a.ok,
     // Вывод результатов
     while ($row = db_row($stmt)) {
         echo "{$row['name']} язык любят: {$row['count_users']} пользователя <br>";
-    }
+    }*/
     
 // *********
 // Здесь нужно прочитать отправленные ранее пользователями данные и вывести в таблицу.
