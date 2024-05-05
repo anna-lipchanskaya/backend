@@ -28,19 +28,15 @@ if (empty($_SERVER['PHP_AUTH_USER']) ||
   exit();
 }
 echo 'Вы успешно авторизовались и видите защищенные паролем данные.'."<br>";
-
- include('../db.php');
-$db = new PDO('mysql:host=localhost;dbname=' . $db_name, $db_login, $db_pass,
-  [PDO::ATTR_PERSISTENT => true, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]); // Заменить test на имя БД, совпадает с логином uXXXXX
-try {
-    $query = $db->query("SELECT a.userid, a.name, a.phone, a.email, a.data, a.pol, a.bio, a.ok, u.login, GROUP_CONCAT(DISTINCT l2.name SEPARATOR ', ') as languages
+require_once('db.php');
+$query = "SELECT a.userid, a.name, a.phone, a.email, a.data, a.pol, a.bio, a.ok, u.login, GROUP_CONCAT(DISTINCT l2.name SEPARATOR ', ') as languages
                         FROM application3 a
                         INNER JOIN users u ON a.userid = u.userid
                         LEFT JOIN ap_lan3 al3 ON a.userid = al3.userid
                         LEFT JOIN language2 l2 ON al3.id_language = l2.id
-                        GROUP BY a.userid, a.name, a.phone, a.email, a.data, a.pol, a.bio, a.ok, u.login");
+                        GROUP BY a.userid, a.name, a.phone, a.email, a.data, a.pol, a.bio, a.ok, u.login";
     
-    $results = $query->fetchAll(PDO::FETCH_ASSOC);
+    $results = 
 
     // Вывод данных
     foreach ($results as $row) {
