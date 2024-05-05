@@ -42,7 +42,7 @@ function db_result($query) {
     $row = db_row($res);
       return $row;
     }
-  } else {
+  else {
     return false;
   }
 }
