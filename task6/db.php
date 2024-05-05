@@ -39,14 +39,12 @@ function db_result($query) {
   array_shift($args);
   $res = $q->execute($args);
   if ($res) {
-    if ($row = db_row_All($res)) {
-      return $row[0];
-    }
+      return db_row($res)[0];
+  }
     else {
       return FALSE;
     }
   }
-}
 
 function db_command($query) {
   global $db;
