@@ -4,7 +4,6 @@
  * HTTP-авторизации для просмотра и удаления результатов.
  **/
 require_once('db.php');   
-function checkAuth() {
         $query = "SELECT login, password FROM admin";
         $row = db_row(Query($query));
     
@@ -16,7 +15,6 @@ function checkAuth() {
       header('WWW-Authenticate: Basic realm="My site"');
       exit('<h1>401 Требуется авторизация</h1>');
     }
-}
 echo 'Вы успешно авторизовались и видите защищенные паролем данные.'."<br>";
 $query = "SELECT a.userid, a.name, a.phone, a.email, a.data, a.pol, a.bio, a.ok, u.login, GROUP_CONCAT(DISTINCT l2.name SEPARATOR ', ') as languages
                         FROM application3 a
