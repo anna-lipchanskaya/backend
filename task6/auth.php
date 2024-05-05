@@ -1,7 +1,7 @@
 <?php
 require_once('db.php');   
 function checkAuth() {
-        $query("SELECT login, password FROM admin");
+        $query = "SELECT login, password FROM admin";
         $row = executeQuery($query);
     
     if (empty($_SERVER['PHP_AUTH_USER']) ||
