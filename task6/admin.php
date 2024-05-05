@@ -113,11 +113,13 @@ else {
         {
         session_start();
       $userid = $_POST['update'];
-    $result = $db->query("SELECT userid FROM users WHERE userid = $userid");
+    $query = "SELECT userid FROM users WHERE userid = $userid";
+    $result = Query($query);
     if ($result->rowCount() > 0) {
-    $stmt = $db->prepare("SELECT login FROM users WHERE userid = :userid");
+    $query = "SELECT login FROM users WHERE userid = :userid";
+          $stmt = Query($query);
         $stmt->execute([':userid' => $userid]);
-    $data = $stmt->fetch(PDO::FETCH_ASSOC);
+    $data = db_row($stmt);
     $_SESSION['login'] = $data['login'];
 
     $_SESSION['uid'] = $userid;
