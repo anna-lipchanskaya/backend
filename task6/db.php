@@ -6,6 +6,19 @@ $db = new PDO('mysql:host=localhost;dbname=' . $db_name, $db_login, $db_pass,
 function db_row($stmt) {
   return $stmt->fetch(PDO::FETCH_ASSOC);
 }
+function db_row_All($stmt) {
+  return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+    function executeQuery($query, $default = FALSE) {
+    global $db;
+        $result = $db->query($query);
+        if ($result) {
+            // Запрос успешно выполнен
+            return db_row_All($result);
+        } else {
+            return $defaul;
+}
+    }
 function db_query($query) {
   global $db;
   $q = $db->prepare($query);
@@ -85,25 +98,6 @@ function db_set($name, $value) {
     $q = "UPDATE variable SET value = ? WHERE name = ?";
     return db_command($q, $value, $name) > 0;
   }
-}
-
-
-
-    function executeQuery($query) {
-    global $db;
-    try {
-        $result = $db->query($query);
-        if ($result) {
-            // Запрос успешно выполнен
-            return $result->fetchAll(PDO::FETCH_ASSOC);
-        } else {
-            // Запрос не удался, логируем ошибку
-            logError(db_error());
-        }
-    } catch (PDOException $e) {
-        // Ошибка при выполнении запроса, логируем исключение
-        logError($e->getMessage());
-    }
 }
     function Query($query) {
     global $db;
