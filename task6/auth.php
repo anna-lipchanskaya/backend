@@ -3,7 +3,7 @@ session_start(); // Начало сессии
 require_once('db.php');   
 function checkAuth() {
         $query = "SELECT login, password FROM admin";
-        $row = executeQuery($query);
+        $row = db_row(Query($query));
     
     if (empty($_SERVER['PHP_AUTH_USER']) ||
         empty($_SERVER['PHP_AUTH_PW']) ||
