@@ -39,7 +39,7 @@ function db_result($query) {
   array_shift($args);
   $res = $q->execute($args);
   if ($res) {
-    if ($row = db_row($res)) {
+    if ($row = db_row_All($res)) {
       return $row[0];
     }
     else {
@@ -108,7 +108,7 @@ function db_delete_by_id($userid) {
 }
 
 function db_get_Login($userid, $default = FALSE) {
-  $value = db_result("SELECT login FROM users WHERE userid = ?", $userid);
+  $value = db_query("SELECT login FROM users WHERE userid = ?", $userid);
   if (!$value) {
     return $default;
   }
