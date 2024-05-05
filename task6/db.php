@@ -110,7 +110,7 @@ function db_delete_by_id($userid) {
   $value3 = db_query("DELETE FROM application3 WHERE userid = ?", $userid);
 }
 
-function db_get_Login(&userid, $default = FALSE) {
+function db_get_Login($userid, $default = FALSE) {
     "SELECT login FROM users WHERE userid = :userid");
   $value = db_result("SELECT login FROM users WHERE userid = ?", $userid);
   if (!$value) {
