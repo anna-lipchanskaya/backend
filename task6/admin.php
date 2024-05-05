@@ -99,10 +99,8 @@ else {
       $userid = $_POST['update'];
     $result = db_get_UserId($userid);
     if ($result) {
-    $stmt = $db->prepare("SELECT login FROM users WHERE userid = :userid");
-        $stmt->execute([':userid' => $userid]);
     $data = db_get_Login($userid);
-    $_SESSION['login'] = $data['login'];
+    $_SESSION['login'] = $data[0]['login'];
 
     $_SESSION['uid'] = $userid;
     header('Location: index.php');
