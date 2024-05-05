@@ -49,6 +49,7 @@ $query = "SELECT a.userid, a.name, a.phone, a.email, a.data, a.pol, a.bio, a.ok,
         echo "Bio: " . $row['bio'] . "<br>";
         echo "Ok: " . $row['ok'] . "<br>";
         echo "Languages: " . $row['languages'] . "<br><br>";
+    }
 try{
     echo "Статистика языков " . "<br>";
     $stmt = $db->query("SELECT l2.name, count(*) AS count_users
