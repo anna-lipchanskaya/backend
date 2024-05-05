@@ -4,17 +4,7 @@
  * HTTP-авторизации для просмотра и удаления результатов.
  **/
 require_once('db.php');   
-include('../db.php');
-$db = new PDO('mysql:host=localhost;dbname=' . $db_name, $db_login, $db_pass,
-  [PDO::ATTR_PERSISTENT => true, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]); // Заменить test на имя БД, совпадает с логином uXXXXX
-  try{
-  // Подготовленный запрос для проверки логина и пароля
-$result = $db->query("SELECT login, password FROM admin");
-    $row = $result->fetch(PDO::FETCH_ASSOC);
-  } catch(PDOException $e){
-    print('Error : ' . $e->getMessage());
-    exit();
-  }
+    $row = db_get_Pass_Login();
 // Пример HTTP-аутентификации.
 // PHP хранит логин и пароль в суперглобальном массиве $_SERVER.
 // Подробнее см. стр. 26 и 99 в учебном пособии Веб-программирование и веб-сервисы.
