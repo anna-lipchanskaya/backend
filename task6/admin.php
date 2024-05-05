@@ -58,7 +58,7 @@ $query = "SELECT a.userid, a.name, a.phone, a.email, a.data, a.pol, a.bio, a.ok,
     $row = executeQuery($query);
 
     // Вывод результатов
-    while ($row)) {
+    while ($row) {
         echo "{$row['name']} язык любят: {$row['count_users']} пользователя <br>";
     }
     
