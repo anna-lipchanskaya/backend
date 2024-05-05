@@ -1,5 +1,6 @@
 <?php
 // auth.php
+session_start();
 include('../db.php');
 $db = new PDO('mysql:host=localhost;dbname=' . $db_name, $db_login, $db_pass,
   [PDO::ATTR_PERSISTENT => true, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
