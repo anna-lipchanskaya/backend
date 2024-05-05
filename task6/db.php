@@ -105,13 +105,9 @@ function db_get_UserId($userid) {
 }
 
 function db_delete_by_id($userid) {
-  $query = "SELECT a.userid, a.name, a.phone, a.email, a.data, a.pol, a.bio, a.ok, u.login, GROUP_CONCAT(DISTINCT l2.name SEPARATOR ', ') as languages
-                        FROM application3 a
-                        INNER JOIN users u ON a.userid = u.userid
-                        LEFT JOIN ap_lan3 al3 ON a.userid = al3.userid
-                        LEFT JOIN language2 l2 ON al3.id_language = l2.id
-                        GROUP BY a.userid, a.name, a.phone, a.email, a.data, a.pol, a.bio, a.ok, u.login";
-  $value = db_query($query);
+  db_query("DELETE FROM application3 WHERE userid = ?", $userid);
+  db_query("DELETE FROM ap_lan3 WHERE userid = ?", $userid);
+  db_query("DELETE FROM users WHERE userid = ?", $userid);
 }
 
 function db_set($name, $value) {
