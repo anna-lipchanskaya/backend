@@ -42,9 +42,9 @@ function executePrepare($query) {
     global $db;
     $stmt = $db->prepare($query);
     return $stmt;
-          if ($result) {
+          if ($stmt) {
             // Запрос успешно выполнен
-            return $result;
+            return $stmt;
         } else {
             // Запрос не удался, логируем ошибку
             logError(db_error());
