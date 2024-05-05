@@ -102,6 +102,7 @@ function db_get_UserId() {
   else {
     return TRUE;
 }
+}
 
 function db_set($name, $value) {
   if (strlen($name) == 0) {
