@@ -82,14 +82,7 @@ $db = new PDO('mysql:host=localhost;dbname=' . $db_name, $db_login, $db_pass,
 
 if ($result) {
     // userid существует - выполняем операции удаления
-    $sql_delete_application = "DELETE FROM application3 WHERE userid = $userid";
-    $sql_delete_ap_lan = "DELETE FROM ap_lan3 WHERE userid = $userid";
-    $sql_delete_users = "DELETE FROM users WHERE userid = $userid";
-
-    // Выполнение операций удаления
-    $db->query($sql_delete_ap_lan);
-    $db->query($sql_delete_users);
-    $db->query($sql_delete_application);
+  
 
     echo "Данные успешно удалены.";
     header('Location: admin.php');
