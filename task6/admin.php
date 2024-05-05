@@ -60,6 +60,7 @@ $query = "SELECT a.userid, a.name, a.phone, a.email, a.data, a.pol, a.bio, a.ok,
     // Вывод результатов
     while ($row = db_row($stmt)) {
         echo "{$row['name']} язык любят: {$row['count_users']} пользователя <br>";
+    }
    
 // *********
 // Здесь нужно прочитать отправленные ранее пользователями данные и вывести в таблицу.
