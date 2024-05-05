@@ -40,7 +40,7 @@ function db_result($query) {
   $res = $stmt->execute($args);
   if ($res) {
     $row = db_row($res)
-      return $row;
+      return $row[0];
     }
   } else {
     return false;
