@@ -50,7 +50,7 @@ $query = "SELECT a.userid, a.name, a.phone, a.email, a.data, a.pol, a.bio, a.ok,
         echo "Languages: " . $row['languages'] . "<br><br>";
     }
     echo "Статистика языков " . "<br>";
-    $query("SELECT l2.name, count(*) AS count_users
+    $query = "SELECT l2.name, count(*) AS count_users
             FROM application3 a 
             INNER JOIN ap_lan3 al3 ON a.userid = al3.userid
             INNER JOIN language2 l2 ON al3.id_language = l2.id
