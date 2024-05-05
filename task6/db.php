@@ -41,7 +41,7 @@ function db_row($stmt) {
 function executePrepare($query) {
     global $db;
     $stmt = $db->prepare($query);
-    return $stmt->fetch(PDO::FETCH_ASSOC);
+    return $stmt;
           if ($result) {
             // Запрос успешно выполнен
             return $result;
