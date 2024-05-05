@@ -1,5 +1,5 @@
 <?php
-
+require_once('db.php');   
 function checkAuth() {
     include('../db.php');
     $db = new PDO('mysql:host=localhost;dbname=' . $db_name, $db_login, $db_pass,
@@ -7,7 +7,7 @@ function checkAuth() {
 
     try {
         $result = $db->query("SELECT login, password FROM admin");
-        $row = $result->fetch(PDO::FETCH_ASSOC);
+        $row = $results = executeQuery($query);
     } catch(PDOException $e) {
         print('Error : ' . $e->getMessage());
         exit();
