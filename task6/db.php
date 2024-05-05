@@ -22,23 +22,16 @@ function db_row_All($stmt) {
 
 function db_query($query) {
   global $db;
-  $q = $db->prepare($query);
+  $stmt = $db->prepare($query);
   $args = func_get_args();
   array_shift($args);
-  $res = $q->execute($args);
+  $res = $stmt->execute($args);
   if ($res) {
-    while ($row = db_row($res)) {
-      if (isset($row['id']) && !isset($r[$row['id']])) {
-        $r[$row['id']] = $row;
-      }
-      else {
-        $r[] = $row;
-      }
-    }
+    return db_row_All($stmt);
+  } else {
+    return false;
   }
-  return $r;
 }
-
 function db_result($query) {
   global $db;
   $q = $db->prepare($query);
@@ -76,7 +69,7 @@ function db_get_Alluser($default = FALSE) {
                         LEFT JOIN ap_lan3 al3 ON a.userid = al3.userid
                         LEFT JOIN language2 l2 ON al3.id_language = l2.id
                         GROUP BY a.userid, a.name, a.phone, a.email, a.data, a.pol, a.bio, a.ok, u.login";
-  $value = executeQuery($query);
+  $value = db_query($query);
   if (!$value) {
     return $default;
   }
