@@ -111,7 +111,6 @@ function db_delete_by_id($userid) {
 }
 
 function db_get_Login($userid, $default = FALSE) {
-    "SELECT login FROM users WHERE userid = :userid");
   $value = db_result("SELECT login FROM users WHERE userid = ?", $userid);
   if (!$value) {
     return $default;
