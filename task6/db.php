@@ -6,6 +6,51 @@ $db = new PDO('mysql:host=localhost;dbname=' . $db_name, $db_login, $db_pass,
 function db_row($stmt) {
   return $stmt->fetch(PDO::FETCH_ASSOC);
 }
+function db_query($query) {
+  global $db;
+  $q = $db->prepare($query);
+  $args = func_get_args();
+  array_shift($args);
+  $res = $q->execute($args);
+  if ($res) {
+    while ($row = db_row($res)) {
+      if (isset($row['id']) && !isset($r[$row['id']])) {
+        $r[$row['id']] = $row;
+      }
+      else {
+        $r[] = $row;
+      }
+    }
+  }
+  return $r;
+}
+
+function db_result($query) {
+  global $db;
+  $q = $db->prepare($query);
+  $args = func_get_args();
+  array_shift($args);
+  $res = $q->execute($args);
+  if ($res) {
+    if ($row = db_row($res)) {
+      return $row[0];
+    }
+    else {
+      return FALSE;
+    }
+  }
+  else {
+    return FALSE;
+  }
+}
+
+function db_command($query) {
+  global $db;
+  $q = $db->prepare($query);
+  $args = func_get_args();
+  array_shift($args);
+  return $res = $q->execute($args);
+}
     function executeQuery($query) {
     global $db;
     try {
