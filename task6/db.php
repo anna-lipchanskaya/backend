@@ -110,6 +110,21 @@ function db_delete_by_id($userid) {
   $value3 = db_query("DELETE FROM application3 WHERE userid = ?", $userid);
 }
 
+function db_get_Login($default = FALSE) {
+$query = "SELECT l2.name, count(*) AS count_users
+            FROM application3 a 
+            INNER JOIN ap_lan3 al3 ON a.userid = al3.userid
+            INNER JOIN language2 l2 ON al3.id_language = l2.id
+            GROUP BY l2.name";
+  $value = db_query($query);
+  if (!$value) {
+    return $default;
+  }
+  else {
+    return $value;
+  }
+}
+
 function db_set($name, $value) {
   if (strlen($name) == 0) {
     return;
