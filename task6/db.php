@@ -11,8 +11,7 @@ function db_row_All($stmt) {
 }
     function executeQuery($query, $default = FALSE) {
     global $db;
-         $q = $db->prepare($query);
-          $res = $q->execute();
+        $result = $db->query($query);
         if ($result) {
             // Запрос успешно выполнен
             return db_row_All($result);
@@ -20,6 +19,7 @@ function db_row_All($stmt) {
             return $defaul;
 }
     }
+
 function db_query($query) {
   global $db;
   $q = $db->prepare($query);
