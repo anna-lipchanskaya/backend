@@ -40,7 +40,7 @@ $query = "SELECT a.userid, a.name, a.phone, a.email, a.data, a.pol, a.bio, a.ok,
 
     // Вывод данных
     foreach ($results as $row) {
-        echo "Пользователь с login" . $row['login'] ." и id ". $row['userid'] . "<br>";
+        echo "Пользователь с login " . $row['login'] ." и id ". $row['userid'] . "<br>";
         echo "Name: " . $row['name'] . "<br>";
         echo "Phone: " . $row['phone'] . "<br>";
         echo "Email: " . $row['email'] . "<br>";
