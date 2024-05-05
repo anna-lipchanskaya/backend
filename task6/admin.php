@@ -119,7 +119,7 @@ else {
     $query = "SELECT login FROM users WHERE userid = :userid";
           $stmt = Query($query);
         $stmt->execute([':userid' => $userid]);
-    $data = db_row($stmt);
+    $data = executeQuery($query);
     $_SESSION['login'] = $data['login'];
 
     $_SESSION['uid'] = $userid;
