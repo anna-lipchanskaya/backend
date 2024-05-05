@@ -5,7 +5,7 @@ require_once('db.php');
  * HTTP-авторизации для просмотра и удаления результатов.
  **/
 //получение логина и пароля из бд
-$userData = executeQuery("SELECT login, password FROM admin")
+$userData = executeQuery("SELECT login, password FROM admin");
 // Пример HTTP-аутентификации.
 // PHP хранит логин и пароль в суперглобальном массиве $_SERVER.
 // Подробнее см. стр. 26 и 99 в учебном пособии Веб-программирование и веб-сервисы.
