@@ -26,8 +26,6 @@ function db_error() {
 }
 
 function logError($errorInfo) {
-    // Здесь должен быть ваш код для логирования ошибок
-    // Например, запись в файл или отправка уведомления администратору
     error_log(print_r($errorInfo, true));
 }
 ?>
