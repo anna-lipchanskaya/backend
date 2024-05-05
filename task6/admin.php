@@ -77,15 +77,13 @@ $query = "SELECT a.userid, a.name, a.phone, a.email, a.data, a.pol, a.bio, a.ok,
 <?php
 if ($_SERVER['REQUEST_METHOD'] == 'POST')
 {
-     include('../db.php');
-$db = new PDO('mysql:host=localhost;dbname=' . $db_name, $db_login, $db_pass,
-  [PDO::ATTR_PERSISTENT => true, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]); // Заменить test на имя БД, совпадает с логином uXXXXX
     if($_POST['button'] == "Delete")
     {
         if(!empty($_POST['delete']))
     {
     $userid = $_POST['delete'];
-    $result = $db->query("SELECT userid FROM users WHERE userid = $userid");
+    $query = "SELECT userid FROM users WHERE userid = $userid";
+    $result = Query($query);
 
 if ($result->rowCount() > 0) {
     // userid существует - выполняем операции удаления
