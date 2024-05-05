@@ -46,9 +46,6 @@ function db_result($query) {
       return FALSE;
     }
   }
-  else {
-    return FALSE;
-  }
 }
 
 function db_command($query) {
