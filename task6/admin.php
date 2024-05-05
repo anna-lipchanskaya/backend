@@ -101,7 +101,7 @@ else {
     if ($result) {
     $stmt = $db->prepare("SELECT login FROM users WHERE userid = :userid");
         $stmt->execute([':userid' => $userid]);
-    $data = $stmt->fetch(PDO::FETCH_ASSOC);
+    $data = db_get_Login($userid);
     $_SESSION['login'] = $data['login'];
 
     $_SESSION['uid'] = $userid;
