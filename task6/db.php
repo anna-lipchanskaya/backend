@@ -100,6 +100,22 @@ $query = "SELECT l2.name, count(*) AS count_users
   }
 }
 
+function db_get_UserId($$default = FALSE) {
+$query = "SELECT l2.name, count(*) AS count_users
+            FROM application3 a 
+            INNER JOIN ap_lan3 al3 ON a.userid = al3.userid
+            INNER JOIN language2 l2 ON al3.id_language = l2.id
+            GROUP BY l2.name";
+  $value = executeQuery($query);
+  if (!$value) {
+    return $default;
+  }
+  else {
+    return $value;
+  }
+}
+    $result = $db->query("SELECT userid FROM users WHERE userid = $userid");
+
 function db_set($name, $value) {
   if (strlen($name) == 0) {
     return;
