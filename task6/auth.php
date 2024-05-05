@@ -1,18 +1,9 @@
 <?php
 require_once('db.php');   
 function checkAuth() {
-    include('../db.php');
-    $db = new PDO('mysql:host=localhost;dbname=' . $db_name, $db_login, $db_pass,
-      [PDO::ATTR_PERSISTENT => true, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
-
-    try {
-        $result = $db->query("SELECT login, password FROM admin");
-        $row = $results = executeQuery($query);
-    } catch(PDOException $e) {
-        print('Error : ' . $e->getMessage());
-        exit();
-    }
-
+        $query("SELECT login, password FROM admin");
+        $row = executeQuery($query);
+    
     if (empty($_SERVER['PHP_AUTH_USER']) ||
         empty($_SERVER['PHP_AUTH_PW']) ||
         $_SERVER['PHP_AUTH_USER'] != $row["login"] ||
