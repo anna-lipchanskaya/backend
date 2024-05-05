@@ -75,7 +75,7 @@ function db_get_Alluser($default = FALSE) {
                         LEFT JOIN ap_lan3 al3 ON a.userid = al3.userid
                         LEFT JOIN language2 l2 ON al3.id_language = l2.id
                         GROUP BY a.userid, a.name, a.phone, a.email, a.data, a.pol, a.bio, a.ok, u.login";
-  $value = db_query($query);
+  $value = executeQuery($query);
   if (!$value) {
     return $default;
   }
