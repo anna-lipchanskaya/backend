@@ -117,9 +117,9 @@ else {
     $result = Query($query);
     if ($result->rowCount() > 0) {
     $query = "SELECT login FROM users WHERE userid = :userid";
-          $stmt = Query($query);
+          $stmt = executeQuery($query);
         $stmt->execute([':userid' => $userid]);
-    $data = executeQuery($query);
+    $data = db_row($query);
     $_SESSION['login'] = $data['login'];
 
     $_SESSION['uid'] = $userid;
