@@ -55,10 +55,10 @@ $query = "SELECT a.userid, a.name, a.phone, a.email, a.data, a.pol, a.bio, a.ok,
             INNER JOIN ap_lan3 al3 ON a.userid = al3.userid
             INNER JOIN language2 l2 ON al3.id_language = l2.id
             GROUP BY l2.name";
-    $row = executeQuery($query);
+    $stmt = Query($query);
 
     // Вывод результатов
-    while ($row) {
+    while ($row = db_row($stmt)) {
         echo "{$row['name']} язык любят: {$row['count_users']} пользователя <br>";
     }
     
