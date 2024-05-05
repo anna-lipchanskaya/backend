@@ -22,6 +22,23 @@ function db_row($stmt) {
         logError($e->getMessage());
     }
 }
+    function Query($query) {
+    global $db;
+    try {
+        $result = $db->query($query);
+        if ($result) {
+            // Запрос успешно выполнен
+            return $result;
+        } else {
+            // Запрос не удался, логируем ошибку
+            logError(db_error());
+        }
+    } catch (PDOException $e) {
+        // Ошибка при выполнении запроса, логируем исключение
+        logError($e->getMessage());
+    }
+}
+
 
 function db_error() {
     global $db;
