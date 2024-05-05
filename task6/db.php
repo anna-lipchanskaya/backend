@@ -12,7 +12,7 @@ function db_row($stmt) {
         $result = $db->query($query);
         if ($result) {
             // Запрос успешно выполнен
-            return db_row($result);
+            return $result->fetch(PDO::FETCH_ASSOC);
         } else {
             // Запрос не удался, логируем ошибку
             logError(db_error());
