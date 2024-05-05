@@ -94,7 +94,7 @@ $query = "SELECT l2.name, count(*) AS count_users
   }
 }
 
-function db_get_UserId() {
+function db_get_UserId($userid) {
   $value = db_result("SELECT userid FROM users WHERE userid = ?", $userid);
   if ($value === FALSE) {
     return FALSE;
