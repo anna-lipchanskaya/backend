@@ -57,7 +57,8 @@ function db_command($query) {
   $args = func_get_args();
   array_shift($args);
   return $res = $q->execute($args);
-}function db_insert_id() {
+}
+function db_insert_id() {
   global $db;
   return $db->lastInsertId();
 }
@@ -84,7 +85,7 @@ $query = "SELECT l2.name, count(*) AS count_users
             INNER JOIN ap_lan3 al3 ON a.userid = al3.userid
             INNER JOIN language2 l2 ON al3.id_language = l2.id
             GROUP BY l2.name";
-  $value = executeQuery($query);
+  $value = db_query($query);
   if (!$value) {
     return $default;
   }
@@ -93,15 +94,15 @@ $query = "SELECT l2.name, count(*) AS count_users
   }
 }
 
-/*function db_get_UserId($default = FALSE) {
+function db_get_UserId($default = FALSE) {
 $query = "SELECT l2.name, count(*) AS count_users
             FROM application3 a 
             INNER JOIN ap_lan3 al3 ON a.userid = al3.userid
             INNER JOIN language2 l2 ON al3.id_language = l2.id
             GROUP BY l2.name";
-  $value = executeQuery($query);
+  $value = db_query($query);
   if (!$value) {
-    return $default;
+    return FALSE;
   }
   else {
     return $value;
