@@ -50,7 +50,42 @@ function db_command($query) {
   $args = func_get_args();
   array_shift($args);
   return $res = $q->execute($args);
+}function db_insert_id() {
+  global $db;
+  return $db->lastInsertId();
 }
+
+function db_get($name, $default = FALSE) {
+  if (strlen($name) == 0) {
+    return $default;
+  }
+  $value = db_result("SELECT value FROM variable WHERE name = ?", $name);
+  if ($value === FALSE) {
+    return $default;
+  }
+  else {
+    return $value;
+  }
+}
+
+function db_set($name, $value) {
+  if (strlen($name) == 0) {
+    return;
+  }
+
+  $v = db_get($name);
+  if ($v === FALSE) {
+    $q = "INSERT INTO variable VALUES (?, ?)";
+    return db_command($q, $name, $value) > 0;
+  }
+  else {
+    $q = "UPDATE variable SET value = ? WHERE name = ?";
+    return db_command($q, $value, $name) > 0;
+  }
+}
+
+
+
     function executeQuery($query) {
     global $db;
     try {
