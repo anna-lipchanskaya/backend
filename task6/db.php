@@ -117,8 +117,7 @@ function db_get_Login($userid, $default = FALSE) {
   }
 }
 function db_get_Pass_Login($default = FALSE) {
-  $value = db_result("SELECT login FROM users WHERE userid = ?", $userid);
-  if (!$value) {
+  $value = db_result("SELECT login, password FROM admin");
     return $default;
   }
   else {
