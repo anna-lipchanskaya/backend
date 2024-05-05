@@ -49,9 +49,9 @@ $results = db_get_Alluser();
             INNER JOIN language2 l2 ON al3.id_language = l2.id
             GROUP BY l2.name";
 
- $stmt = Query($query);
+ $languages = db_get_StatusLanguage();
     // Вывод результатов
-    while ($row = db_row($stmt)) {
+    foreach ($languages as $row) {
         echo "{$row['name']} язык любят: {$row['count_users']} пользователя <br>";
     }
    
