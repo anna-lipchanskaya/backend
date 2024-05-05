@@ -30,8 +30,4 @@ function logError($errorInfo) {
     // Например, запись в файл или отправка уведомления администратору
     error_log(print_r($errorInfo, true));
 }
-
-// Пример вызова функции
-$query = "SELECT * FROM users WHERE id = 1";
-$userData = executeQuery($query);
 ?>
