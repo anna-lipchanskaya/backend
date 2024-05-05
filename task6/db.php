@@ -105,7 +105,7 @@ function db_get_UserId($userid) {
 }
 
 function db_delete_by_id($userid) {
-  $value1 = db_query("DELETE FROM application3 WHERE userid = ?", $userid);
+  $value1 = db_query("DELETE FROM users WHERE userid = ?", $userid);
   if ($value1 == FALSE) {
     return FALSE;
   }
@@ -113,10 +113,11 @@ function db_delete_by_id($userid) {
     if ($value2 == FALSE) {
     return FALSE;
   }
-  $value3 = db_query("DELETE FROM users WHERE userid = ?", $userid);
+  $value3 = db_query("DELETE FROM application3 WHERE userid = ?", $userid);
     if ($value3 == FALSE) {
     return FALSE;
   }
+  return TRUE;
 }
 
 function db_set($name, $value) {
