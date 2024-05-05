@@ -4,24 +4,15 @@ require_once('db.php');
  * Задача 6. Реализовать вход администратора с использованием
  * HTTP-авторизации для просмотра и удаления результатов.
  **/
-  include('../db.php');
-$db = new PDO('mysql:host=localhost;dbname=' . $db_name, $db_login, $db_pass,
-  [PDO::ATTR_PERSISTENT => true, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]); // Заменить test на имя БД, совпадает с логином uXXXXX
-  try{
-  // Подготовленный запрос для проверки логина и пароля
-$result = $db->query("SELECT login, password FROM admin");
-    $row = $result->fetch(PDO::FETCH_ASSOC);
-  } catch(PDOException $e){
-    print('Error : ' . $e->getMessage());
-    exit();
-  }
+//получение логина и пароля из бд
+$userData = executeQuery("SELECT login, password FROM admin")
 // Пример HTTP-аутентификации.
 // PHP хранит логин и пароль в суперглобальном массиве $_SERVER.
 // Подробнее см. стр. 26 и 99 в учебном пособии Веб-программирование и веб-сервисы.
 if (empty($_SERVER['PHP_AUTH_USER']) ||
     empty($_SERVER['PHP_AUTH_PW']) ||
-    $_SERVER['PHP_AUTH_USER'] != $row["login"] ||
-    password_verify($_SERVER['PHP_AUTH_PW'], $row["password"])) {
+    $_SERVER['PHP_AUTH_USER'] != $userData["login"] ||
+    password_verify($_SERVER['PHP_AUTH_PW'], $userData["password"])) {
   header('HTTP/1.1 401 Unanthorized');
   header('WWW-Authenticate: Basic realm="My site"');
   print('<h1>401 Требуется авторизация</h1>');
