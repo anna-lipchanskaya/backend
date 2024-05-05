@@ -39,7 +39,7 @@ function db_result($query) {
   array_shift($args);
   $res = $q->execute($args);
   if ($res) {
-    if ($row = db_row_All($res)) {
+    if ($row = db_row($res)) {
       return $row[0];
     }
     else {
@@ -92,7 +92,7 @@ $query = "SELECT l2.name, count(*) AS count_users
 }
 
 function db_get_UserId($userid) {
-  $value = db_query("SELECT userid FROM users WHERE userid = ?", $userid);
+  $value = db_result("SELECT userid FROM users WHERE userid = ?", $userid);
   if ($value == FALSE) {
     return FALSE;
   }
