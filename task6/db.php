@@ -6,9 +6,6 @@ $db = new PDO('mysql:host=localhost;dbname=' . $db_name, $db_login, $db_pass,
 function db_row($stmt) {
   return $stmt->fetch(PDO::FETCH_ASSOC);
 }
-function db_row_ALL($stmt) {
-  return $stmt->fetchAll(PDO::FETCH_ASSOC);
-}
 function db_query($query) {
   global $db;
   $q = $db->prepare($query);
@@ -66,7 +63,7 @@ function db_get_Alluser($default = FALSE) {
                         LEFT JOIN language2 l2 ON al3.id_language = l2.id
                         GROUP BY a.userid, a.name, a.phone, a.email, a.data, a.pol, a.bio, a.ok, u.login";
   $value = db_query($query);
-  if ($value === FALSE) {
+  if (!$value) {
     return $default;
   }
   else {
