@@ -70,13 +70,15 @@ $results = db_get_Alluser();
 <?php
 if ($_SERVER['REQUEST_METHOD'] == 'POST')
 {
+     include('../db.php');
+$db = new PDO('mysql:host=localhost;dbname=' . $db_name, $db_login, $db_pass,
+  [PDO::ATTR_PERSISTENT => true, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]); // Заменить test на имя БД, совпадает с логином uXXXXX
     if($_POST['button'] == "Delete")
     {
         if(!empty($_POST['delete']))
     {
     $userid = $_POST['delete'];
-    $query = "SELECT userid FROM users WHERE userid = $userid";
-    $result = Query($query);
+    $result = $db->query("SELECT userid FROM users WHERE userid = $userid");
 
 if ($result->rowCount() > 0) {
     // userid существует - выполняем операции удаления
@@ -85,9 +87,9 @@ if ($result->rowCount() > 0) {
     $sql_delete_users = "DELETE FROM users WHERE userid = $userid";
 
     // Выполнение операций удаления
-    Query($sql_delete_ap_lan);
-    Query($sql_delete_users);
-    Query($sql_delete_application);
+    $db->query($sql_delete_ap_lan);
+    $db->query($sql_delete_users);
+    $db->query($sql_delete_application);
 
     echo "Данные успешно удалены.";
     header('Location: admin.php');
@@ -106,13 +108,11 @@ else {
         {
         session_start();
       $userid = $_POST['update'];
-    $query = "SELECT userid FROM users WHERE userid = $userid";
-    $result = Query($query);
+    $result = $db->query("SELECT userid FROM users WHERE userid = $userid");
     if ($result->rowCount() > 0) {
-    $query = "SELECT login FROM users WHERE userid = :userid";
-          $stmt = executeQuery($query);
+    $stmt = $db->prepare("SELECT login FROM users WHERE userid = :userid");
         $stmt->execute([':userid' => $userid]);
-    $data = db_row($query);
+    $data = $stmt->fetch(PDO::FETCH_ASSOC);
     $_SESSION['login'] = $data['login'];
 
     $_SESSION['uid'] = $userid;
