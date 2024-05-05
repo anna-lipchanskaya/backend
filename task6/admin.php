@@ -3,9 +3,9 @@
  * Задача 6. Реализовать вход администратора с использованием
  * HTTP-авторизации для просмотра и удаления результатов.
  **/
+require_once('db.php');
 require_once('auth.php');
 echo 'Вы успешно авторизовались и видите защищенные паролем данные.'."<br>";
-require_once('db.php');
 $query = "SELECT a.userid, a.name, a.phone, a.email, a.data, a.pol, a.bio, a.ok, u.login, GROUP_CONCAT(DISTINCT l2.name SEPARATOR ', ') as languages
                         FROM application3 a
                         INNER JOIN users u ON a.userid = u.userid
