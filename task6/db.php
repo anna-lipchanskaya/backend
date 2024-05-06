@@ -240,7 +240,7 @@ if (empty($bio)) {
     setcookie('bio_error_len', '1', time() + 24 * 60 * 60);
             $errors = TRUE;
         }
-if($errors == FALSE) 
+if($errors == TRUE) 
 {
   return "Error";
 }
