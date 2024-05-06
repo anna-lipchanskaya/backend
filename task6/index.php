@@ -274,6 +274,7 @@ if ($_POST['button'] == "ok"){
       session_start() && !empty($_SESSION['login'])) {
     // TODO: перезаписать данные в БД новыми данными,
     // кроме логина и пароля.
+    $data = db_get_Pass_Login_user($_SESSION['login'])['userid'];
     
   }
   else {
