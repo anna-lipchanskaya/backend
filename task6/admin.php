@@ -6,6 +6,15 @@
 require_once('db.php');   
 require_once('auth.php'); 
 echo 'Вы успешно авторизовались и видите защищенные паролем данные.'."<br>"; 
+?>
+    <form action="" method="POST">
+            <input name="delete"/>
+          <input type="submit" name = "button" value="Delete" />
+        <br>
+            <input name="update"/>
+          <input type="submit" name = "button" value="Update" />
+    </form>
+<?php
 $results = db_get_Alluser();
 
     // Вывод данных
@@ -37,15 +46,6 @@ $results = db_get_Alluser();
 // Здесь нужно прочитать отправленные ранее пользователями данные и вывести в таблицу.
 // Реализовать просмотр и удаление всех данных.
 // *********
-?>
-    <form action="" method="POST">
-            <input name="delete"/>
-          <input type="submit" name = "button" value="Delete" />
-        <br>
-            <input name="update"/>
-          <input type="submit" name = "button" value="Update" />
-    </form>
-<?php
 if ($_SERVER['REQUEST_METHOD'] == 'POST')
 {
     if($_POST['button'] == "Delete")
