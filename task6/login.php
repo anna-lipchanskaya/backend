@@ -131,17 +131,9 @@ else
   // Выдать сообщение об ошибках.
     $login = $_POST['login'];
     $password = $_POST['password'];
-
-  try{
-  // Подготовленный запрос для проверки логина и пароля
-// Подготовка SQL-запроса
-    $stmt = $db->prepare("SELECT * FROM users WHERE login = :login");
-    $stmt->execute(array(':login' => $login));
-    $use = db_get_Pass_Login_user();
-
-
-
-      // Сохраняем ранее введенное в форму значение на месяц.
+    $use = db_get_Pass_Login_user($login);
+    
+    // Сохраняем ранее введенное в форму значение на месяц.
     setcookie('login_value', $_POST['login'], time() + 30 * 24 * 60 * 60);
     setcookie('password_value', $_POST['password'], time() + 30 * 24 * 60 * 60);
   
@@ -159,10 +151,8 @@ else
   if (!$session_started) {
     session_start();
   }
-  $login = $_POST['login'];
-  $password = $_POST['password'];
   // Если все ок, то авторизуем пользователя.
-  $_SESSION['login'] = $_POST['login'];
+  $_SESSION['login'] = $login;
   // Записываем ID пользователя.
     // Получаем personId из таблицы personAuthentificationData
     $stmt = $db->prepare("SELECT userid  FROM users WHERE login = :login");
@@ -170,11 +160,6 @@ else
     $data = $stmt->fetch(PDO::FETCH_ASSOC);
 
     $_SESSION['uid'] = $data['userid'];
-
-  } catch(PDOException $e){
-    print('Error : ' . $e->getMessage());
-    exit();
-  }
 
   // Делаем перенаправление.
   header('Location: ./');
