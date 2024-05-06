@@ -178,7 +178,7 @@ function db_get_Logins() {
 }
 }
 
-function db_set_application($userid, $login, $hashedPassword, $name, $phone, $email, $data, $pol, $bio, $ok, $abilities) {
+function db_set_application($userid, $name, $phone, $email, $data, $pol, $bio, $ok, $abilities) {
  $errors = FALSE;
   if (empty($name)) {
     // Выдаем куку на день с флажком об ошибке в поле name.
@@ -267,7 +267,7 @@ else{
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
     // Сохраняем в Cookies.
     setcookie('login', $login, time() + 24 * 60 * 60);
-    setcookie('pass', $password, time() + 24 * 60 * 60);
+    setcookie('pass', $hashedPassword, time() + 24 * 60 * 60);
 
     // TODO: Сохранение данных формы, логина и хеш md5() пароля в базу данных.
 
