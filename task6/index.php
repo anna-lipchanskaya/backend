@@ -209,14 +209,7 @@ $errors = array();
     // TODO: загрузить данные пользователя из БД
     // и заполнить переменную $values,
     // предварительно санитизовав.
- include('../db.php');
-$db = new PDO('mysql:host=localhost;dbname=' . $db_name, $db_login, $db_pass,
-  [PDO::ATTR_PERSISTENT => true, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]); // Заменить test на имя БД, совпадает с логином uXXXXX
-
-    try{
-    $stmt = $db->prepare("SELECT userid  FROM users WHERE login = :login");
-    $stmt->execute(['login' => $_SESSION['login']]);
-    $data = $stmt->fetch(PDO::FETCH_ASSOC);
+    $data = db_get_Pass_Login_user($_SESSION['login']);
     
 $stmt = $db->prepare("SELECT l.name
 FROM ap_lan3 AS a JOIN language2 AS l ON a.id_language = l.id WHERE a.userid = :userid");
@@ -244,11 +237,8 @@ $abilities_serialized = serialize($languages);
         'ok' => htmlspecialchars($row['ok']),
         'abilities' => $languages
     ];
-     }
-    catch(PDOException $e){
-      print('Error : ' . $e->getMessage());
-      exit();
-    }
+
+    
     setcookie('name_value',$row['name'], time() + 30 * 24 * 60 * 60);
     setcookie('phone_value',$row['phone'], time() + 30 * 24 * 60 * 60);
     setcookie('email_value',$row['email'], time() + 30 * 24 * 60 * 60);
