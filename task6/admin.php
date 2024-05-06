@@ -15,37 +15,6 @@ echo 'Вы успешно авторизовались и видите защи�
           <input type="submit" name = "button" value="Update" />
     </form>
 <?php
-$results = db_get_Alluser();
-
-    // Вывод данных
-    foreach ($results as $row) {
-        echo "Пользователь с login " . $row['login'] ." и id ". $row['userid'] . "<br>";
-        echo "Name: " . $row['name'] . "<br>";
-        echo "Phone: " . $row['phone'] . "<br>";
-        echo "Email: " . $row['email'] . "<br>";
-        echo "Data: " . $row['data'] . "<br>";
-        echo "Gender: " . $row['pol'] . "<br>";
-        echo "Bio: " . $row['bio'] . "<br>";
-        echo "Ok: " . $row['ok'] . "<br>";
-        echo "Languages: " . $row['languages'] . "<br><br>";
-    }
-    echo "Статистика языков " . "<br>";
-    $query = "SELECT l2.name, count(*) AS count_users
-            FROM application3 a 
-            INNER JOIN ap_lan3 al3 ON a.userid = al3.userid
-            INNER JOIN language2 l2 ON al3.id_language = l2.id
-            GROUP BY l2.name";
-
- $languages = db_get_StatusLanguage();
-    // Вывод результатов
-    foreach ($languages as $row) {
-        echo "{$row['name']} язык любят: {$row['count_users']} пользователя <br>";
-    }
-   
-// *********
-// Здесь нужно прочитать отправленные ранее пользователями данные и вывести в таблицу.
-// Реализовать просмотр и удаление всех данных.
-// *********
 if ($_SERVER['REQUEST_METHOD'] == 'POST')
 {
     if($_POST['button'] == "Delete")
@@ -94,4 +63,30 @@ else {
         }
     }
 }
+$results = db_get_Alluser();
+
+    // Вывод данных
+    foreach ($results as $row) {
+        echo "Пользователь с login " . $row['login'] ." и id ". $row['userid'] . "<br>";
+        echo "Name: " . $row['name'] . "<br>";
+        echo "Phone: " . $row['phone'] . "<br>";
+        echo "Email: " . $row['email'] . "<br>";
+        echo "Data: " . $row['data'] . "<br>";
+        echo "Gender: " . $row['pol'] . "<br>";
+        echo "Bio: " . $row['bio'] . "<br>";
+        echo "Ok: " . $row['ok'] . "<br>";
+        echo "Languages: " . $row['languages'] . "<br><br>";
+    }
+    echo "Статистика языков " . "<br>";
+    $query = "SELECT l2.name, count(*) AS count_users
+            FROM application3 a 
+            INNER JOIN ap_lan3 al3 ON a.userid = al3.userid
+            INNER JOIN language2 l2 ON al3.id_language = l2.id
+            GROUP BY l2.name";
+
+ $languages = db_get_StatusLanguage();
+    // Вывод результатов
+    foreach ($languages as $row) {
+        echo "{$row['name']} язык любят: {$row['count_users']} пользователя <br>";
+    }
 ?>
