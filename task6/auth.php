@@ -1,5 +1,4 @@
 <?php
-session_start(); // Начало сессии
 require_once('db.php');   
 function checkAuth() {
  $row = db_get_Pass_Login();
