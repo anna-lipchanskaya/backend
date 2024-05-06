@@ -211,7 +211,7 @@ $errors = array();
     // предварительно санитизовав.
     $data = db_get_Pass_Login_user($_SESSION['login']);
     
-$rows = db_get_Languages($_SESSION['uid']);
+$rows = db_get_Languages($data['userid']);
 $languages = [];
 foreach ($rows as $row) {
     $languages[] = htmlspecialchars($row['name']);
@@ -219,10 +219,7 @@ foreach ($rows as $row) {
 
 // Сериализуем массив перед передачей в куки
 $abilities_serialized = serialize($languages);
-    
-    $stmt = $db->prepare("SELECT name, phone, email, data, pol, bio, ok  FROM application3 WHERE userid = :userid");
-    $stmt->execute(['userid' => $data['userid']]);
-    $row = $stmt->fetch();
+    $row = db_get_form_user($data['userid']);
 
     $values = [
         'name' => htmlspecialchars($row['name']),
