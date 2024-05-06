@@ -452,7 +452,7 @@ while (in_array($login, $logins)) {
     // TODO: Сохранение данных формы, логина и хеш md5() пароля в базу данных.
 
     // Подготовленный запрос. Не именованные метки.
-    try {
+    /*try {
       $stmt = $db->prepare("INSERT INTO application3 (name, phone, email, data, pol, bio, ok) VALUES (?, ?, ?, ?, ?, ?, ?)");
       $stmt->execute([$_POST['name'], $_POST['phone'], $_POST['email'], $_POST['data'], $_POST['pol'], $_POST['bio'], $_POST['ok']]);
       $UserId = $db->lastInsertId();
@@ -476,7 +476,7 @@ while (in_array($login, $logins)) {
       exit();
     }
 
-  }
+  }*/
 
   // Сохраняем куку с признаком успешного сохранения.
   setcookie('save', '1');
