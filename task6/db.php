@@ -167,7 +167,7 @@ function db_get_language_id($name, $default = FALSE) {
   }
 }
 
-function db_set_application($userid, $login, $hashedPassword, $name, $phone, $email, $pol, $data, $abilities, $bio, $ok) {
+function db_set_application($userid, $login, $hashedPassword, $name, $phone, $email, $data, $pol, $bio, $ok, $abilities) {
  $errors = FALSE;
   if (empty($name)) {
     // Выдаем куку на день с флажком об ошибке в поле name.
