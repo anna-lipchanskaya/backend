@@ -283,8 +283,22 @@ else{
     {
       return FALSE;
         }
-
-      foreach ($abilities as $ability) {
+  }
+  else {
+     $q1 = db_command("UPDATE application3 SET (name, phone, email, data, pol, bio, ok) VALUES (?, ?, ?, ?, ?, ?, ?) WHERE userid = ?", $name, $phone, $email, $data, $pol, $bio, $ok, &userid);
+      if($q1 <= 0) 
+    {
+      return FALSE;
+        }
+      
+// Удаление строк из таблицы ap_lan3 с найденным userid
+    $q2 = db_command("DELETE FROM ap_lan3 WHERE userid = ?", $userid);
+        if($q2 <= 0) 
+    {
+      return FALSE;
+        }   
+}
+        foreach ($abilities as $ability) {
     $languageId = db_get_language_id($ability)['id'];
     $q3 = db_command("INSERT INTO ap_lan3 (userid, id_language) VALUES (?, ?)", $UserId, $languageId);
             if($q3 <= 0) 
@@ -294,48 +308,6 @@ else{
       }
     return TRUE;
   }
-  else {
-try
-    {
-    $stmt = $db->prepare("SELECT userid  FROM users WHERE login = :login");
-    $stmt->execute(['login' => $_SESSION['login']]);
-    $data = db_get_Pass_Login_user($_SESSION['login']);
-    $sql = "UPDATE application3 SET name = :name, phone = :phone, email = :email,  data = :data, pol = :pol, bio = :bio, ok = :ok WHERE userid = :userid";
-    
-    $stmt = $db->prepare($sql);
-    $stmt->bindParam(':name', $_POST['name']);
-    $stmt->bindParam(':phone', $_POST['phone']);
-    $stmt->bindParam(':email', $_POST['email']);
-    $stmt->bindParam(':data', $_POST['data']);
-    $stmt->bindParam(':pol', $_POST['pol']);
-    $stmt->bindParam(':bio', $_POST['bio']);
-    $stmt->bindParam(':ok', $_POST['ok']);
-    $stmt->bindParam(':userid', $data['userid']);
-    $stmt->execute();
-      
-// Удаление строк из таблицы ap_lan3 с найденным userid
-    $stmt_delete = $db->prepare("DELETE FROM ap_lan3 WHERE userid = :userid");
-    $stmt_delete->bindParam(':userid', $data['userid']);
-    $stmt_delete->execute();
-  
-       foreach ($_POST['abilities'] as $ability) {
-    $stmtLang = $db->prepare("SELECT id FROM language2 WHERE name = ?");
-    $stmtLang->execute([$ability]);
-    $languageId = $stmtLang->fetchColumn();
-
-    $stmtApLang = $db->prepare("INSERT INTO ap_lan3 (userid, id_language) VALUES (:UserId, :languageId)");
-    $stmtApLang->bindParam(':languageId', $languageId);
-    $stmtApLang->bindParam(':UserId', $data['userid']);
-    $stmtApLang->execute();
-   
-}
-  }
-    catch(PDOException $e){
-      print('Error : ' . $e->getMessage());
-      exit();
-    }
-  }
-}
 }
 
 
