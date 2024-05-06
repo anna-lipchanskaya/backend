@@ -126,8 +126,8 @@ function db_get_Pass_Login($default = FALSE) {
   }
 }
 
-function db_get_Pass_Login_user($default = FALSE) {
-  $value = db_result("SELECT * FROM users WHERE login = :login");
+function db_get_Pass_Login_user($login, $default = FALSE) {
+  $value = db_result("SELECT * FROM users WHERE login = ?", $login);
     if (!$value) {
           return $default;
   }
