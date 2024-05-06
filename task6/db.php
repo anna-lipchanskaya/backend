@@ -157,7 +157,7 @@ function db_get_form_user($userid, $default = FALSE) {
   }
 }
 
-function db_set($name, $value) {
+function db_set_application($name, $value) {
   if (strlen($name) == 0) {
     return;
   }
@@ -172,6 +172,8 @@ function db_set($name, $value) {
     return db_command($q, $value, $name) > 0;
   }
 }
+
+
     function Query($query) {
     global $db;
     try {
