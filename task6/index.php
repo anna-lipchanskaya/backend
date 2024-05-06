@@ -352,7 +352,7 @@ while (in_array($login, $logins)) {
         {
           echo "Error";
         }
-    /*if ($result == "Error") {
+    if ($result === "Error") {
     // При наличии ошибок перезагружаем страницу и завершаем работу скрипта.
                   echo "Hello2";
     header('Location: index.php');
@@ -380,7 +380,7 @@ while (in_array($login, $logins)) {
     setcookie('bio_error_len', '', 100000);
     setcookie('ok_error', '', 100000);
     // TODO: тут необходимо удалить остальные Cookies.
-  }*/
+  }
 
   // Сохраняем куку с признаком успешного сохранения.
   setcookie('save', '1');
