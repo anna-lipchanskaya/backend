@@ -259,7 +259,7 @@ else
 {
 if ($_POST['button'] == "ok"){
   // Проверяем ошибки.
-  $errors = FALSE;
+  /*$errors = FALSE;
   if (empty($_POST['name'])) {
     // Выдаем куку на день с флажком об ошибке в поле name.
     setcookie('name_error', '1', time() + 24 * 60 * 60);
@@ -329,7 +329,7 @@ if (empty($_POST['bio'])) {
 }elseif (strlen($_POST['bio']) > 300) {
     setcookie('bio_error_len', '1', time() + 24 * 60 * 60);
             $errors = TRUE;
-        }
+        }*/
   // Сохраняем ранее введенное в форму значение на год.
   setcookie('name_value', $_POST['name'], time() + 365 * 24 * 60 * 60);
   setcookie('phone_value', $_POST['phone'], time() + 365 * 24 * 60 * 60);
@@ -344,13 +344,6 @@ if (empty($_POST['bio'])) {
 // TODO: тут необходимо проверить правильность заполнения всех остальных полей.
 // Сохранить в Cookie признаки ошибок и значения полей.
 // *************
-
-
-  if ($errors) {
-    // При наличии ошибок перезагружаем страницу и завершаем работу скрипта.
-    header('Location: index.php');
-    exit();
-  }
   else {
     // Удаляем Cookies с признаками ошибок.
     // Удаляем Cookies с признаками ошибок.
@@ -452,6 +445,13 @@ while (in_array($login, $logins)) {
     // TODO: Сохранение данных формы, логина и хеш md5() пароля в базу данных.
 
     // Подготовленный запрос. Не именованные метки.
+    $userid = -1;
+    $result = db_set_application($userid, $login, $hashedPassword, $_POST['name'], $_POST['phone'], $_POST['email'], $_POST['data'], $_POST['pol'], $_POST['bio'], $_POST['ok']);
+      if ($result == "Error") {
+    // При наличии ошибок перезагружаем страницу и завершаем работу скрипта.
+    header('Location: index.php');
+    exit();
+  }
     /*try {
       $stmt = $db->prepare("INSERT INTO application3 (name, phone, email, data, pol, bio, ok) VALUES (?, ?, ?, ?, ?, ?, ?)");
       $stmt->execute([$_POST['name'], $_POST['phone'], $_POST['email'], $_POST['data'], $_POST['pol'], $_POST['bio'], $_POST['ok']]);
