@@ -276,7 +276,7 @@ else{
     {
       return FALSE;
         }
-      $UserId = db_insert_id();
+    $UserId = db_insert_id();
 
       $q2 = db_command("INSERT INTO users (userid, login, password) VALUES (?, ?, ?)", $UserId, $login, $hashedPassword);
         if($q2 <= 0) 
@@ -296,7 +296,8 @@ else{
         if($q2 <= 0) 
     {
       return FALSE;
-        }   
+        }
+    $UserId = $userid;
 }
         foreach ($abilities as $ability) {
     $languageId = db_get_language_id($ability)['id'];
