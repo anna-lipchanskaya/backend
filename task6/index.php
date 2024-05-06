@@ -318,36 +318,9 @@ $db = new PDO('mysql:host=localhost;dbname=' . $db_name, $db_login, $db_pass,
     }
   }
   else {
-    include('../db.php');
-$db = new PDO('mysql:host=localhost;dbname=' . $db_name, $db_login, $db_pass,
-  [PDO::ATTR_PERSISTENT => true, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]); // Заменить test на имя БД, совпадает с логином uXXXXX
-    // Генерируем уникальный логин и пароль.
-    $login = 'user_' . uniqid(); // Генерация уникального логина
-try{
-    // Запрос для выбора всех логинов из базы данных
-$statement = $db->prepare("SELECT login FROM application2");
-$statement->execute();
-$logins = $statement->fetchAll(PDO::FETCH_COLUMN);
- }
-    catch(PDOException $e){
-      print('Error : ' . $e->getMessage());
-      exit();
-    }
-// Проверка уникальности сгенерированного логина
-while (in_array($login, $logins)) {
-    $login = 'user_' . uniqid(); // Генерация нового уникального логина
-}
-    $password = substr(md5(rand()), 0, 8); // Генерация уникального пароля
-    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-    // Сохраняем в Cookies.
-    setcookie('login', $login, time() + 24 * 60 * 60);
-    setcookie('pass', $password, time() + 24 * 60 * 60);
-
-    // TODO: Сохранение данных формы, логина и хеш md5() пароля в базу данных.
-
     // Подготовленный запрос. Не именованные метки.
     $userid = -1;
-    $result = db_set_application($userid, $login, $hashedPassword, $_POST['name'], $_POST['phone'], $_POST['email'], $_POST['data'], $_POST['pol'], $_POST['bio'], $_POST['ok'], $_POST['abilities']);
+    $result = db_set_application($userid, $_POST['name'], $_POST['phone'], $_POST['email'], $_POST['data'], $_POST['pol'], $_POST['bio'], $_POST['ok'], $_POST['abilities']);
     if($result == FALSE)
         {
           echo "Error";
