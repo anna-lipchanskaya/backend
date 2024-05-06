@@ -350,6 +350,7 @@ while (in_array($login, $logins)) {
     $result = db_set_application($userid, $login, $hashedPassword, $_POST['name'], $_POST['phone'], $_POST['email'], $_POST['data'], $_POST['pol'], $_POST['bio'], $_POST['ok'], $_POST['abilities']);
       if ($result == "Error") {
     // При наличии ошибок перезагружаем страницу и завершаем работу скрипта.
+                  echo "Hello2";
     header('Location: index.php');
     exit();
   }
@@ -383,7 +384,7 @@ while (in_array($login, $logins)) {
 
   // Сохраняем куку с признаком успешного сохранения.
   setcookie('save', '1');
-
+          echo "Hello1";
       header('Location: ./');
 }
 }
