@@ -267,7 +267,7 @@ else{
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
     // Сохраняем в Cookies.
     setcookie('login', $login, time() + 24 * 60 * 60);
-    setcookie('pass', $hashedPassword, time() + 24 * 60 * 60);
+    setcookie('pass', $password, time() + 24 * 60 * 60);
 
     // TODO: Сохранение данных формы, логина и хеш md5() пароля в базу данных.
 
