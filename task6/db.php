@@ -126,6 +126,16 @@ function db_get_Pass_Login($default = FALSE) {
   }
 }
 
+function db_get_Pass_Login_user($default = FALSE) {
+  $value = db_result("SELECT * FROM users WHERE login = :login");
+    if (!$value) {
+          return $default;
+  }
+  else {
+    return $value;
+  }
+}
+
 function db_set($name, $value) {
   if (strlen($name) == 0) {
     return;
