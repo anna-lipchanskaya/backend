@@ -274,14 +274,14 @@ if ($_POST['button'] == "ok"){
       session_start() && !empty($_SESSION['login'])) {
     // TODO: перезаписать данные в БД новыми данными,
     // кроме логина и пароля.
-    $data = db_get_Pass_Login_user($_SESSION['login'])['userid'];
-    
+    $userid = db_get_Pass_Login_user($_SESSION['login'])['userid'];
   }
   else {
     // Подготовленный запрос. Не именованные метки.
     $userid = -1;
-    $result = db_set_application($userid, $_POST['name'], $_POST['phone'], $_POST['email'], $_POST['data'], $_POST['pol'], $_POST['bio'], $_POST['ok'], $_POST['abilities']);
-    if($result == FALSE)
+  }
+   $result = db_set_application($userid, $_POST['name'], $_POST['phone'], $_POST['email'], $_POST['data'], $_POST['pol'], $_POST['bio'], $_POST['ok'], $_POST['abilities']);
+  if($result == FALSE)
         {
           echo "Error";
           exit();
