@@ -285,7 +285,7 @@ else{
         }
   }
   else {
-     $q1 = db_command("UPDATE application3 UPDATE application3 SET name = ?, phone = ?, email = ?,  data = ?, pol = ?, bio = ?, ok = ? WHERE userid = ?", $name, $phone, $email, $data, $pol, $bio, $ok, &userid);
+     $q1 = db_command("UPDATE application3 UPDATE application3 SET name = ?, phone = ?, email = ?,  data = ?, pol = ?, bio = ?, ok = ? WHERE userid = ?", $name, $phone, $email, $data, $pol, $bio, $ok, $userid);
       if($q1 <= 0) 
     {
       return FALSE;
