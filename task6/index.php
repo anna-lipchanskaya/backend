@@ -320,7 +320,6 @@ if ($_POST['button'] == "ok"){
           echo "Hello1";
       header('Location: ./');
 }
-}
   else
 {
     if ($_POST['button'] == "exit") {
