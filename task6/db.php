@@ -232,7 +232,21 @@ if (empty($bio)) {
 if($errors == FALSE) return FALSE;
   $v = db_get_UserId($userid);
   if ($v == FALSE) {
-    $q = "INSERT INTO variable VALUES (?, ?)";
+      $q1 = "INSERT INTO application3 (name, phone, email, data, pol, bio, ok) VALUES (?, ?, ?, ?, ?, ?, ?)";
+      $UserId = $db->lastInsertId();
+
+      $q2 = "INSERT INTO users (userid, login, password) VALUES (?, ?, ?)";
+      $stmt->execute([$UserId, $login, $hashedPassword]);
+
+      foreach ($_POST['abilities'] as $ability) {
+    $stmtLang = $db->prepare("SELECT id FROM language2 WHERE name = ?");
+    $stmtLang->execute([$ability]);
+    $languageId = $stmtLang->fetchColumn();
+
+    $stmtApLang = $db->prepare("INSERT INTO ap_lan3 (userid, id_language) VALUES (:UserId, :languageId)");
+    $stmtApLang->bindParam(':languageId', $languageId);
+    $stmtApLang->bindParam(':UserId', $UserId);
+    $stmtApLang->execute();
     return db_command($q, $name, $value) > 0;
   }
   else {
