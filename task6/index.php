@@ -324,10 +324,10 @@ $db = new PDO('mysql:host=localhost;dbname=' . $db_name, $db_login, $db_pass,
     if($result == FALSE)
         {
           echo "Error";
+          exit();
         }
     if ($result === "Error") {
     // При наличии ошибок перезагружаем страницу и завершаем работу скрипта.
-                  echo "Hello2";
     header('Location: index.php');
     exit();
   }
