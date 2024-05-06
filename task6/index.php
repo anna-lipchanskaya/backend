@@ -258,78 +258,6 @@ $abilities_serialized = serialize($languages);
 else 
 {
 if ($_POST['button'] == "ok"){
-  // Проверяем ошибки.
-  /*$errors = FALSE;
-  if (empty($_POST['name'])) {
-    // Выдаем куку на день с флажком об ошибке в поле name.
-    setcookie('name_error', '1', time() + 24 * 60 * 60);
-    $errors = TRUE;
-  }elseif (!preg_match('/^[\p{L}\s]+$/u', $_POST['name'])) {
-    setcookie('name_error_len', '1', time() + 24 * 60 * 60);
-    $errors = TRUE;
-} elseif (strlen($_POST['name']) > 150) {
-    setcookie('name_error_struct', '1', time() + 24 * 60 * 60);
-    $errors = TRUE;
-}
-  if (empty($_POST['phone'])) {
-    setcookie('phone_error', '1', time() + 24 * 60 * 60);
-    $errors = TRUE;
-} elseif (!preg_match('/^\d+$/', $_POST['phone'])) {
-    setcookie('phone_error_struct', '1', time() + 24 * 60 * 60);
-    $errors = TRUE;
-}elseif (strlen($_POST['phone']) > 11) {
-    setcookie('phone_error_len', '1', time() + 24 * 60 * 60);
-            $errors = TRUE;
-        }
-  if (empty($_POST['email'])) {
-    setcookie('email_error', '1', time() + 24 * 60 * 60);
-    $errors = TRUE;
-} elseif (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
-    setcookie('email_error_struct', '1', time() + 24 * 60 * 60);
-    $errors = TRUE;
-}elseif (strlen($_POST['email']) > 150) {
-    setcookie('email_error_len', '1', time() + 24 * 60 * 60);
-            $errors = TRUE;
-        }
-if (empty($_POST['pol'])) {
-    setcookie('pol_error', '1', time() + 24 * 60 * 60);
-    $errors = TRUE;
-} elseif ($_POST['pol'] !== 'W' && $_POST['pol'] !== 'M') {
-    setcookie('pol_error_struct', '1', time() + 24 * 60 * 60);
-    $errors = TRUE;
-}
-if ($_POST['ok'] !== 'on') {
-    setcookie('ok_error', '1', time() + 24 * 60 * 60);
-    $errors = TRUE;
-}
-  if (empty($_POST['data'])) {
-    setcookie('data_error', '1', time() + 24 * 60 * 60);
-  $errors = TRUE;
-} elseif (!preg_match('/^\d{4}-\d{2}-\d{2}$/', $_POST['data'])) {
-    setcookie('data_error_struct', '1', time() + 24 * 60 * 60);
-  $errors = TRUE;
-}
-$allowed_languages = array("Pascal", "C", "C++", "JavaScript", "PHP", "Python", "Java", "Haskel");
-
-if (empty($_POST['abilities'])) {
-    setcookie('abilities_error', '1', time() + 24 * 60 * 60);
-    $errors = TRUE;
-} else {
-    foreach ($_POST['abilities'] as $language) {
-        if (!in_array($language, $allowed_languages)) {
-    setcookie('abilities_error_struct', '1', time() + 24 * 60 * 60);
-            $errors = TRUE;
-            break;
-        }
-    }
-}
-if (empty($_POST['bio'])) {
-    setcookie('bio_error', '1', time() + 24 * 60 * 60);
-  $errors = TRUE;
-}elseif (strlen($_POST['bio']) > 300) {
-    setcookie('bio_error_len', '1', time() + 24 * 60 * 60);
-            $errors = TRUE;
-        }*/
   // Сохраняем ранее введенное в форму значение на год.
   setcookie('name_value', $_POST['name'], time() + 365 * 24 * 60 * 60);
   setcookie('phone_value', $_POST['phone'], time() + 365 * 24 * 60 * 60);
@@ -448,36 +376,12 @@ while (in_array($login, $logins)) {
     setcookie('ok_error', '', 100000);
     // TODO: тут необходимо удалить остальные Cookies.
   }
-    /*try {
-      $stmt = $db->prepare("INSERT INTO application3 (name, phone, email, data, pol, bio, ok) VALUES (?, ?, ?, ?, ?, ?, ?)");
-      $stmt->execute([$_POST['name'], $_POST['phone'], $_POST['email'], $_POST['data'], $_POST['pol'], $_POST['bio'], $_POST['ok']]);
-      $UserId = $db->lastInsertId();
-
-      $stmt = $db->prepare("INSERT INTO users (userid, login, password) VALUES (?, ?, ?)");
-      $stmt->execute([$UserId, $login, $hashedPassword]);
-
-      foreach ($_POST['abilities'] as $ability) {
-    $stmtLang = $db->prepare("SELECT id FROM language2 WHERE name = ?");
-    $stmtLang->execute([$ability]);
-    $languageId = $stmtLang->fetchColumn();
-
-    $stmtApLang = $db->prepare("INSERT INTO ap_lan3 (userid, id_language) VALUES (:UserId, :languageId)");
-    $stmtApLang->bindParam(':languageId', $languageId);
-    $stmtApLang->bindParam(':UserId', $UserId);
-    $stmtApLang->execute();
-}
-    }
-    catch(PDOException $e){
-      print('Error : ' . $e->getMessage());
-      exit();
-    }
-
-  }*/
 
   // Сохраняем куку с признаком успешного сохранения.
   setcookie('save', '1');
 
       header('Location: ./');
+}
 }
   else
 {
