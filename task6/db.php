@@ -50,10 +50,10 @@ function db_result($query) {
 
 function db_command($query) {
   global $db;
-  $q = $db->prepare($query);
+  $stmt = $db->prepare($query);
   $args = func_get_args();
   array_shift($args);
-  $res = $q->execute($args);
+  $res = $stmt->execute($args);
   return $res;
 }
 function db_insert_id() {
