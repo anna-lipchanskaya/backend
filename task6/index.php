@@ -340,33 +340,6 @@ if (empty($_POST['bio'])) {
   setcookie('bio_value', $_POST['bio'], time() + 365 * 24 * 60 * 60);
   setcookie('ok_value', $_POST['ok'], time() + 365 * 24 * 60 * 60);
 
-// *************
-// TODO: тут необходимо проверить правильность заполнения всех остальных полей.
-// Сохранить в Cookie признаки ошибок и значения полей.
-// *************
-  else {
-    // Удаляем Cookies с признаками ошибок.
-    // Удаляем Cookies с признаками ошибок.
-    setcookie('name_error', '', 100000);
-    setcookie('name_error_len', '', 100000);
-    setcookie('name_error_struct', '', 100000);
-    setcookie('phone_error', '', 100000);
-    setcookie('phone_error_len', '', 100000);
-    setcookie('phone_error_struct', '', 100000);
-    setcookie('email_error', '', 100000);
-    setcookie('email_error_len', '', 100000);
-    setcookie('email_error_struct', '', 100000);
-    setcookie('data_error', '', 100000);
-    setcookie('data_error_struct', '', 100000);
-    setcookie('pol_error', '', 100000);
-    setcookie('pol_error_struct', '', 100000);
-    setcookie('abilities_error', '', 100000);
-    setcookie('abilities_error_struct', '', 100000);
-    setcookie('bio_error', '', 100000);
-    setcookie('bio_error_len', '', 100000);
-    setcookie('ok_error', '', 100000);
-    // TODO: тут необходимо удалить остальные Cookies.
-  }
 
   // Проверяем меняются ли ранее сохраненные данные или отправляются новые.
   if (!empty($_COOKIE[session_name()]) &&
@@ -446,11 +419,34 @@ while (in_array($login, $logins)) {
 
     // Подготовленный запрос. Не именованные метки.
     $userid = -1;
-    $result = db_set_application($userid, $login, $hashedPassword, $_POST['name'], $_POST['phone'], $_POST['email'], $_POST['data'], $_POST['pol'], $_POST['bio'], $_POST['ok']);
+    $result = db_set_application($userid, $login, $hashedPassword, $_POST['name'], $_POST['phone'], $_POST['email'], $_POST['data'], $_POST['pol'], $_POST['bio'], $_POST['ok'], $_POST['abilities']);
       if ($result == "Error") {
     // При наличии ошибок перезагружаем страницу и завершаем работу скрипта.
     header('Location: index.php');
     exit();
+  }
+     else {
+    // Удаляем Cookies с признаками ошибок.
+    // Удаляем Cookies с признаками ошибок.
+    setcookie('name_error', '', 100000);
+    setcookie('name_error_len', '', 100000);
+    setcookie('name_error_struct', '', 100000);
+    setcookie('phone_error', '', 100000);
+    setcookie('phone_error_len', '', 100000);
+    setcookie('phone_error_struct', '', 100000);
+    setcookie('email_error', '', 100000);
+    setcookie('email_error_len', '', 100000);
+    setcookie('email_error_struct', '', 100000);
+    setcookie('data_error', '', 100000);
+    setcookie('data_error_struct', '', 100000);
+    setcookie('pol_error', '', 100000);
+    setcookie('pol_error_struct', '', 100000);
+    setcookie('abilities_error', '', 100000);
+    setcookie('abilities_error_struct', '', 100000);
+    setcookie('bio_error', '', 100000);
+    setcookie('bio_error_len', '', 100000);
+    setcookie('ok_error', '', 100000);
+    // TODO: тут необходимо удалить остальные Cookies.
   }
     /*try {
       $stmt = $db->prepare("INSERT INTO application3 (name, phone, email, data, pol, bio, ok) VALUES (?, ?, ?, ?, ?, ?, ?)");
