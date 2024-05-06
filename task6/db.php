@@ -147,6 +147,16 @@ FROM ap_lan3 AS a JOIN language2 AS l ON a.id_language = l.id WHERE a.userid = ?
 }
 }
 
+function db_get_form_user($userid, $default = FALSE) {
+  $value = db_result("SELECT name, phone, email, data, pol, bio, ok  FROM application3 WHERE userid = ?", $userid);
+    if (!$value) {
+          return $default;
+  }
+  else {
+    return $value;
+  }
+}
+
 function db_set($name, $value) {
   if (strlen($name) == 0) {
     return;
