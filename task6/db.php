@@ -257,7 +257,7 @@ else{
       $q2 = db_command("INSERT INTO users (userid, login, password) VALUES (?, ?, ?)", $UserId, $login, $hashedPassword);
         if($q2 <= 0) 
     {
-      return FALSE
+      return FALSE;
         }
 
       foreach ($abilities as $ability) {
