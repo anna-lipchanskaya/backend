@@ -10,7 +10,6 @@ echo 'Вы успешно авторизовались и видите защи�
     <form action="" method="POST">
             <input name="delete"/>
           <input type="submit" name = "button" value="Delete" />
-        <br>
             <input name="update"/>
           <input type="submit" name = "button" value="Update" />
     </form>
@@ -27,16 +26,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 if ($result) {
     // userid существует - выполняем операции удаления
     $result = db_delete_by_id($userid);
-    echo "Данные успешно удалены.";
+    echo "Данные успешно удалены. <br>";
     header('Location: admin.php');
     exit();
 }
 else {
-    echo "userid не найден в базе данных.";
+    echo "userid не найден в базе данных. <br>";
 }
     }
     else{
-            echo "заполните userid";
+            echo "заполните userid <br>";
         }
     }
         if($_POST['button'] == "Update")
@@ -55,11 +54,11 @@ else {
         exit();
     }
     else {
-    echo "userid не найден в базе данных.";
+    echo "userid не найден в базе данных. <br>";
 }
     }
         else{
-            echo "заполните userid";
+            echo "заполните userid <br>";
         }
     }
 }
