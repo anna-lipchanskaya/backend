@@ -157,7 +157,17 @@ function db_get_form_user($userid, $default = FALSE) {
   }
 }
 
-function db_set_application($userid, $name, $phone, $email, $pol, $data, $abilities, $bio, $ok) {
+function db_get_language_id($name, $default = FALSE) {
+  $value = db_result("SELECT id FROM language2 WHERE name = ?", $name);
+    if (!$value) {
+          return $default;
+  }
+  else {
+    return $value;
+  }
+}
+
+function db_set_application($userid, $login, $hashedPassword, $name, $phone, $email, $pol, $data, $abilities, $bio, $ok) {
  $errors = FALSE;
   if (empty($name)) {
     // Выдаем куку на день с флажком об ошибке в поле name.
@@ -229,30 +239,24 @@ if (empty($bio)) {
     setcookie('bio_error_len', '1', time() + 24 * 60 * 60);
             $errors = TRUE;
         }
-if($errors == FALSE) return FALSE;
+if($errors == FALSE) return "Error";
   $v = db_get_UserId($userid);
   if ($v == FALSE) {
-      $q1 = "INSERT INTO application3 (name, phone, email, data, pol, bio, ok) VALUES (?, ?, ?, ?, ?, ?, ?)";
-      $UserId = $db->lastInsertId();
+      $q1 = db_command("INSERT INTO application3 (name, phone, email, data, pol, bio, ok) VALUES (?, ?, ?, ?, ?, ?, ?)", $name, $phone, $email, $data, $pol, $bio, $ok);
+      $UserId = db_insert_id();
 
-      $q2 = "INSERT INTO users (userid, login, password) VALUES (?, ?, ?)";
-      $stmt->execute([$UserId, $login, $hashedPassword]);
+      $q2 = db_command("INSERT INTO users (userid, login, password) VALUES (?, ?, ?)", $UserId, $login, $hashedPassword);
 
-      foreach ($_POST['abilities'] as $ability) {
-    $stmtLang = $db->prepare("SELECT id FROM language2 WHERE name = ?");
-    $stmtLang->execute([$ability]);
-    $languageId = $stmtLang->fetchColumn();
-
-    $stmtApLang = $db->prepare("INSERT INTO ap_lan3 (userid, id_language) VALUES (:UserId, :languageId)");
-    $stmtApLang->bindParam(':languageId', $languageId);
-    $stmtApLang->bindParam(':UserId', $UserId);
-    $stmtApLang->execute();
-    return db_command($q, $name, $value) > 0;
+      foreach ($abilities as $ability) {
+    $languageId = db_get_language_id($ability);
+    $q3 = db_command("INSERT INTO ap_lan3 (userid, id_language) VALUES (?, ?)", $UserId, $languageId);
+      }
+    return db_command($q, $name, $phone, $email, $data, $pol, $bio, $ok) > 0;
   }
-  else {
+  /*else {
     $q = "UPDATE variable SET value = ? WHERE name = ?";
-    return db_command($q, $value, $name) > 0;
-  }
+    return (db_command($q1, $name, $name) > 0);
+  }*/
 }
 
 
