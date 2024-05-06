@@ -129,11 +129,6 @@ else
 
   // TODO: Проверть есть ли такой логин и пароль в базе данных.
   // Выдать сообщение об ошибках.
-
-    include('../db.php');
-$db = new PDO('mysql:host=localhost;dbname=' . $db_name, $db_login, $db_pass,
-  [PDO::ATTR_PERSISTENT => true, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]); // Заменить test на имя БД, совпадает с логином uXXXXX
-  // Получение данных из формы
     $login = $_POST['login'];
     $password = $_POST['password'];
 
@@ -142,7 +137,7 @@ $db = new PDO('mysql:host=localhost;dbname=' . $db_name, $db_login, $db_pass,
 // Подготовка SQL-запроса
     $stmt = $db->prepare("SELECT * FROM users WHERE login = :login");
     $stmt->execute(array(':login' => $login));
-    $use = $stmt->fetch();
+    $use = db_get_Pass_Login_user();
 
 
 
