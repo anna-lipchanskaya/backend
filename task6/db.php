@@ -261,7 +261,7 @@ else{
         }
 
       foreach ($abilities as $ability) {
-    $languageId = db_get_language_id($ability);
+    $languageId = db_get_language_id($ability)['id'];
     $q3 = db_command("INSERT INTO ap_lan3 (userid, id_language) VALUES (?, ?)", $UserId, $languageId);
             if($q3 <= 0) 
     {
