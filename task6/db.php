@@ -135,6 +135,8 @@ function db_get_Pass_Login_user($login, $default = FALSE) {
     return $value;
   }
 }
+"SELECT l.name
+FROM ap_lan3 AS a JOIN language2 AS l ON a.id_language = l.id WHERE a.userid = :userid"
 
 function db_set($name, $value) {
   if (strlen($name) == 0) {
