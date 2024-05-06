@@ -348,16 +348,16 @@ while (in_array($login, $logins)) {
     // Подготовленный запрос. Не именованные метки.
     $userid = -1;
     $result = db_set_application($userid, $login, $hashedPassword, $_POST['name'], $_POST['phone'], $_POST['email'], $_POST['data'], $_POST['pol'], $_POST['bio'], $_POST['ok'], $_POST['abilities']);
-      /*if ($result == "Error") {
+    if($result == FALSE)
+        {
+          echo "Error";
+        }
+    /*if ($result == "Error") {
     // При наличии ошибок перезагружаем страницу и завершаем работу скрипта.
                   echo "Hello2";
     header('Location: index.php');
     exit();
-  }*/
-        if($result == FALSE)
-        {
-          echo "Error";
-        }
+  }
      else {
     // Удаляем Cookies с признаками ошибок.
     // Удаляем Cookies с признаками ошибок.
@@ -380,7 +380,7 @@ while (in_array($login, $logins)) {
     setcookie('bio_error_len', '', 100000);
     setcookie('ok_error', '', 100000);
     // TODO: тут необходимо удалить остальные Cookies.
-  }
+  }*/
 
   // Сохраняем куку с признаком успешного сохранения.
   setcookie('save', '1');
