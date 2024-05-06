@@ -353,6 +353,10 @@ while (in_array($login, $logins)) {
     header('Location: index.php');
     exit();
   }
+        if($result == FALSE)
+        {
+          echo "Error";
+        }
      else {
     // Удаляем Cookies с признаками ошибок.
     // Удаляем Cookies с признаками ошибок.
