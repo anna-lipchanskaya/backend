@@ -154,12 +154,7 @@ else
   // Если все ок, то авторизуем пользователя.
   $_SESSION['login'] = $login;
   // Записываем ID пользователя.
-    // Получаем personId из таблицы personAuthentificationData
-    $stmt = $db->prepare("SELECT userid  FROM users WHERE login = :login");
-        $stmt->execute([':login' => $login]);
-    $data = $stmt->fetch(PDO::FETCH_ASSOC);
-
-    $_SESSION['uid'] = $data['userid'];
+    $_SESSION['uid'] = $use['userid'];
 
   // Делаем перенаправление.
   header('Location: ./');
