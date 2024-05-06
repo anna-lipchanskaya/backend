@@ -294,10 +294,47 @@ else{
       }
     return TRUE;
   }
-  /*else {
-    $q = "UPDATE variable SET value = ? WHERE name = ?";
-    return (db_command($q1, $name, $name) > 0);
-  }*/
+  else {
+try
+    {
+    $stmt = $db->prepare("SELECT userid  FROM users WHERE login = :login");
+    $stmt->execute(['login' => $_SESSION['login']]);
+    $data = db_get_Pass_Login_user($_SESSION['login']);
+    $sql = "UPDATE application3 SET name = :name, phone = :phone, email = :email,  data = :data, pol = :pol, bio = :bio, ok = :ok WHERE userid = :userid";
+    
+    $stmt = $db->prepare($sql);
+    $stmt->bindParam(':name', $_POST['name']);
+    $stmt->bindParam(':phone', $_POST['phone']);
+    $stmt->bindParam(':email', $_POST['email']);
+    $stmt->bindParam(':data', $_POST['data']);
+    $stmt->bindParam(':pol', $_POST['pol']);
+    $stmt->bindParam(':bio', $_POST['bio']);
+    $stmt->bindParam(':ok', $_POST['ok']);
+    $stmt->bindParam(':userid', $data['userid']);
+    $stmt->execute();
+      
+// Удаление строк из таблицы ap_lan3 с найденным userid
+    $stmt_delete = $db->prepare("DELETE FROM ap_lan3 WHERE userid = :userid");
+    $stmt_delete->bindParam(':userid', $data['userid']);
+    $stmt_delete->execute();
+  
+       foreach ($_POST['abilities'] as $ability) {
+    $stmtLang = $db->prepare("SELECT id FROM language2 WHERE name = ?");
+    $stmtLang->execute([$ability]);
+    $languageId = $stmtLang->fetchColumn();
+
+    $stmtApLang = $db->prepare("INSERT INTO ap_lan3 (userid, id_language) VALUES (:UserId, :languageId)");
+    $stmtApLang->bindParam(':languageId', $languageId);
+    $stmtApLang->bindParam(':UserId', $data['userid']);
+    $stmtApLang->execute();
+   
+}
+  }
+    catch(PDOException $e){
+      print('Error : ' . $e->getMessage());
+      exit();
+    }
+  }
 }
 }
 
