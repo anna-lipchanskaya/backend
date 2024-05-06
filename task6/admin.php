@@ -59,7 +59,6 @@ if ($result) {
     // userid существует - выполняем операции удаления
     $result = db_delete_by_id($userid);
     echo "Данные успешно удалены.";
-    header('Location: admin.php');
 }
 else {
     echo "userid не найден в базе данных.";
