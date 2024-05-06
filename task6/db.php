@@ -168,6 +168,16 @@ function db_get_language_id($name, $default = FALSE) {
   }
 }
 
+function db_get_Logins() {
+  $value = db_query("SELECT login FROM users");
+  if ($value == FALSE) {
+    return FALSE;
+  }
+  else {
+    return $value;
+}
+}
+
 function db_set_application($userid, $login, $hashedPassword, $name, $phone, $email, $data, $pol, $bio, $ok, $abilities) {
  $errors = FALSE;
   if (empty($name)) {
@@ -247,6 +257,20 @@ if($errors == TRUE)
 else{
   $v = db_get_UserId($userid);
   if ($v == FALSE) {
+    $login = 'user_' . uniqid(); // Генерация уникального логина
+  $logins = db_get_Logins();
+  // Проверка уникальности сгенерированного логина
+  while (in_array($login, $logins)) {
+    $login = 'user_' . uniqid(); // Генерация нового уникального логина
+}
+    $password = substr(md5(rand()), 0, 8); // Генерация уникального пароля
+    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+    // Сохраняем в Cookies.
+    setcookie('login', $login, time() + 24 * 60 * 60);
+    setcookie('pass', $password, time() + 24 * 60 * 60);
+
+    // TODO: Сохранение данных формы, логина и хеш md5() пароля в базу данных.
+
       $q1 = db_command("INSERT INTO application3 (name, phone, email, data, pol, bio, ok) VALUES (?, ?, ?, ?, ?, ?, ?)", $name, $phone, $email, $data, $pol, $bio, $ok);
     if($q1 <= 0) 
     {
