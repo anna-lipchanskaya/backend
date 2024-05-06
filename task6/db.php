@@ -157,13 +157,81 @@ function db_get_form_user($userid, $default = FALSE) {
   }
 }
 
-function db_set_application($name, $value) {
-  if (strlen($name) == 0) {
-    return;
-  }
+function db_set_application($userid, $name, $phone, $email, $pol, $data, $abilities, $bio, $ok) {
+ $errors = FALSE;
+  if (empty($name)) {
+    // Выдаем куку на день с флажком об ошибке в поле name.
+    setcookie('name_error', '1', time() + 24 * 60 * 60);
+    $errors = TRUE;
+  }elseif (!preg_match('/^[\p{L}\s]+$/u', $name)) {
+    setcookie('name_error_len', '1', time() + 24 * 60 * 60);
+    $errors = TRUE;
+} elseif (strlen($name) > 150) {
+    setcookie('name_error_struct', '1', time() + 24 * 60 * 60);
+    $errors = TRUE;
+}
+  if (empty($phone)) {
+    setcookie('phone_error', '1', time() + 24 * 60 * 60);
+    $errors = TRUE;
+} elseif (!preg_match('/^\d+$/', $phone)) {
+    setcookie('phone_error_struct', '1', time() + 24 * 60 * 60);
+    $errors = TRUE;
+}elseif (strlen($phone) > 11) {
+    setcookie('phone_error_len', '1', time() + 24 * 60 * 60);
+            $errors = TRUE;
+        }
+  if (empty($email)) {
+    setcookie('email_error', '1', time() + 24 * 60 * 60);
+    $errors = TRUE;
+} elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    setcookie('email_error_struct', '1', time() + 24 * 60 * 60);
+    $errors = TRUE;
+}elseif (strlen($email) > 150) {
+    setcookie('email_error_len', '1', time() + 24 * 60 * 60);
+            $errors = TRUE;
+        }
+if (empty($pol)) {
+    setcookie('pol_error', '1', time() + 24 * 60 * 60);
+    $errors = TRUE;
+} elseif ($pol !== 'W' && $pol !== 'M') {
+    setcookie('pol_error_struct', '1', time() + 24 * 60 * 60);
+    $errors = TRUE;
+}
+if ($ok !== 'on') {
+    setcookie('ok_error', '1', time() + 24 * 60 * 60);
+    $errors = TRUE;
+}
+  if (empty($data)) {
+    setcookie('data_error', '1', time() + 24 * 60 * 60);
+  $errors = TRUE;
+} elseif (!preg_match('/^\d{4}-\d{2}-\d{2}$/', $data)) {
+    setcookie('data_error_struct', '1', time() + 24 * 60 * 60);
+  $errors = TRUE;
+}
+$allowed_languages = array("Pascal", "C", "C++", "JavaScript", "PHP", "Python", "Java", "Haskel");
 
-  $v = db_get($name);
-  if ($v === FALSE) {
+if (empty($abilities)) {
+    setcookie('abilities_error', '1', time() + 24 * 60 * 60);
+    $errors = TRUE;
+} else {
+    foreach ($abilities as $language) {
+        if (!in_array($language, $allowed_languages)) {
+    setcookie('abilities_error_struct', '1', time() + 24 * 60 * 60);
+            $errors = TRUE;
+            break;
+        }
+    }
+}
+if (empty($bio)) {
+    setcookie('bio_error', '1', time() + 24 * 60 * 60);
+  $errors = TRUE;
+}elseif (strlen($bio) > 300) {
+    setcookie('bio_error_len', '1', time() + 24 * 60 * 60);
+            $errors = TRUE;
+        }
+if($errors == FALSE) return FALSE;
+  $v = db_get_UserId($userid);
+  if ($v == FALSE) {
     $q = "INSERT INTO variable VALUES (?, ?)";
     return db_command($q, $name, $value) > 0;
   }
