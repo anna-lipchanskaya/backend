@@ -211,10 +211,7 @@ $errors = array();
     // предварительно санитизовав.
     $data = db_get_Pass_Login_user($_SESSION['login']);
     
-$stmt = $db->prepare("SELECT l.name
-FROM ap_lan3 AS a JOIN language2 AS l ON a.id_language = l.id WHERE a.userid = :userid");
-$stmt->execute(['userid' => $data['userid']]);
-$rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$rows = db_get_Languages($_SESSION['uid']);
 $languages = [];
 foreach ($rows as $row) {
     $languages[] = htmlspecialchars($row['name']);
@@ -254,17 +251,6 @@ $abilities_serialized = serialize($languages);
         $_SESSION['uid']);
 
   }
-  /**else{
-          if (!empty($_SERVER['PHP_AUTH_USER']) ||
-    !empty($_SERVER['PHP_AUTH_PW']) ||
-    $_SERVER['PHP_AUTH_USER'] == 'admin' ||
-    md5($_SERVER['PHP_AUTH_PW']) == md5('123'))
-  {
-    header('Location: admin.php');
-    exit();
-  }
-  }
-  */
   // Включаем содержимое файла form.php.
   // В нем будут доступны переменные $messages, $errors и $values для вывода 
   // сообщений, полей с ранее заполненными данными и признаками ошибок.
