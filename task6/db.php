@@ -53,7 +53,8 @@ function db_command($query) {
   $q = $db->prepare($query);
   $args = func_get_args();
   array_shift($args);
-  return $res = $q->execute($args);
+  $res = $q->execute($args);
+  return $res;
 }
 function db_insert_id() {
   global $db;
@@ -239,24 +240,41 @@ if (empty($bio)) {
     setcookie('bio_error_len', '1', time() + 24 * 60 * 60);
             $errors = TRUE;
         }
-if($errors == FALSE) return "Error";
+if($errors == FALSE) 
+{
+  return "Error";
+}
+else{
   $v = db_get_UserId($userid);
   if ($v == FALSE) {
       $q1 = db_command("INSERT INTO application3 (name, phone, email, data, pol, bio, ok) VALUES (?, ?, ?, ?, ?, ?, ?)", $name, $phone, $email, $data, $pol, $bio, $ok);
+    if($q1 <= 0) 
+    {
+      return FALSE;
+        }
       $UserId = db_insert_id();
 
       $q2 = db_command("INSERT INTO users (userid, login, password) VALUES (?, ?, ?)", $UserId, $login, $hashedPassword);
+        if($q2 <= 0) 
+    {
+      return FALSE
+        }
 
       foreach ($abilities as $ability) {
     $languageId = db_get_language_id($ability);
     $q3 = db_command("INSERT INTO ap_lan3 (userid, id_language) VALUES (?, ?)", $UserId, $languageId);
+            if($q3 <= 0) 
+    {
+      return FALSE;
+        }
       }
-    return db_command($q, $name, $phone, $email, $data, $pol, $bio, $ok) > 0;
+    return TRUE;
   }
   /*else {
     $q = "UPDATE variable SET value = ? WHERE name = ?";
     return (db_command($q1, $name, $name) > 0);
   }*/
+}
 }
 
 
