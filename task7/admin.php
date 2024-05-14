@@ -51,8 +51,7 @@ else {
     $_SESSION['login'] = htmlspecialchars($data['login'], ENT_QUOTES, 'UTF-8');
 
     $_SESSION['uid'] = $userid;
-    header(' Location: /index?
-    msg=Ошибка');
+    header(' Location: /');
         exit();
     }
     else {
