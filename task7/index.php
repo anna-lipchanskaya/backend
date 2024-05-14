@@ -250,9 +250,7 @@ $abilities_serialized = serialize($languages);
   }
   else{
           if (!empty($_SERVER['PHP_AUTH_USER']) ||
-    !empty($_SERVER['PHP_AUTH_PW']) ||
-    $_SERVER['PHP_AUTH_USER'] == 'admin' ||
-    md5($_SERVER['PHP_AUTH_PW']) == md5('123'))
+    !empty($_SERVER['PHP_AUTH_PW']))
   {
     header('Location: admin.php');
     exit();
@@ -269,13 +267,13 @@ else
 if ($_POST['button'] == "ok"){
   // Сохраняем ранее введенное в форму значение на год.
   setcookie('name_value', $_POST['name'], time() + 365 * 24 * 60 * 60, '/', '', false, true);
-  setcookie('phone_value', $_POST['phone'], time() + 365 * 24 * 60 * 60);
-  setcookie('email_value', $_POST['email'], time() + 365 * 24 * 60 * 60);
-  setcookie('data_value', $_POST['data'], time() + 365 * 24 * 60 * 60);
-  setcookie('pol_value', $_POST['pol'], time() + 365 * 24 * 60 * 60);
-  setcookie('abilities_value', serialize($_POST['abilities']), time() + 365 * 24 * 60 * 60);
-  setcookie('bio_value', $_POST['bio'], time() + 365 * 24 * 60 * 60);
-  setcookie('ok_value', $_POST['ok'], time() + 365 * 24 * 60 * 60);
+  setcookie('phone_value', $_POST['phone'], time() + 365 * 24 * 60 * 60, '/', '', false, true);
+  setcookie('email_value', $_POST['email'], time() + 365 * 24 * 60 * 60, '/', '', false, true);
+  setcookie('data_value', $_POST['data'], time() + 365 * 24 * 60 * 60, '/', '', false, true);
+  setcookie('pol_value', $_POST['pol'], time() + 365 * 24 * 60 * 60, '/', '', false, true);
+  setcookie('abilities_value', serialize($_POST['abilities']), time() + 365 * 24 * 60 * 60, '/', '', false, true);
+  setcookie('bio_value', $_POST['bio'], time() + 365 * 24 * 60 * 60, '/', '', false, true);
+  setcookie('ok_value', $_POST['ok'], time() + 365 * 24 * 60 * 60, '/', '', false, true);
 
 
   // Проверяем меняются ли ранее сохраненные данные или отправляются новые.
