@@ -47,7 +47,7 @@ else {
     $result = db_get_UserId($userid);
     if ($result) {
     $data = db_get_Login($userid);
-    $_SESSION['login'] = $data['login'];
+    $_SESSION['login'] = htmlspecialchars($data['login'], ENT_QUOTES, 'UTF-8');
 
     $_SESSION['uid'] = $userid;
     header('Location: index.php');
