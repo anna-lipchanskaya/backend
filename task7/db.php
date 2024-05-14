@@ -25,7 +25,8 @@ function db_query($query) {
   $stmt = $db->prepare($query);
   $args = func_get_args();
   array_shift($args);
-  $res = $stmt->execute($args);
+  $arg = $pdo->quote($args);
+  $res = $stmt->execute($arg);
   if ($res) {
     return db_row_All($stmt);
   } else {
@@ -103,10 +104,9 @@ function db_get_UserId($userid) {
 }
 
 function db_delete_by_id($userid) {
-  $id = $pdo->quote($userid);
-  $value1 = db_query("DELETE FROM users WHERE userid = ?", $id);
-  $value2 = db_query("DELETE FROM ap_lan3 WHERE userid = ?", $id);
-  $value3 = db_query("DELETE FROM application3 WHERE userid = ?", $id);
+  $value1 = db_query("DELETE FROM users WHERE userid = ?", $userid);
+  $value2 = db_query("DELETE FROM ap_lan3 WHERE userid = ?", $userid);
+  $value3 = db_query("DELETE FROM application3 WHERE userid = ?", $userid);
 }
 
 function db_get_Login($userid, $default = FALSE) {
