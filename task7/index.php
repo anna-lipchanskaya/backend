@@ -234,15 +234,14 @@ $abilities_serialized = serialize($languages);
     ];
 
     
-    setcookie('name_value',$row['name'], time() + 30 * 24 * 60 * 60);
-    setcookie('phone_value',$row['phone'], time() + 30 * 24 * 60 * 60);
-    setcookie('email_value',$row['email'], time() + 30 * 24 * 60 * 60);
-    setcookie('data_value',$row['data'], time() + 30 * 24 * 60 * 60);
-    setcookie('pol_value',$row['pol'], time() + 30 * 24 * 60 * 60);
-    setcookie('bio_value',$row['bio'], time() + 30 * 24 * 60 * 60);
-    setcookie('ok_value',$row['ok'], time() + 30 * 24 * 60 * 60);
+    setcookie('name_value',htmlspecialchars($row['name']), time() + 30 * 24 * 60 * 60);
+    setcookie('phone_value',htmlspecialchars($row['phone']), time() + 30 * 24 * 60 * 60);
+    setcookie('email_value',htmlspecialchars($row['email']), time() + 30 * 24 * 60 * 60);
+    setcookie('data_value',htmlspecialchars($row['data']), time() + 30 * 24 * 60 * 60);
+    setcookie('pol_value',htmlspecialchars($row['pol']), time() + 30 * 24 * 60 * 60);
+    setcookie('bio_value',htmlspecialchars($row['bio']), time() + 30 * 24 * 60 * 60);
+    setcookie('ok_value',htmlspecialchars($row['ok']), time() + 30 * 24 * 60 * 60);
     setcookie('abilities_value', $abilities_serialized, time() + 30 * 24 * 60 * 60);
-    //printf('Вход с логином %s, uid %d', $_SESSION['login'], $_SESSION['uid']);
  $messages[] = sprintf('Вход с логином <strong class="login">%s</strong>
         и id <strong class="login">%d</strong>.',
         $_SESSION['login'],
@@ -327,7 +326,6 @@ if ($_POST['button'] == "ok"){
 
   // Сохраняем куку с признаком успешного сохранения.
   setcookie('save', '1');
-          echo "Hello1";
       header('Location: ./');
 }
   else
