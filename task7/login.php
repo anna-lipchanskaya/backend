@@ -63,7 +63,7 @@ if (session_start() && !empty($_COOKIE[session_name()])) {
     if (!empty($_SESSION['login'])) {
         // Если есть логин в сессии, то пользователь уже авторизован.
         if (!empty($_COOKIE['logout'])) {
-            setcookie('logout', '', 100000);
+            setcookie('logout', '', 100000, '/', '', false, true);
             // Выход пользователя из сессии
             session_destroy();
         }
@@ -85,7 +85,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
   // Выдаем сообщения об ошибках.
   if (!empty($errors['error'])) {
-    setcookie('error', '', 100000);
+    setcookie('error', '', 100000, '/', '', false, true);
     // Выводим сообщение.
     $messages[] = '<div class="error">Неправильный логин или пароль</div>';
   }
@@ -131,20 +131,22 @@ else
   // Выдать сообщение об ошибках.
     $login = $_POST['login'];
     $password = $_POST['password'];
+    if (is_numeric($login) && is_numeric($password))
+    {
     $use = db_get_Pass_Login_user($login);
     
     // Сохраняем ранее введенное в форму значение на месяц.
-    setcookie('login_value', $_POST['login'], time() + 30 * 24 * 60 * 60);
-    setcookie('password_value', $_POST['password'], time() + 30 * 24 * 60 * 60);
+    setcookie('login_value', $_POST['login'], time() + 30 * 24 * 60 * 60, '/', '', false, true););
+    setcookie('password_value', $_POST['password'], time() + 30 * 24 * 60 * 60, '/', '', false, true);
   
     // Проверка наличия пользователя и совпадения пароля
     if ($use && password_verify($password, $use['password'])) {
         // Логин и пароль верные
-   setcookie('login_value', '', 100000);
-    setcookie('password_value', '', 100000);
+   setcookie('login_value', '', 100000, '/', '', false, true);
+    setcookie('password_value', '', 100000, '/', '', false, true);
     } else {
         // Логин или пароль неверные
-     setcookie('error', '1', time() + 24 * 60 * 60);
+     setcookie('error', '1', time() + 24 * 60 * 60, '/', '', false, true);
       header('Location: login.php');
         exit();
     }
@@ -158,6 +160,12 @@ else
 
   // Делаем перенаправление.
   header('Location: ./');
+    }
+    else{
+           setcookie('error', '1', time() + 24 * 60 * 60, '/', '', false, true);
+      header('Location: login.php');
+        exit();
+    }
   }
     else{
         header('Location: admin.php');
