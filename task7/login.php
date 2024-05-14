@@ -136,7 +136,7 @@ else
     $use = db_get_Pass_Login_user($login);
     
     // Сохраняем ранее введенное в форму значение на месяц.
-    setcookie('login_value', $_POST['login'], time() + 30 * 24 * 60 * 60, '/', '', false, true););
+    setcookie('login_value', $_POST['login'], time() + 30 * 24 * 60 * 60, '/', '', false, true);
     setcookie('password_value', $_POST['password'], time() + 30 * 24 * 60 * 60, '/', '', false, true);
   
     // Проверка наличия пользователя и совпадения пароля
