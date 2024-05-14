@@ -268,7 +268,7 @@ else
 {
 if ($_POST['button'] == "ok"){
   // Сохраняем ранее введенное в форму значение на год.
-  setcookie('name_value', $_POST['name'], time() + 365 * 24 * 60 * 60);
+  setcookie('name_value', $_POST['name'], time() + 365 * 24 * 60 * 60, '/', '', false, true);
   setcookie('phone_value', $_POST['phone'], time() + 365 * 24 * 60 * 60);
   setcookie('email_value', $_POST['email'], time() + 365 * 24 * 60 * 60);
   setcookie('data_value', $_POST['data'], time() + 365 * 24 * 60 * 60);
