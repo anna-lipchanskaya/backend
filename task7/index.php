@@ -234,14 +234,14 @@ $abilities_serialized = serialize($languages);
     ];
 
     
-    setcookie('name_value',htmlspecialchars($row['name']), time() + 30 * 24 * 60 * 60);
-    setcookie('phone_value',htmlspecialchars($row['phone']), time() + 30 * 24 * 60 * 60);
-    setcookie('email_value',htmlspecialchars($row['email']), time() + 30 * 24 * 60 * 60);
-    setcookie('data_value',htmlspecialchars($row['data']), time() + 30 * 24 * 60 * 60);
-    setcookie('pol_value',htmlspecialchars($row['pol']), time() + 30 * 24 * 60 * 60);
-    setcookie('bio_value',htmlspecialchars($row['bio']), time() + 30 * 24 * 60 * 60);
-    setcookie('ok_value',htmlspecialchars($row['ok']), time() + 30 * 24 * 60 * 60);
-    setcookie('abilities_value', $abilities_serialized, time() + 30 * 24 * 60 * 60);
+    setcookie('name_value',htmlspecialchars($row['name']), time() + 30 * 24 * 60 * 60, '/', '', false, true);
+    setcookie('phone_value',htmlspecialchars($row['phone']), time() + 30 * 24 * 60 * 60, '/', '', false, true);
+    setcookie('email_value',htmlspecialchars($row['email']), time() + 30 * 24 * 60 * 60, '/', '', false, true);
+    setcookie('data_value',htmlspecialchars($row['data']), time() + 30 * 24 * 60 * 60, '/', '', false, true);
+    setcookie('pol_value',htmlspecialchars($row['pol']), time() + 30 * 24 * 60 * 60, '/', '', false, true);
+    setcookie('bio_value',htmlspecialchars($row['bio']), time() + 30 * 24 * 60 * 60, '/', '', false, true);
+    setcookie('ok_value',htmlspecialchars($row['ok']), time() + 30 * 24 * 60 * 60, '/', '', false, true);
+    setcookie('abilities_value', $abilities_serialized, time() + 30 * 24 * 60 * 60, '/', '', false, true);
  $messages[] = sprintf('Вход с логином <strong class="login">%s</strong>
         и id <strong class="login">%d</strong>.',
         $_SESSION['login'],
@@ -300,25 +300,24 @@ if ($_POST['button'] == "ok"){
   }
      else {
     // Удаляем Cookies с признаками ошибок.
-    // Удаляем Cookies с признаками ошибок.
-    setcookie('name_error', '', 100000);
-    setcookie('name_error_len', '', 100000);
-    setcookie('name_error_struct', '', 100000);
-    setcookie('phone_error', '', 100000);
-    setcookie('phone_error_len', '', 100000);
-    setcookie('phone_error_struct', '', 100000);
-    setcookie('email_error', '', 100000);
-    setcookie('email_error_len', '', 100000);
-    setcookie('email_error_struct', '', 100000);
-    setcookie('data_error', '', 100000);
-    setcookie('data_error_struct', '', 100000);
-    setcookie('pol_error', '', 100000);
-    setcookie('pol_error_struct', '', 100000);
-    setcookie('abilities_error', '', 100000);
-    setcookie('abilities_error_struct', '', 100000);
-    setcookie('bio_error', '', 100000);
-    setcookie('bio_error_len', '', 100000);
-    setcookie('ok_error', '', 100000);
+    setcookie('name_error', '', 100000, '/', '', false, true);
+    setcookie('name_error_len', '', 100000, '/', '', false, true);
+    setcookie('name_error_struct', '', 100000, '/', '', false, true);
+    setcookie('phone_error', '', 100000, '/', '', false, true);
+    setcookie('phone_error_len', '', 100000, '/', '', false, true);
+    setcookie('phone_error_struct', '', 100000, '/', '', false, true);
+    setcookie('email_error', '', 100000, '/', '', false, true);
+    setcookie('email_error_len', '', 100000, '/', '', false, true);
+    setcookie('email_error_struct', '', 100000, '/', '', false, true);
+    setcookie('data_error', '', 100000, '/', '', false, true);
+    setcookie('data_error_struct', '', 100000, '/', '', false, true);
+    setcookie('pol_error', '', 100000, '/', '', false, true);
+    setcookie('pol_error_struct', '', 100000, '/', '', false, true);
+    setcookie('abilities_error', '', 100000, '/', '', false, true);
+    setcookie('abilities_error_struct', '', 100000, '/', '', false, true);
+    setcookie('bio_error', '', 100000, '/', '', false, true);
+    setcookie('bio_error_len', '', 100000, '/', '', false, true);
+    setcookie('ok_error', '', 100000, '/', '', false, true);
     // TODO: тут необходимо удалить остальные Cookies.
   }
 
@@ -329,15 +328,15 @@ if ($_POST['button'] == "ok"){
   else
 {
     if ($_POST['button'] == "exit") {
-    setcookie('logout', 'exit', time() + 24 * 60 * 60);
-setcookie('name_value', '', 100000);
-  setcookie('phone_value', '', 100000);
-  setcookie('email_value', '', 100000);
-  setcookie('data_value','', 100000);
-  setcookie('pol_value', '', 100000);
-  setcookie('abilities_value', '', 100000);
-  setcookie('bio_value', '', 100000);
-  setcookie('ok_value', '', 100000);
+    setcookie('logout', 'exit', time() + 24 * 60 * 60, '/', '', false, true);
+setcookie('name_value', '', 100000, '/', '', false, true);
+  setcookie('phone_value', '', 100000, '/', '', false, true);
+  setcookie('email_value', '', 100000, '/', '', false, true);
+  setcookie('data_value','', 100000, '/', '', false, true);
+  setcookie('pol_value', '', 100000, '/', '', false, true);
+  setcookie('abilities_value', '', 100000, '/', '', false, true);
+  setcookie('bio_value', '', 100000, '/', '', false, true);
+  setcookie('ok_value', '', 100000, '/', '', false, true);
   header('Location: login.php');
       exit();
 }
