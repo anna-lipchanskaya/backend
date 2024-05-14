@@ -131,7 +131,7 @@ $errors = array();
   }
     if($errors['email_struct']) {
     setcookie('email_error_struct', '', 100000, '/', '', false, true);
-    setcookie('email_value', '', 100000, '/', '', false, true););
+    setcookie('email_value', '', 100000, '/', '', false, true);
     $messages[] = '<div class="error">Введите корректный адрес электронной почты.</div>';
   }
       if ($errors['data']) {
