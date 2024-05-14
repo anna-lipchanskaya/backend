@@ -47,7 +47,7 @@ else {
     $result = db_get_UserId($userid);
     if ($result) {
     $data = db_get_Login($userid);
-    $_SESSION['login'] = $data['login'];
+    $_SESSION['login'] = htmlspecialchars($data['login'], ENT_QUOTES, 'UTF-8');
 
     $_SESSION['uid'] = $userid;
     header('Location: index.php');
@@ -65,17 +65,17 @@ else {
 $results = db_get_Alluser();
 
     // Вывод данных
-    foreach ($results as $row) {
-        echo "Пользователь с login " . $row['login'] ." и id ". $row['userid'] . "<br>";
-        echo "Name: " . $row['name'] . "<br>";
-        echo "Phone: " . $row['phone'] . "<br>";
-        echo "Email: " . $row['email'] . "<br>";
-        echo "Data: " . $row['data'] . "<br>";
-        echo "Gender: " . $row['pol'] . "<br>";
-        echo "Bio: " . $row['bio'] . "<br>";
-        echo "Ok: " . $row['ok'] . "<br>";
-        echo "Languages: " . $row['languages'] . "<br><br>";
-    }
+  foreach ($results as $row) {
+    echo "Пользователь с login " . htmlspecialchars($row['login'], ENT_QUOTES, 'UTF-8') . " и id " . $row['userid'] . "<br>";
+    echo "Name: " . htmlspecialchars($row['name'], ENT_QUOTES, 'UTF-8') . "<br>";
+    echo "Phone: " . htmlspecialchars($row['phone'], ENT_QUOTES, 'UTF-8') . "<br>";
+    echo "Email: " . htmlspecialchars($row['email'], ENT_QUOTES, 'UTF-8') . "<br>";
+    echo "Data: " . htmlspecialchars($row['data'], ENT_QUOTES, 'UTF-8') . "<br>";
+    echo "Gender: " . htmlspecialchars($row['pol'], ENT_QUOTES, 'UTF-8') . "<br>";
+    echo "Bio: " . htmlspecialchars($row['bio'], ENT_QUOTES, 'UTF-8') . "<br>";
+    echo "Ok: " . htmlspecialchars($row['ok'], ENT_QUOTES, 'UTF-8') . "<br>";
+    echo "Languages: " . htmlspecialchars($row['languages'], ENT_QUOTES, 'UTF-8') . "<br><br>";
+}
     echo "Статистика языков " . "<br>";
     $query = "SELECT l2.name, count(*) AS count_users
             FROM application3 a 
@@ -86,6 +86,6 @@ $results = db_get_Alluser();
  $languages = db_get_StatusLanguage();
     // Вывод результатов
     foreach ($languages as $row) {
-        echo "{$row['name']} язык любят: {$row['count_users']} пользователя <br>";
+        echo "{htmlspecialchars($row['name'], ENT_QUOTES, 'UTF-8')} язык любят: {htmlspecialchars($row['count_users'], ENT_QUOTES, 'UTF-8')} пользователя <br>";
     }
 ?>
