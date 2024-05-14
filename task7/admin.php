@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     $userid = $_POST['delete'];
         if(is_numeric($userid))
         {
-    $result = db_get_UserId($userid);
+    $result = htmlspecialchars(db_get_UserId($userid));
 
 if ($result) {
     // userid существует - выполняем операции удаления
