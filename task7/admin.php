@@ -86,6 +86,6 @@ $results = db_get_Alluser();
  $languages = db_get_StatusLanguage();
     // Вывод результатов
     foreach ($languages as $row) {
-        echo "{$row['name']} язык любят: {$row['count_users']} пользователя <br>";
+        echo htmlspecialchars($row['name'], ENT_QUOTES, 'UTF-8'). "язык любят:" . htmlspecialchars($row['count_users'], ENT_QUOTES, 'UTF-8'). " пользователя <br>";
     }
 ?>
