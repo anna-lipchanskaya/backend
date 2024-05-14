@@ -27,7 +27,7 @@ if ($result) {
     // userid существует - выполняем операции удаления
     $result = db_delete_by_id($userid);
     echo "Данные успешно удалены. <br>";
-    header('Location: admin.php');
+    header('Location: /admin?msg=Ошибка');
     exit();
 }
 else {
@@ -50,7 +50,7 @@ else {
     $_SESSION['login'] = htmlspecialchars($data['login'], ENT_QUOTES, 'UTF-8');
 
     $_SESSION['uid'] = $userid;
-    header('Location: index.php');
+    header('Location: /index?msg=Ошибка');
         exit();
     }
     else {
