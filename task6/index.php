@@ -251,9 +251,7 @@ $abilities_serialized = serialize($languages);
   }
   else{
           if (!empty($_SERVER['PHP_AUTH_USER']) ||
-    !empty($_SERVER['PHP_AUTH_PW']) ||
-    $_SERVER['PHP_AUTH_USER'] == 'admin' ||
-    md5($_SERVER['PHP_AUTH_PW']) == md5('123'))
+    !empty($_SERVER['PHP_AUTH_PW']))
   {
     header('Location: admin.php');
     exit();
