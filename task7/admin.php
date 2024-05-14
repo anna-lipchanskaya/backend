@@ -21,6 +21,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
         if(!empty($_POST['delete']))
     {
     $userid = $_POST['delete'];
+        if(is_numeric($userid))
+        {
     $result = db_get_UserId($userid);
 
 if ($result) {
@@ -34,16 +36,23 @@ else {
     echo "userid не найден в базе данных. <br>";
 }
     }
+        else {
+    echo "userid состоит из цифр. <br>";
+}
+    }
     else{
             echo "заполните userid <br>";
         }
+
     }
         if($_POST['button'] == "Update")
     {
         if(!empty($_POST['update']))
         {
+                  $userid = $_POST['update'];
+        if(is_numeric($userid))
+        {
         session_start();
-      $userid = $_POST['update'];
     $result = db_get_UserId($userid);
     if ($result) {
     $data = db_get_Login($userid);
@@ -57,6 +66,10 @@ else {
     echo "userid не найден в базе данных. <br>";
 }
     }
+    else {
+    echo "userid состоит из цифр. <br>";
+}
+        }
         else{
             echo "заполните userid <br>";
         }
