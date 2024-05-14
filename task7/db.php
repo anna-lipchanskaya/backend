@@ -103,7 +103,7 @@ function db_get_UserId($userid) {
 }
 
 function db_delete_by_id($userid) {
-  $id = mysqli_real_escape_string($conn, $userid);
+  $id = $pdo->quote($userid);
   $value1 = db_query("DELETE FROM users WHERE userid = ?", $id);
   $value2 = db_query("DELETE FROM ap_lan3 WHERE userid = ?", $id);
   $value3 = db_query("DELETE FROM application3 WHERE userid = ?", $id);
