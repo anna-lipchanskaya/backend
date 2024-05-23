@@ -132,16 +132,6 @@ margin-left: 28%;
 justify-content: center;
 align-items: center;">Заявка</h1>
       <?php
-if (session_status() == PHP_SESSION_NONE) {
-    session_start();
-}
-
-if (!isset($_SESSION['csrf_token'])) {
-    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
-}
-
-$csrfToken = $_SESSION['csrf_token'];
-
 if (!empty($messages)) {
   print('<div id="messages">');
   // Выводим все сообщения.
