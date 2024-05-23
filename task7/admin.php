@@ -3,8 +3,21 @@
  * Задача 6. Реализовать вход администратора с использованием
  * HTTP-авторизации для просмотра и удаления результатов.
  **/
-require_once('db.php');   
-require_once('auth.php'); 
+ $files = [
+ 'auth.php',
+'db.php',
+];
+
+function safe_require_once($file) {
+global $files;
+ if (in_array($file, $files)) {
+  require_once($file);
+ } else {
+ echo "Файл неразрешен";
+ }
+}
+safe_require_once('db.php');   
+safe_require_once('auth.php'); 
 echo 'Вы успешно авторизовались и видите защищенные паролем данные.'."<br>"; 
 ?>
     <form action="" method="POST">
