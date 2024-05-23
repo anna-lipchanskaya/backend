@@ -1,11 +1,12 @@
 <?php
-function safe_include() {
  $files = [
  'form.php',
 'db.php',
 ];
+function safe_include($file) {
+global $files;
  if (in_array($file, $files)) {
- require_once($file);
+  include($file);
  } else {
  echo "Файл неразрешен";
  }
@@ -19,7 +20,7 @@ if (session_status() == PHP_SESSION_NONE) {
  * сессии для изменения отправленных данных в предыдущей задаче,
  * пароль и логин генерируются автоматически при первоначальной отправке формы.
  */
-safe_include();
+safe_include('db.php');
 // Отправляем браузеру правильную кодировку,
 // файл index.php должен быть в кодировке UTF-8 без BOM.
 header('Content-Type: text/html; charset=UTF-8');
@@ -273,6 +274,7 @@ $abilities_serialized = serialize($languages);
   // Включаем содержимое файла form.php.
   // В нем будут доступны переменные $messages, $errors и $values для вывода 
   // сообщений, полей с ранее заполненными данными и признаками ошибок.
+ safe_include('form.php');
 }
 // Иначе, если запрос был методом POST, т.е. нужно проверить данные и сохранить их в XML-файл.
 else 
