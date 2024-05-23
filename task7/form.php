@@ -140,11 +140,12 @@ if (!empty($messages)) {
   }
   print('</div>');
 }
+  $token = $_SESSION['csrf_token'];
 
 // Далее выводим форму отмечая элементы с ошибками классом error
 // и задавая начальные значения элементов ранее сохраненными.
 ?>
-     <input type="hidden" name="csrf_token" value="<?php echo $csrfToken; ?>">
+<input type="hidden" name="csrf_token" value="<?= $token; ?>">
     <label>
       ФИО:<br />
       <input 
