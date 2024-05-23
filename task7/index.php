@@ -301,29 +301,29 @@ if ($_POST['button'] == "ok"){
      else {
     // Удаляем Cookies с признаками ошибок.
     // Удаляем Cookies с признаками ошибок.
-    setcookie('name_error', '', 100000);
-    setcookie('name_error_len', '', 100000);
-    setcookie('name_error_struct', '', 100000);
-    setcookie('phone_error', '', 100000);
-    setcookie('phone_error_len', '', 100000);
-    setcookie('phone_error_struct', '', 100000);
-    setcookie('email_error', '', 100000);
-    setcookie('email_error_len', '', 100000);
-    setcookie('email_error_struct', '', 100000);
-    setcookie('data_error', '', 100000);
-    setcookie('data_error_struct', '', 100000);
-    setcookie('pol_error', '', 100000);
-    setcookie('pol_error_struct', '', 100000);
-    setcookie('abilities_error', '', 100000);
-    setcookie('abilities_error_struct', '', 100000);
-    setcookie('bio_error', '', 100000);
-    setcookie('bio_error_len', '', 100000);
-    setcookie('ok_error', '', 100000);
+    setcookie('name_error', '', 100000, '/', '', false, true);
+    setcookie('name_error_len', '', 100000, '/', '', false, true);
+    setcookie('name_error_struct', '', 100000, '/', '', false, true);
+    setcookie('phone_error', '', 100000, '/', '', false, true);
+    setcookie('phone_error_len', '', 100000, '/', '', false, true);
+    setcookie('phone_error_struct', '', 100000, '/', '', false, true);
+    setcookie('email_error', '', 100000, '/', '', false, true);
+    setcookie('email_error_len', '', 100000, '/', '', false, true);
+    setcookie('email_error_struct', '', 100000, '/', '', false, true);
+    setcookie('data_error', '', 100000, '/', '', false, true);
+    setcookie('data_error_struct', '', 100000, '/', '', false, true);
+    setcookie('pol_error', '', 100000, '/', '', false, true);
+    setcookie('pol_error_struct', '', 100000, '/', '', false, true);
+    setcookie('abilities_error', '', 100000, '/', '', false, true);
+    setcookie('abilities_error_struct', '', 100000, '/', '', false, true);
+    setcookie('bio_error', '', 100000, '/', '', false, true);
+    setcookie('bio_error_len', '', 100000, '/', '', false, true);
+    setcookie('ok_error', '', 100000, '/', '', false, true);
     // TODO: тут необходимо удалить остальные Cookies.
   }
 
   // Сохраняем куку с признаком успешного сохранения.
-  setcookie('save', '1');
+  setcookie('save', '1', '/', '', false, true);
       header('Location: ./');
 }
   else
