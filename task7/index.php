@@ -291,7 +291,6 @@ if ($_POST['button'] == "ok"){
     }
   }
   else {
-    // Подготовленный запрос. Не именованные метки.
     $userid = -1;
   }
    $result = db_set_application($userid, $_POST['name'], $_POST['phone'], $_POST['email'], $_POST['data'], $_POST['pol'], $_POST['bio'], $_POST['ok'], $_POST['abilities']);
