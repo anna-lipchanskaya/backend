@@ -6,7 +6,7 @@
 function safe_include($file) {
 global $files;
  if (in_array($file, $files)) {
-  include($file);
+  require_once($file);
  } else {
  echo "Файл неразрешен";
  }
