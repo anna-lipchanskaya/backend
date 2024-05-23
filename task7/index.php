@@ -332,7 +332,6 @@ if ($_POST['button'] == "ok"){
   setcookie('save', '1');
       header('Location: ./');
 }
-}
   else
 {
     if ($_POST['button'] == "exit") {
