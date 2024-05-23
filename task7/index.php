@@ -339,7 +339,7 @@ if ($_POST['button'] == "ok"){
 {
     if ($_POST['button'] == "exit") {
     setcookie('logout', 'exit', time() + 24 * 60 * 60);
-setcookie('name_value', '', 100000);
+   setcookie('name_value', '', 100000);
   setcookie('phone_value', '', 100000);
   setcookie('email_value', '', 100000);
   setcookie('data_value','', 100000);
