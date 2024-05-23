@@ -285,10 +285,10 @@ if ($_POST['button'] == "ok"){
     if (isset($_SESSION['csrf_token']) && $_SESSION['csrf_token'] === @$_POST['csrf_token']) {
           $userid = db_get_Pass_Login_user($_SESSION['login'])['userid'];
   }
-    }
       else {
         echo "Token неверный";
     }
+  }
   }
   else {
     $userid = -1;
