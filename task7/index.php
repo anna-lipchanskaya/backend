@@ -281,47 +281,44 @@ if ($_POST['button'] == "ok"){
       session_start() && !empty($_SESSION['login'])) {
     // TODO: перезаписать данные в БД новыми данными,
     // кроме логина и пароля.
-    if (isset($_POST['submit_test'])) {
-    if (isset($_SESSION['csrf_token']) && $_SESSION['csrf_token'] === @$_POST['csrf_token']) {
-          $userid = db_get_Pass_Login_user($_SESSION['login'])['userid'];
+    $userid = db_get_Pass_Login_user($_SESSION['login'])['userid'];
   }
-      else {
-        echo "Token неверный";
-    }
-  }
-  }
+  else {
+    // Подготовленный запрос. Не именованные метки.
     $userid = -1;
+  }
    $result = db_set_application($userid, $_POST['name'], $_POST['phone'], $_POST['email'], $_POST['data'], $_POST['pol'], $_POST['bio'], $_POST['ok'], $_POST['abilities']);
-      if($result == FALSE)
+  if($result == FALSE)
         {
           echo "Error";
           exit();
         }
-  if ($result === "Error") {
+    if ($result === "Error") {
     // При наличии ошибок перезагружаем страницу и завершаем работу скрипта.
     header('Location: index.php');
     exit();
   }
      else {
     // Удаляем Cookies с признаками ошибок.
-    setcookie('name_error', '', 100000, '/', '', false, true);
-    setcookie('name_error_len', '', 100000, '/', '', false, true);
-    setcookie('name_error_struct', '', 100000, '/', '', false, true);
-    setcookie('phone_error', '', 100000, '/', '', false, true);
-    setcookie('phone_error_len', '', 100000, '/', '', false, true);
-    setcookie('phone_error_struct', '', 100000, '/', '', false, true);
-    setcookie('email_error', '', 100000, '/', '', false, true);
-    setcookie('email_error_len', '', 100000, '/', '', false, true);
-    setcookie('email_error_struct', '', 100000, '/', '', false, true);
-    setcookie('data_error', '', 100000, '/', '', false, true);
-    setcookie('data_error_struct', '', 100000, '/', '', false, true);
-    setcookie('pol_error', '', 100000, '/', '', false, true);
-    setcookie('pol_error_struct', '', 100000, '/', '', false, true);
-    setcookie('abilities_error', '', 100000, '/', '', false, true);
-    setcookie('abilities_error_struct', '', 100000, '/', '', false, true);
-    setcookie('bio_error', '', 100000, '/', '', false, true);
-    setcookie('bio_error_len', '', 100000, '/', '', false, true);
-    setcookie('ok_error', '', 100000, '/', '', false, true);
+    // Удаляем Cookies с признаками ошибок.
+    setcookie('name_error', '', 100000);
+    setcookie('name_error_len', '', 100000);
+    setcookie('name_error_struct', '', 100000);
+    setcookie('phone_error', '', 100000);
+    setcookie('phone_error_len', '', 100000);
+    setcookie('phone_error_struct', '', 100000);
+    setcookie('email_error', '', 100000);
+    setcookie('email_error_len', '', 100000);
+    setcookie('email_error_struct', '', 100000);
+    setcookie('data_error', '', 100000);
+    setcookie('data_error_struct', '', 100000);
+    setcookie('pol_error', '', 100000);
+    setcookie('pol_error_struct', '', 100000);
+    setcookie('abilities_error', '', 100000);
+    setcookie('abilities_error_struct', '', 100000);
+    setcookie('bio_error', '', 100000);
+    setcookie('bio_error_len', '', 100000);
+    setcookie('ok_error', '', 100000);
     // TODO: тут необходимо удалить остальные Cookies.
   }
 
