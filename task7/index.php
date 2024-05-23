@@ -281,7 +281,9 @@ if ($_POST['button'] == "ok"){
       session_start() && !empty($_SESSION['login'])) {
     // TODO: перезаписать данные в БД новыми данными,
     // кроме логина и пароля.
-    $userid = db_get_Pass_Login_user($_SESSION['login'])['userid'];
+    if (isset($_POST['submit_test'])) {
+    if (isset($_SESSION['csrf_token']) && $_SESSION['csrf_token'] === @$_POST['csrf_token']) {
+          $userid = db_get_Pass_Login_user($_SESSION['login'])['userid'];
   }
   else {
     // Подготовленный запрос. Не именованные метки.
@@ -324,6 +326,10 @@ if ($_POST['button'] == "ok"){
   // Сохраняем куку с признаком успешного сохранения.
   setcookie('save', '1');
       header('Location: ./');
+}
+    } else {
+        echo "Token неверный";
+    }
 }
   else
 {
