@@ -158,9 +158,7 @@ else
   // Записываем ID пользователя.
     $_SESSION['uid'] = $use['userid'];
 //Генерируем CSRF-токен
-      if (!isset($_SESSION['csrf_token'])) {
-    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
-}
+  $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
 
   // Делаем перенаправление.
   header('Location: ./');
