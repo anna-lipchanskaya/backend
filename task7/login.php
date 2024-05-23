@@ -50,6 +50,10 @@ input[type="submit"]:hover {
  * После авторизации пользователь перенаправляется на главную страницу
  * для изменения ранее введенных данных.
  **/
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+
 require_once('db.php');   
 // Отправляем браузеру правильную кодировку,
 // файл login.php должен быть в кодировке UTF-8 без BOM.
@@ -150,9 +154,6 @@ else
       header('Location: login.php');
         exit();
     }
-  if (!$session_started) {
-    session_start();
-  }
   // Если все ок, то авторизуем пользователя.
   $_SESSION['login'] = $login;
   // Записываем ID пользователя.
