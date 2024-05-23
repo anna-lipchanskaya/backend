@@ -5,7 +5,7 @@ function safe_include($file) {
 'db.php',
 ];
  if (in_array($file, $files)) {
- include($file);
+ require_once($file);
  } else {
  echo "Файл неразрешен";
  }
