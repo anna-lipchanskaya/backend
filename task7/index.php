@@ -1,16 +1,5 @@
 <?php
- $files = [
- 'form.php',
-'db.php',
-];
-function safe_include($file) {
-global $files;
- if (in_array($file, $files)) {
-  require_once($file);
- } else {
- echo "Файл неразрешен";
- }
-}
+
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
@@ -20,11 +9,31 @@ if (session_status() == PHP_SESSION_NONE) {
  * сессии для изменения отправленных данных в предыдущей задаче,
  * пароль и логин генерируются автоматически при первоначальной отправке формы.
  */
-safe_include('db.php');
 // Отправляем браузеру правильную кодировку,
 // файл index.php должен быть в кодировке UTF-8 без BOM.
 header('Content-Type: text/html; charset=UTF-8');
+ $files = [
+ 'form.php',
+'db.php',
+];
+function safe_include($file) {
+global $files;
+ if (in_array($file, $files)) {
+  include($file);
+ } else {
+ echo "Файл неразрешен";
+ }
+}
 
+function safe_require_once($file) {
+global $files;
+ if (in_array($file, $files)) {
+  require_once($file);
+ } else {
+ echo "Файл неразрешен";
+ }
+}
+ safe_require_once('db.php');
 // В суперглобальном массиве $_SERVER PHP сохраняет некторые заголовки запроса HTTP
 // и другие сведения о клиненте и сервере, например метод текущего запроса $_SERVER['REQUEST_METHOD'].
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
