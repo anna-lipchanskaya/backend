@@ -131,7 +131,7 @@ else
   // Выдать сообщение об ошибках.
     $login = $_POST['login'];
     $password = $_POST['password'];
-    if (is_numeric($login) && is_numeric($password))
+    if (is_string($login) && is_string($password))
     {
     $use = db_get_Pass_Login_user($login);
     
