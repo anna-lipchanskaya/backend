@@ -20,9 +20,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   // Выдаем сообщение об успешном сохранении.
   if (!empty($_COOKIE['save'])) {
     // Удаляем куку, указывая время устаревания в прошлом.
-    setcookie('save', '', 100000, '/', '', false, true);
-    setcookie('login', '', 100000, '/', '', false, true);
-    setcookie('pass', '', 100000, '/', '', false, true);
+    setcookie('save', '', 100000);
+    setcookie('login', '', 100000);
+    setcookie('pass', '', 100000);
     // Выводим сообщение пользователю.
  echo '<script>
                     document.addEventListener("DOMContentLoaded", function() {
@@ -85,108 +85,108 @@ $errors = array();
  // Выдаем сообщения об ошибках.
   if ($errors['name']) {
     // Удаляем куки, указывая время устаревания в прошлом.
-    setcookie('name_error', '', 100000, '/', '', false, true);
-    setcookie('name_value', '', 100000, '/', '', false, true);
+    setcookie('name_error', '', 100000);
+    setcookie('name_value', '', 100000);
     // Выводим сообщение.
     $messages[] = '<div class="error">Заполните имя.</div>';
   }
   if($errors['name_len']) {
-    setcookie('name_error_len', '', 100000, '/', '', false, true);
-    setcookie('name_value', '', 100000, '/', '', false, true);
+    setcookie('name_error_len', '', 100000);
+    setcookie('name_value', '', 100000);
     $messages[] = '<div class="error">Имя должно содержать только буквы.</div>';
   }
     if($errors['name_struct']) {
-    setcookie('name_error_struct', '', 100000, '/', '', false, true);
-    setcookie('name_value', '', 100000, '/', '', false, true);
+    setcookie('name_error_struct', '', 100000);
+    setcookie('name_value', '', 100000);
     $messages[] = '<div class="error">Имя должно быть не длиннее 150 слов.</div>';
   }
     if ($errors['phone']) {
     // Удаляем куки, указывая время устаревания в прошлом.
-    setcookie('phone_error', '', 100000, '/', '', false, true);
-    setcookie('phone_value', '', 100000, '/', '', false, true);
+    setcookie('phone_error', '', 100000);
+    setcookie('phone_value', '', 100000);
     // Выводим сообщение.
     $messages[] = '<div class="error">Заполните телефон.</div>';
   }
   if($errors['phone_len']) {
-    setcookie('phone_error_len', '', 100000, '/', '', false, true);
-    setcookie('phone_value', '', 100000, '/', '', false, true);
+    setcookie('phone_error_len', '', 100000);
+    setcookie('phone_value', '', 100000);
     $messages[] = '<div class="error">Телефон не должно превышать 11 символов.</div>';
   }
     if($errors['phone_struct']) {
-    setcookie('phone_error_struct', '', 100000, '/', '', false, true);
-    setcookie('phone_value', '', 100000, '/', '', false, true);
+    setcookie('phone_error_struct', '', 100000);
+    setcookie('phone_value', '', 100000);
     $messages[] = '<div class="error">Телефон должен состоять только из цифр.</div>';
   }
     if ($errors['email']) {
     // Удаляем куки, указывая время устаревания в прошлом.
-    setcookie('email_error', '', 100000, '/', '', false, true);
-    setcookie('email_value', '', 100000, '/', '', false, true);
+    setcookie('email_error', '', 100000);
+    setcookie('email_value', '', 100000);
     // Выводим сообщение.
     $messages[] = '<div class="error">Заполните адрес электронной почты.</div>';
   }
   if($errors['email_len']) {
-    setcookie('email_error_len', '', 100000, '/', '', false, true);
-    setcookie('email_value', '', 100000, '/', '', false, true);
+    setcookie('email_error_len', '', 100000);
+    setcookie('email_value', '', 100000);
     $messages[] = '<div class="error">Адрес электронной почты не должен превышать 150 символов.</div>';
   }
     if($errors['email_struct']) {
-    setcookie('email_error_struct', '', 100000, '/', '', false, true);
-    setcookie('email_value', '', 100000, '/', '', false, true);
+    setcookie('email_error_struct', '', 100000);
+    setcookie('email_value', '', 100000);
     $messages[] = '<div class="error">Введите корректный адрес электронной почты.</div>';
   }
       if ($errors['data']) {
     // Удаляем куки, указывая время устаревания в прошлом.
-    setcookie('data_error', '', 100000, '/', '', false, true);
-    setcookie('data_value', '', 100000, '/', '', false, true);
+    setcookie('data_error', '', 100000);
+    setcookie('data_value', '', 100000);
     // Выводим сообщение.
     $messages[] = '<div class="error">Заполните дату.</div>';
   }
   if($errors['data_struct']) {
-    setcookie('data_error_struct', '', 100000, '/', '', false, true);
-    setcookie('data_value', '', 100000, '/', '', false, true);
+    setcookie('data_error_struct', '', 100000);
+    setcookie('data_value', '', 100000);
     $messages[] = '<div class="error">Дата должна быть в формате YYYY-MM-DD.</div>';
   }
         if ($errors['ok']) {
     // Удаляем куки, указывая время устаревания в прошлом.
-    setcookie('ok_error', '', 100000, '/', '', false, true);
-    setcookie('ok_value', '', 100000, '/', '', false, true);
+    setcookie('ok_error', '', 100000);
+    setcookie('ok_value', '', 10000);
     // Выводим сообщение.
     $messages[] = '<div class="error">Подтвердите соглашение.</div>';
   }
         if ($errors['pol']) {
     // Удаляем куки, указывая время устаревания в прошлом.
-    setcookie('pol_error', '', 100000, '/', '', false, true);
-    setcookie('pol_value', '', 100000, '/', '', false, true);
+    setcookie('pol_error', '', 100000);
+    setcookie('pol_value', '', 100000);
     // Выводим сообщение.
     $messages[] = '<div class="error">Заполните пол.</div>';
   }
   if($errors['pol_struct']) {
-    setcookie('pol_error_struct', '', 100000, '/', '', false, true);
-    setcookie('pol_value', '', 100000, '/', '', false, true);
+    setcookie('pol_error_struct', '', 100000);
+    setcookie('pol_value', '', 100000);
     $messages[] = '<div class="error">Выберите только мужской или женский пол.</div>';
   }
     if ($errors['abilities']) {
     // Удаляем куки, указывая время устаревания в прошлом.
-    setcookie('abilities_error', '', 100000, '/', '', false, true);
-    setcookie('abilities_value', '', 100000, '/', '', false, true);
+    setcookie('abilities_error', '', 100000);
+    setcookie('abilities_value', '', 100000);
     // Выводим сообщение.
     $messages[] = '<div class="error">Выберите хотя бы 1 язык программирования.</div>';
   }
   if($errors['abilities_struct']) {
-    setcookie('abilities_error_struct', '', 100000, '/', '', false, true);
-    setcookie('abilities_value', '', 100000, '/', '', false, true);
+    setcookie('abilities_error_struct', '', 100000);
+    setcookie('abilities_value', '', 100000);
     $messages[] = '<div class="error">Выберите только представленные языки.</div>';
   }
       if ($errors['bio']) {
     // Удаляем куки, указывая время устаревания в прошлом.
-    setcookie('bio_error', '', 100000, '/', '', false, true);
-    setcookie('bio_value', '', 100000, '/', '', false, true);
+    setcookie('bio_error', '', 100000);
+    setcookie('bio_value', '', 100000);
     // Выводим сообщение.
     $messages[] = '<div class="error">Запоните биографию.</div>';
   }
   if($errors['bio_len']) {
-    setcookie('bio_error_len', '', 100000, '/', '', false, true);
-    setcookie('bio_value', '', 100000, '/', '', false, true);
+    setcookie('bio_error_len', '', 100000);
+    setcookie('bio_value', '', 100000);
     $messages[] = '<div class="error">Биография не должна превышать 300 символов.</div>';
   }
   // TODO: тут выдать сообщения об ошибках в других полях.
@@ -234,14 +234,14 @@ $abilities_serialized = serialize($languages);
     ];
 
     
-    setcookie('name_value',htmlspecialchars($row['name']), time() + 30 * 24 * 60 * 60, '/', '', false, true);
-    setcookie('phone_value',htmlspecialchars($row['phone']), time() + 30 * 24 * 60 * 60, '/', '', false, true);
-    setcookie('email_value',htmlspecialchars($row['email']), time() + 30 * 24 * 60 * 60, '/', '', false, true);
-    setcookie('data_value',htmlspecialchars($row['data']), time() + 30 * 24 * 60 * 60, '/', '', false, true);
-    setcookie('pol_value',htmlspecialchars($row['pol']), time() + 30 * 24 * 60 * 60, '/', '', false, true);
-    setcookie('bio_value',htmlspecialchars($row['bio']), time() + 30 * 24 * 60 * 60, '/', '', false, true);
-    setcookie('ok_value',htmlspecialchars($row['ok']), time() + 30 * 24 * 60 * 60, '/', '', false, true);
-    setcookie('abilities_value', $abilities_serialized, time() + 30 * 24 * 60 * 60, '/', '', false, true);
+    setcookie('name_value',htmlspecialchars($row['name']), time() + 30 * 24 * 60 * 60);
+    setcookie('phone_value',htmlspecialchars($row['phone']), time() + 30 * 24 * 60 * 60);
+    setcookie('email_value',htmlspecialchars($row['email']), time() + 30 * 24 * 60 * 60);
+    setcookie('data_value',htmlspecialchars($row['data']), time() + 30 * 24 * 60 * 60);
+    setcookie('pol_value',htmlspecialchars($row['pol']), time() + 30 * 24 * 60 * 60);
+    setcookie('bio_value',htmlspecialchars($row['bio']), time() + 30 * 24 * 60 * 60);
+    setcookie('ok_value',htmlspecialchars($row['ok']), time() + 30 * 24 * 60 * 60);
+    setcookie('abilities_value', $abilities_serialized, time() + 30 * 24 * 60 * 60);
  $messages[] = sprintf('Вход с логином <strong class="login">%s</strong>
         и id <strong class="login">%d</strong>.',
         $_SESSION['login'],
@@ -266,14 +266,14 @@ else
 {
 if ($_POST['button'] == "ok"){
   // Сохраняем ранее введенное в форму значение на год.
-  setcookie('name_value', $_POST['name'], time() + 365 * 24 * 60 * 60, '/', '', false, true);
-  setcookie('phone_value', $_POST['phone'], time() + 365 * 24 * 60 * 60, '/', '', false, true);
-  setcookie('email_value', $_POST['email'], time() + 365 * 24 * 60 * 60, '/', '', false, true);
-  setcookie('data_value', $_POST['data'], time() + 365 * 24 * 60 * 60, '/', '', false, true);
-  setcookie('pol_value', $_POST['pol'], time() + 365 * 24 * 60 * 60, '/', '', false, true);
-  setcookie('abilities_value', serialize($_POST['abilities']), time() + 365 * 24 * 60 * 60, '/', '', false, true);
-  setcookie('bio_value', $_POST['bio'], time() + 365 * 24 * 60 * 60, '/', '', false, true);
-  setcookie('ok_value', $_POST['ok'], time() + 365 * 24 * 60 * 60, '/', '', false, true);
+  setcookie('name_value', $_POST['name'], time() + 365 * 24 * 60 * 60);
+  setcookie('phone_value', $_POST['phone'], time() + 365 * 24 * 60 * 60);
+  setcookie('email_value', $_POST['email'], time() + 365 * 24 * 60 * 60);
+  setcookie('data_value', $_POST['data'], time() + 365 * 24 * 60 * 60);
+  setcookie('pol_value', $_POST['pol'], time() + 365 * 24 * 60 * 60);
+  setcookie('abilities_value', serialize($_POST['abilities']), time() + 365 * 24 * 60 * 60);
+  setcookie('bio_value', $_POST['bio'], time() + 365 * 24 * 60 * 60);
+  setcookie('ok_value', $_POST['ok'], time() + 365 * 24 * 60 * 60);
 
 
   // Проверяем меняются ли ранее сохраненные данные или отправляются новые.
@@ -301,7 +301,7 @@ if ($_POST['button'] == "ok"){
      else {
     // Удаляем Cookies с признаками ошибок.
     // Удаляем Cookies с признаками ошибок.
-    setcookie('name_error', '', 100000, '/', '', false, true);
+    setcookie('name_error', '', 100000);
     setcookie('name_error_len', '', 100000, '/', '', false, true);
     setcookie('name_error_struct', '', 100000, '/', '', false, true);
     setcookie('phone_error', '', 100000, '/', '', false, true);
