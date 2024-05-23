@@ -143,15 +143,22 @@ if (!empty($messages)) {
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
+session_start();
+
+// Генерируем CSRF-токен, если его еще нет в сессии
 if (!isset($_SESSION['csrf_token'])) {
     $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
 }
-  $token = $_SESSION['csrf_token'];
+
+// Получаем токен из сессии
+$token = $_SESSION['csrf_token'];
+?>
+
 
 // Далее выводим форму отмечая элементы с ошибками классом error
 // и задавая начальные значения элементов ранее сохраненными.
 ?>
-    <input type="hidden" name="csrf_token" value="<?php echo $token; ?>">
+  <input type="hidden" name="csrf_token" value="<?= $token; ?>">
     <label>
       ФИО:<br />
       <input 
