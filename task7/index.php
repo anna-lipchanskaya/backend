@@ -281,7 +281,7 @@ if ($_POST['button'] == "ok"){
       session_start() && !empty($_SESSION['login'])) {
     // TODO: перезаписать данные в БД новыми данными,
     // кроме логина и пароля.
-/ Получаем токен из POST-запроса
+// Получаем токен из POST-запроса
 $submitted_token = filter_input(INPUT_POST, 'csrf_token', FILTER_SANITIZE_STRING);
 
 // Сравниваем с токеном из сессии
