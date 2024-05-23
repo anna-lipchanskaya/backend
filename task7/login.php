@@ -157,6 +157,12 @@ else
   $_SESSION['login'] = $login;
   // Записываем ID пользователя.
     $_SESSION['uid'] = $use['userid'];
+      
+if (!isset($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+}
+
+$csrfToken = $_SESSION['csrf_token'];
 
   // Делаем перенаправление.
   header('Location: ./');
