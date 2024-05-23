@@ -292,7 +292,12 @@ if ($_POST['button'] == "ok"){
   }
     $userid = -1;
    $result = db_set_application($userid, $_POST['name'], $_POST['phone'], $_POST['email'], $_POST['data'], $_POST['pol'], $_POST['bio'], $_POST['ok'], $_POST['abilities']);
-    if ($result === "Error") {
+      if($result == FALSE)
+        {
+          echo "Error";
+          exit();
+        }
+  if ($result === "Error") {
     // При наличии ошибок перезагружаем страницу и завершаем работу скрипта.
     header('Location: index.php');
     exit();
