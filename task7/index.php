@@ -264,6 +264,13 @@ $abilities_serialized = serialize($languages);
 // Иначе, если запрос был методом POST, т.е. нужно проверить данные и сохранить их в XML-файл.
 else 
 {
+  $submitted_token = filter_input(INPUT_POST, 'csrf_token', FILTER_SANITIZE_STRING);
+
+// Сравниваем с токеном из сессии
+if (!$submitted_token || $submitted_token !== $_SESSION['csrf_token']) {
+  echo "Неверный токен";
+  exit();
+  }
 if ($_POST['button'] == "ok"){
   // Сохраняем ранее введенное в форму значение на год.
   setcookie('name_value', $_POST['name'], time() + 365 * 24 * 60 * 60);
@@ -282,15 +289,6 @@ if ($_POST['button'] == "ok"){
     // TODO: перезаписать данные в БД новыми данными,
     // кроме логина и пароля.
 // Получаем токен из POST-запроса
-$submitted_token = filter_input(INPUT_POST, 'csrf_token', FILTER_SANITIZE_STRING);
-
-// Сравниваем с токеном из сессии
-if (!$submitted_token || $submitted_token !== $_SESSION['csrf_token']) {
-  }
-      else {
-        echo "Неверный токен";
-        exit();
-    }
 }
   else {
     // Подготовленный запрос. Не именованные метки.
