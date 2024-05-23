@@ -290,7 +290,7 @@ if ($_POST['button'] == "ok"){
     }
   }
   }
-  if (empty($_COOKIE[session_name()]) || empty($_SESSION['login'])) {
+  if (empty($_SESSION['login'])) {
     $userid = -1;
   }
    $result = db_set_application($userid, $_POST['name'], $_POST['phone'], $_POST['email'], $_POST['data'], $_POST['pol'], $_POST['bio'], $_POST['ok'], $_POST['abilities']);
