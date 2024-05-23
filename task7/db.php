@@ -25,8 +25,7 @@ function db_query($query) {
   $stmt = $db->prepare($query);
   $args = func_get_args();
   array_shift($args);
-  $arg = $pdo->quote($args);
-  $res = $stmt->execute($arg);
+  $res = $stmt->execute($args);
   if ($res) {
     return db_row_All($stmt);
   } else {
@@ -312,6 +311,23 @@ else{
   }
 }
 
+
+    function Query($query) {
+    global $db;
+    try {
+        $result = $db->query($query);
+        if ($result) {
+            // Запрос успешно выполнен
+            return $result;
+        } else {
+            // Запрос не удался, логируем ошибку
+            logError(db_error());
+        }
+    } catch (PDOException $e) {
+        // Ошибка при выполнении запроса, логируем исключение
+        logError($e->getMessage());
+    }
+}
 
 function db_error() {
     global $db;
