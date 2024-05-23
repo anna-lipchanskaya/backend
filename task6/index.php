@@ -325,7 +325,6 @@ if ($_POST['button'] == "ok"){
 
   // Сохраняем куку с признаком успешного сохранения.
   setcookie('save', '1');
-          echo "Hello1";
       header('Location: ./');
 }
   else
